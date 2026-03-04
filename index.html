@@ -27,10 +27,9 @@
   --shadow-lg: 0 8px 40px rgba(74,58,107,.08);
   --gradient: linear-gradient(135deg, #8B6FC0 0%, #7B8ED8 40%, #F0919B 80%, #F4C5A0 100%);
   --gradient-pill: linear-gradient(135deg, #8B6FC0, #7B8ED8);
-  /* Tab colors — soft palette */
-  --c1: #8B6FC0; --c2: #7B8ED8; --c3: #5BBAC6; --c4: #F0919B;
-  --c5: #E8A96B; --c6: #6BBF8A; --c7: #C476B8; --c8: #7BA3CC;
-  --c9: #A899D4; --c10: #6B5F8D;
+  /* Tab colors — soft palette (8 tabs) */
+  --c1: #5BBAC6; --c2: #8B6FC0; --c3: #F0919B; --c4: #7B8ED8;
+  --c5: #E8A96B; --c6: #6BBF8A; --c7: #6B5F8D; --c8: #C476B8;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
@@ -112,10 +111,30 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 .cat-pill[data-color="c7"]:hover svg,.cat-pill[data-color="c7"].active svg { fill:#fff; }
 .cat-pill[data-color="c8"]:hover,.cat-pill[data-color="c8"].active { background:var(--c8); border-color:var(--c8); color:#fff; }
 .cat-pill[data-color="c8"]:hover svg,.cat-pill[data-color="c8"].active svg { fill:#fff; }
-.cat-pill[data-color="c9"]:hover,.cat-pill[data-color="c9"].active { background:var(--c9); border-color:var(--c9); color:#fff; }
-.cat-pill[data-color="c9"]:hover svg,.cat-pill[data-color="c9"].active svg { fill:#fff; }
-.cat-pill[data-color="c10"]:hover,.cat-pill[data-color="c10"].active { background:var(--c10); border-color:var(--c10); color:#fff; }
-.cat-pill[data-color="c10"]:hover svg,.cat-pill[data-color="c10"].active svg { fill:#fff; }
+
+/* ── Sub-category pills ── */
+.sub-pills { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.sub-pill { padding:7px 18px; border-radius:20px; border:1px solid var(--border); background:var(--surface); font-size:12px; font-weight:500; color:var(--text-2); cursor:pointer; transition:all .2s; }
+.sub-pill:hover { border-color:var(--purple); color:var(--purple); }
+.sub-pill.active { background:var(--purple); color:#fff; border-color:var(--purple); }
+
+/* ── Know Me section ── */
+.info-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:24px; }
+.info-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; }
+.info-card .info-label { font-size:11px; font-weight:600; text-transform:uppercase; color:var(--text-3); letter-spacing:.5px; margin-bottom:8px; }
+.info-card .info-value { font-size:14px; font-weight:500; color:var(--text); }
+.info-card .info-value a { color:var(--purple); text-decoration:none; }
+.info-card .info-value a:hover { text-decoration:underline; }
+
+/* ── Feedback form ── */
+.feedback-form { max-width:640px; margin:0 auto; }
+.feedback-form .form-group { margin-bottom:20px; }
+.feedback-form label { display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px; }
+.feedback-form input, .feedback-form textarea, .feedback-form select { width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:14px; font-family:inherit; outline:none; transition:border-color .2s; background:var(--surface); }
+.feedback-form input:focus, .feedback-form textarea:focus, .feedback-form select:focus { border-color:var(--purple); }
+.feedback-form textarea { min-height:120px; resize:vertical; }
+.feedback-form .submit-btn { padding:12px 32px; background:var(--gradient); color:#fff; border:none; border-radius:28px; font-size:14px; font-weight:600; cursor:pointer; transition:transform .15s, box-shadow .15s; font-family:inherit; }
+.feedback-form .submit-btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(139,111,192,.3); }
 
 /* ── Main Content ── */
 .main { max-width:1120px; margin:0 auto; padding:36px 40px 60px; }
@@ -187,208 +206,252 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 
 <!-- ═══ CATEGORY PILLS ═══ -->
 <div class="cat-bar">
-  <div class="cat-pill active" data-color="c1" onclick="showTab('playbooks')">
+  <div class="cat-pill active" data-color="c1" onclick="showTab('access')">
+    <svg viewBox="0 0 20 20"><path d="M10 2a4 4 0 00-4 4v2H5a1 1 0 00-1 1v8a1 1 0 001 1h10a1 1 0 001-1V9a1 1 0 00-1-1h-1V6a4 4 0 00-4-4zm-2 4a2 2 0 114 0v2H8V6zm2 6a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>
+    Access
+  </div>
+  <div class="cat-pill" data-color="c2" onclick="showTab('playbooks')">
     <svg viewBox="0 0 20 20"><path d="M4 3a1 1 0 00-1 1v12a1 1 0 001 1h5V3H4zm7 0v14h5a1 1 0 001-1V4a1 1 0 00-1-1h-5z"/></svg>
     Playbooks
   </div>
-  <div class="cat-pill" data-color="c2" onclick="showTab('templates')">
-    <svg viewBox="0 0 20 20"><path d="M5 2a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-5-5H5zm6 0v4a1 1 0 001 1h4"/></svg>
-    Templates
+  <div class="cat-pill" data-color="c3" onclick="showTab('knowme')">
+    <svg viewBox="0 0 20 20"><path d="M10 2a5 5 0 00-5 5c0 2.1 1.3 3.9 3.1 4.7A7 7 0 003 18h2a5 5 0 0110 0h2a7 7 0 00-5.1-6.3A5 5 0 0015 7a5 5 0 00-5-5zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg>
+    Know Me
   </div>
-  <div class="cat-pill" data-color="c3" onclick="showTab('guides')">
-    <svg viewBox="0 0 20 20"><path d="M9 2a1 1 0 011 0l7 4v8l-7 4a1 1 0 01-1 0l-7-4V6l7-4zM10 4L5 7v6l5 3 5-3V7l-5-3z"/></svg>
-    Guides / How-To
-  </div>
-  <div class="cat-pill" data-color="c4" onclick="showTab('checklists')">
-    <svg viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm6 7l4-4-1-1-3 3-1.5-1.5-1 1L9 11z"/></svg>
-    Checklists
-  </div>
-  <div class="cat-pill" data-color="c5" onclick="showTab('reports')">
+  <div class="cat-pill" data-color="c4" onclick="showTab('reports')">
     <svg viewBox="0 0 20 20"><path d="M3 14h2v3H3v-3zm4-4h2v7H7v-7zm4-3h2v10h-2V7zm4-4h2v14h-2V3z"/></svg>
-    Reports & Dashboards
+    Reports
   </div>
-  <div class="cat-pill" data-color="c6" onclick="showTab('flows')">
-    <svg viewBox="0 0 20 20"><path d="M3 5a2 2 0 012-2h2a2 2 0 012 2v1h2V5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6H9v1a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm0 8a2 2 0 012-2h10a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/></svg>
-    Process Flows
-  </div>
-  <div class="cat-pill" data-color="c7" onclick="showTab('training')">
+  <div class="cat-pill" data-color="c5" onclick="showTab('training')">
     <svg viewBox="0 0 20 20"><path d="M10 2l8 4-8 4-8-4 8-4zm-6 7l6 3 6-3v2l-6 3-6-3v-2z"/></svg>
     Training
   </div>
-  <div class="cat-pill" data-color="c8" onclick="showTab('reference')">
-    <svg viewBox="0 0 20 20"><path d="M3 3h5a2 2 0 012 2v12a1 1 0 01-1-1 1 1 0 00-1-1H3V3zm14 0h-5a2 2 0 00-2 2v12a1 1 0 011-1 1 1 0 011-1h5V3z"/></svg>
-    Reference / KB
+  <div class="cat-pill" data-color="c6" onclick="showTab('planning')">
+    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 9h12v7H4V9z"/></svg>
+    Planning
   </div>
-  <div class="cat-pill" data-color="c9" onclick="showTab('comms')">
-    <svg viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H8l-4 3v-3H4a2 2 0 01-2-2V5z"/></svg>
-    Communications
-  </div>
-  <div class="cat-pill" data-color="c10" onclick="showTab('agent')">
+  <div class="cat-pill" data-color="c7" onclick="showTab('ai')">
     <svg viewBox="0 0 20 20"><path d="M10 1a5 5 0 00-5 5v2a1 1 0 00-1 1v3a1 1 0 001 1h1a4 4 0 008 0h1a1 1 0 001-1V9a1 1 0 00-1-1V6a5 5 0 00-5-5zm-1.5 8a1 1 0 110 2 1 1 0 010-2zm3 0a1 1 0 110 2 1 1 0 010-2zM6 16v1a2 2 0 002 2h4a2 2 0 002-2v-1H6z"/></svg>
-    Agent & Copilot
+    AI
+  </div>
+  <div class="cat-pill" data-color="c8" onclick="showTab('feedback')">
+    <svg viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H8l-4 3v-3H4a2 2 0 01-2-2V5zm4 2a1 1 0 100 2h8a1 1 0 100-2H6zm0 3a1 1 0 100 2h5a1 1 0 100-2H6z"/></svg>
+    Feedback
   </div>
 </div>
 
 <!-- ═══ CONTENT PANES ═══ -->
 <div class="main">
 
-<!-- PLAYBOOKS -->
-<div class="pane active" id="playbooks">
-  <div class="pane-header"><h2>Playbooks</h2><p>Scenario-driven operational guidance</p></div>
+<!-- ACCESS -->
+<div class="pane active" id="access">
+  <div class="pane-header"><h2>Access</h2><p>Groups you need to join and what they enable</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Onboarding &#8211; Pre-Onboarding & Customer Setup</div><div class="rc-desc">Phase-based customer setup guidance before kickoff</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Onboarding &#8211; Business & Technical</div><div class="rc-desc">Kickoff through technical enablement</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Onboarding a MCSfMSC Customer</div><div class="rc-desc">End-to-end onboarding operational guide</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Care/PHE Purview Escalation Playbook</div><div class="rc-desc">Escalation paths for Purview incidents</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Issue Resolution Playbook (MCS)</div><div class="rc-desc">Issue handling & resolution flows</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Readiness Playbook</div><div class="rc-desc">Sentinel readiness resources & updates</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Direct Connect Process Playbook</div><div class="rc-desc">Customer re-education & escalation guidance</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Routing Enablement Guidance (Week 4 / Day 5)</div><div class="rc-desc">Playbook-referenced routing timing</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">DCR Playbooks (Entra, Intune, Purview, MTP)</div><div class="rc-desc">Design Change Request workflows per product</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Care/PHE Escalation (Intune, MDO, Security Copilot)</div><div class="rc-desc">Product-specific escalation paths</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">CSS to Care/PHE Escalation Path</div><div class="rc-desc">Cross-team escalation routing</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MyHorizons Tool (CLE Onboarding)</div><div class="rc-desc">Geordie's CLE onboarding checklist & access setup</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Security Groups Overview</div><div class="rc-desc">Summary of required AD/SG groups and what they unlock</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">CRM Access & Permissions</div><div class="rc-desc">Request CRM access, role assignment, and data visibility</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Power BI Workspace Access</div><div class="rc-desc">Join PBI workspace groups for dashboards & reports</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">IcM / DFM Access</div><div class="rc-desc">IcM stamping permissions and DFM tool access</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">SharePoint & Teams Channels</div><div class="rc-desc">Join MCS SharePoint sites and Teams channels</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">ADO (Azure DevOps) Access</div><div class="rc-desc">Get access to Delivery and PM backlogs</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Intake Portal Access</div><div class="rc-desc">aka.ms/mcsfmscintake permissions</div></div><span class="rc-arrow">→</span></div>
   </div>
 </div>
 
-<!-- TEMPLATES -->
-<div class="pane" id="templates">
-  <div class="pane-header"><h2>Templates</h2><p>Pre-formatted reusable artifacts</p></div>
-  <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Customer Onboarding Template (v2.0)</div><div class="rc-desc">Official kickoff & onboarding deck</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Customer Onboarding Follow-Up Email</div><div class="rc-desc">Post-kickoff reusable customer email</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Intake Template (v2.0)</div><div class="rc-desc">Standardized intake data capture</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Support Case Best Practices Deck</div><div class="rc-desc">Onboarding expectations for customers</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Customer Lockbox Process Slide</div><div class="rc-desc">Lockbox workflow for onboarding decks</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfSC Ops Review Deck (Weekly)</div><div class="rc-desc">Standardized ops review structure</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">CSAM Walking Deck for MCS</div><div class="rc-desc">Role-based CSAM engagement guide</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Customer Decks (Azure/M365/Security/BizApps)</div><div class="rc-desc">Customer-facing presentation templates</div></div><span class="rc-arrow">→</span></div>
+<!-- PLAYBOOKS (sub-divided by Feature) -->
+<div class="pane" id="playbooks">
+  <div class="pane-header"><h2>Playbooks</h2><p>Scenario-driven operational guidance — sub-divided by feature</p></div>
+  <div class="sub-pills">
+    <div class="sub-pill active" onclick="filterPlaybooks('all',this)">All</div>
+    <div class="sub-pill" onclick="filterPlaybooks('onboarding',this)">Onboarding</div>
+    <div class="sub-pill" onclick="filterPlaybooks('escalation',this)">Escalation</div>
+    <div class="sub-pill" onclick="filterPlaybooks('issue',this)">Issue Resolution</div>
+    <div class="sub-pill" onclick="filterPlaybooks('readiness',this)">Readiness</div>
+    <div class="sub-pill" onclick="filterPlaybooks('process',this)">Process & Routing</div>
+  </div>
+  <div class="res-grid" id="playbooks-grid">
+    <!-- Onboarding -->
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">MCS Onboarding – Pre-Onboarding & Customer Setup</div><div class="rc-desc">Phase-based customer setup guidance before kickoff</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">MCS Onboarding – Business & Technical</div><div class="rc-desc">Kickoff through technical enablement</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Onboarding a MCSfMSC Customer</div><div class="rc-desc">End-to-end onboarding operational guide</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Customer Pipeline Management Guide</div><div class="rc-desc">Nomination → Deal → Onboarding</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Pre-Onboarding Customer Setup Checklist</div><div class="rc-desc">Setup validation before kickoff</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Customer Onboarding End-to-End Flow</div><div class="rc-desc">Nomination → Onboarding → Run-state visual flow</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">MCSfMSC Customer Onboarding Template (v2.0)</div><div class="rc-desc">Official kickoff & onboarding deck</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Customer Onboarding Follow-Up Email</div><div class="rc-desc">Post-kickoff reusable customer email template</div></div><span class="rc-arrow">→</span></div>
+    <!-- Escalation -->
+    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">Care/PHE Purview Escalation Playbook</div><div class="rc-desc">Escalation paths for Purview incidents</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">Care/PHE Escalation (Intune, MDO, Security Copilot)</div><div class="rc-desc">Product-specific escalation paths</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">CSS to Care/PHE Escalation Path</div><div class="rc-desc">Cross-team escalation routing & visual flow</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">SEV One Escalation Process</div><div class="rc-desc">Sev1/A escalation handling steps</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">MCS Email Escalation Workflow</div><div class="rc-desc">How customers escalate to MCS (step-by-step + visual)</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">Escalation Authorization & Sender Rules</div><div class="rc-desc">Who can escalate, required data format</div></div><span class="rc-arrow">→</span></div>
+    <!-- Issue Resolution -->
+    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">Issue Resolution Playbook (MCS)</div><div class="rc-desc">Issue handling & resolution flows</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">Sev 1/A Issue Resolution Process Flow</div><div class="rc-desc">Severity-based resolution workflow</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">Crisis Prevention & MIRP</div><div class="rc-desc">Major Incident Response Plan</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">IcM / DFM Stamping Guide</div><div class="rc-desc">How to stamp incidents in IcM</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">How to Submit CRM Deliverables</div><div class="rc-desc">CRM operational task instructions</div></div><span class="rc-arrow">→</span></div>
+    <!-- Readiness -->
+    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">MCS Readiness Playbook</div><div class="rc-desc">Sentinel readiness resources & updates</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">Role-Specific Readiness Steps</div><div class="rc-desc">CLE / CSS / PHE / CEM per-role actions</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">MCS Change Readiness Log</div><div class="rc-desc">Sprint-scoped release readiness checklist</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">SLA Definitions (15-min Initial Response)</div><div class="rc-desc">Response time commitments per MBR docs</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">Role Definitions (CLE/PHE/CSS/SCIM/Care)</div><div class="rc-desc">Responsibilities per playbooks & onboarding</div></div><span class="rc-arrow">→</span></div>
+    <!-- Process & Routing -->
+    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">Direct Connect Process Playbook</div><div class="rc-desc">Customer re-education & escalation guidance</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">Routing Enablement Guidance (Week 4 / Day 5)</div><div class="rc-desc">Playbook-referenced routing timing</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">DCR Playbooks (Entra, Intune, Purview, MTP)</div><div class="rc-desc">Design Change Request workflows per product</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">MCS Intake Template (v2.0)</div><div class="rc-desc">Standardized intake data capture</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">MCAPS Onboarding FAQ</div><div class="rc-desc">Common onboarding & process questions</div></div><span class="rc-arrow">→</span></div>
   </div>
 </div>
 
-<!-- GUIDES -->
-<div class="pane" id="guides">
-  <div class="pane-header"><h2>Guides / How-To</h2><p>Focused, single-task instructions</p></div>
-  <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Email Escalation Workflow (Step-by-Step)</div><div class="rc-desc">How customers escalate to MCS</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Customer Pipeline Management Guide</div><div class="rc-desc">Nomination &#8594; Deal &#8594; Onboarding</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Intake Portal</div><div class="rc-desc">aka.ms/mcsfmscintake</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SEV One Escalation Process</div><div class="rc-desc">Sev1/A escalation handling steps</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">IcM / DFM Stamping Guide</div><div class="rc-desc">How to stamp incidents in IcM</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">How to Submit CRM Deliverables</div><div class="rc-desc">CRM operational task instructions</div></div><span class="rc-arrow">→</span></div>
+<!-- KNOW ME -->
+<div class="pane" id="knowme">
+  <div class="pane-header"><h2>Know Me</h2><p>Customer summary view — sourced from CRM</p></div>
+  <!-- Customer selector -->
+  <div style="margin-bottom:24px;">
+    <select style="padding:10px 16px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:14px; font-family:inherit; outline:none; min-width:300px; background:var(--surface);">
+      <option>Select a customer...</option>
+      <option>Contoso Ltd.</option>
+      <option>Fabrikam Inc.</option>
+      <option>Woodgrove Bank</option>
+    </select>
   </div>
-</div>
-
-<!-- CHECKLISTS -->
-<div class="pane" id="checklists">
-  <div class="pane-header"><h2>Checklists</h2><p>Action validation lists</p></div>
+  <!-- Read-only summary cards -->
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-label">Internal Contacts</div>
+      <div class="info-value">CLE: Jane Doe &bull; PHE: John Smith &bull; CSAM: Alex Lee</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Customer Contacts</div>
+      <div class="info-value">Primary: Sarah Johnson (VP Eng) &bull; Technical: Mike Chen</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Contract Dates</div>
+      <div class="info-value">Start: 2024-06-01 &bull; End: 2026-05-31</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Customer-Specific DGs</div>
+      <div class="info-value">mcs-contoso@microsoft.com &bull; contoso-cri@microsoft.com</div>
+    </div>
+  </div>
+  <!-- CRM edit links -->
+  <div class="pane-header" style="margin-top:16px;"><h2>CRM Views</h2><p>Edit access in CRM as the system of truth</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Delivery Team &#8211; Implemented Changes & Required Actions</div><div class="rc-desc">Monthly readiness action checklist by role</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Change Readiness Log</div><div class="rc-desc">Sprint-scoped release readiness checklist</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Customer Onboarding Processes (Loop)</div><div class="rc-desc">Working onboarding follow-up tracker</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Pre-Onboarding Customer Setup Checklist</div><div class="rc-desc">Setup validation before kickoff</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Role-Specific Readiness Steps</div><div class="rc-desc">CLE / CSS / PHE / CEM per-role actions</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Customer Account (CRM)</div><div class="rc-desc">Open full customer record in CRM for editing</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Contact Management (CRM)</div><div class="rc-desc">Update internal & customer contacts</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Contract & Entitlements (CRM)</div><div class="rc-desc">View and edit contract details</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Deliverables Tracker (CRM)</div><div class="rc-desc">Track and submit CRM deliverables</div></div><span class="rc-arrow">→</span></div>
   </div>
 </div>
 
 <!-- REPORTS -->
 <div class="pane" id="reports">
-  <div class="pane-header"><h2>Reports & Dashboards</h2><p>Data-driven status and decision-making tools</p></div>
+  <div class="pane-header"><h2>Reports</h2><p>Data-driven status and decision-making tools</p></div>
   <div class="res-grid">
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS PBI App (Subha's Dashboard)</div><div class="rc-desc">Onboarding, Cases, Incidents, RCAs — all-in-one PBI app</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Support Health 360</div><div class="rc-desc">Security 360 health metrics & insights</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Power BI</div><div class="rc-desc">Main MCS Power BI dashboard</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Dashboard &#8211; Power BI</div><div class="rc-desc">Operational dashboard</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Dash Case Insights</div><div class="rc-desc">Case-level analytics</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">MCS BI Scorecards</div><div class="rc-desc">Performance scorecards</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Support Health Metrics Scorecard</div><div class="rc-desc">Health metrics tracking</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Data Dashboard</div><div class="rc-desc">Operational data views</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM CRI Deep Dive</div><div class="rc-desc">CRI analytics deep dive</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM WSR Drilldown</div><div class="rc-desc">WSR analytics</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">WSR Scorecard</div><div class="rc-desc">Weekly service review metrics</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM WSR Drilldown</div><div class="rc-desc">Weekly service review analytics</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM Case Heatmap</div><div class="rc-desc">Case distribution analysis</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">Proactive Resiliency Dashboard</div><div class="rc-desc">Service health & resilience monitoring</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Weekly Ops Data (Excel)</div><div class="rc-desc">Weekly operational data input</div></div><span class="rc-arrow">→</span></div>
-  </div>
-</div>
-
-<!-- FLOWS -->
-<div class="pane" id="flows">
-  <div class="pane-header"><h2>Process Flows</h2><p>Visual representations of workflows</p></div>
-  <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Email Escalation Workflow (Visual)</div><div class="rc-desc">End-to-end escalation flow diagram</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">CSS &#8594; Care/PHE Escalation Path</div><div class="rc-desc">Cross-team routing visualization</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Care/PHE Escalation Workflows (Per Product)</div><div class="rc-desc">Product-specific escalation diagrams</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Crisis Prevention & MIRP</div><div class="rc-desc">Major Incident Response Plan</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Sev 1/A Issue Resolution Process Flow</div><div class="rc-desc">Severity-based resolution workflow</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Customer Onboarding End-to-End Flow</div><div class="rc-desc">Nomination &#8594; Onboarding &#8594; Run-state</div></div><span class="rc-arrow">→</span></div>
   </div>
 </div>
 
 <!-- TRAINING -->
 <div class="pane" id="training">
-  <div class="pane-header"><h2>Training Materials</h2><p>Learning-oriented content</p></div>
+  <div class="pane-header"><h2>Training</h2><p>Learning-oriented content, ramp plans, and QA resources</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Customer Onboarding v2.0 (Training)</div><div class="rc-desc">Kickoff deck used for CLE ramp</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Program Scrum Recordings</div><div class="rc-desc">Operational training via meeting recordings</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MyHorizons Checklist (Geordie)</div><div class="rc-desc">CLE onboarding ramp checklist & milestones</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">QA Objects & Assessments</div><div class="rc-desc">Links to quality assurance training objects</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">Job Task Analysis / CLE-PHE Ramp Plans</div><div class="rc-desc">Role-based competency development</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Onboarding Processes & Tooling Review</div><div class="rc-desc">Training session on onboarding gaps</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Program Scrum Recordings</div><div class="rc-desc">Operational training via meeting recordings</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Onboarding Processes & Tooling Review</div><div class="rc-desc">Training session on onboarding gaps & tools</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">MCAPS Onboarding Field Operations Playbook</div><div class="rc-desc">Broader onboarding framework</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Walking Decks (Azure/M365/Internal)</div><div class="rc-desc">Internal training presentation decks</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Support Case Best Practices Deck</div><div class="rc-desc">Customer expectations & case handling training</div></div><span class="rc-arrow">→</span></div>
   </div>
 </div>
 
-<!-- REFERENCE -->
-<div class="pane" id="reference">
-  <div class="pane-header"><h2>Reference / Knowledge Base</h2><p>Authoritative static lookup materials</p></div>
+<!-- PLANNING -->
+<div class="pane" id="planning">
+  <div class="pane-header"><h2>Planning</h2><p>ADO backlogs and project tracking</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SLA Definitions (15-min Initial Response)</div><div class="rc-desc">Response time commitments per MBR docs</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Role Definitions (CLE/PHE/CSS/SCIM/Care)</div><div class="rc-desc">Responsibilities per playbooks & onboarding</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">ADO Backlog — Delivery (Jeremy's Team)</div><div class="rc-desc">Azure DevOps backlog for delivery engineering work items</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">ADO Backlog — PM (Our Team)</div><div class="rc-desc">Azure DevOps backlog for PM planning & feature requests</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Sprint Planning Dashboard</div><div class="rc-desc">Current sprint status, velocity, and burndown</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Roadmap</div><div class="rc-desc">Feature roadmap and milestone tracking</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Change Readiness + Sprint Planning</div><div class="rc-desc">Sprint-scoped readiness activities</div></div><span class="rc-arrow">→</span></div>
     <div class="res-card"><div class="rc-info"><div class="rc-title">Evolution of ROB and SIP for MCSfMSC</div><div class="rc-desc">Health Review & SIP definitions</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCAPS Onboarding FAQ</div><div class="rc-desc">Common onboarding questions</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Unified Portal One Pager</div><div class="rc-desc">Vision doc for single source of truth</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Escalation Authorization & Sender Rules</div><div class="rc-desc">Who can escalate, required data format</div></div><span class="rc-arrow">→</span></div>
   </div>
 </div>
 
-<!-- COMMS -->
-<div class="pane" id="comms">
-  <div class="pane-header"><h2>Communications</h2><p>Operational meetings & broadcasts</p></div>
-  <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfSC Delivery Update MBRs (Monthly)</div><div class="rc-desc">Monthly business reviews</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Implemented/Upcoming Changes Emails</div><div class="rc-desc">Monthly readiness change notifications</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Change Readiness + Sprint Planning</div><div class="rc-desc">Sprint-scoped readiness comms</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">OES Newsletter (Monthly)</div><div class="rc-desc">Operational readiness dashboards & updates</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Operations Meeting Notes (Loop)</div><div class="rc-desc">Weekly ops meeting notes & action items</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">CARE OE PM Weekly Meeting Notes</div><div class="rc-desc">PM-level weekly sync notes</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Program Scrum Meeting Notes</div><div class="rc-desc">Sprint-scoped program communications</div></div><span class="rc-arrow">→</span></div>
-  </div>
-</div>
-
-<!-- AGENT & COPILOT -->
-<div class="pane" id="agent">
+<!-- AI -->
+<div class="pane" id="ai">
   <div class="agent-hero">
     <div class="copilot-icon">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
     </div>
-    <h2>MCS Copilot</h2>
-    <p>Ask questions about MCS resources, processes, and best practices</p>
+    <h2>MCS AI Assistant</h2>
+    <p>Prompt templates and AI-powered tools for CLE scenarios</p>
     <div class="agent-chat">
-      <input type="text" placeholder="Ask MCS Copilot anything..." />
+      <input type="text" placeholder="Ask MCS AI anything..." />
     </div>
     <div class="agent-prompts">
-      <div class="prompt">How do I onboard a new MCS customer?</div>
-      <div class="prompt">What is the Sev1 escalation process?</div>
-      <div class="prompt">Show me the latest MBR deck</div>
-      <div class="prompt">What are the SLA definitions?</div>
-      <div class="prompt">Find the DCR playbook for Entra</div>
+      <div class="prompt">Summarize case timeline for [case #]</div>
+      <div class="prompt">Assess CRI risk for [customer]</div>
+      <div class="prompt">Draft escalation summary</div>
+      <div class="prompt">Analyze case risk factors</div>
     </div>
   </div>
-  <div class="pane-header" style="margin-top:32px;"><h2>Agent Tools</h2><p>AI-powered assistants for MCS workflows</p></div>
+  <div class="pane-header" style="margin-top:32px;"><h2>Prompt Templates</h2><p>Pre-built prompts for common CLE scenarios</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Copilot Chat</div><div class="rc-desc">Natural language Q&A across all MCS resources</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Case Triage Agent</div><div class="rc-desc">AI-assisted case routing and prioritization</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Onboarding Wizard</div><div class="rc-desc">Step-by-step guided customer onboarding</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Escalation Assistant</div><div class="rc-desc">Smart escalation path recommendation</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Report Builder</div><div class="rc-desc">Generate custom reports from MCS data</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Readiness Checker</div><div class="rc-desc">Validate sprint readiness automatically</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Case / CRI Timeline Prompt</div><div class="rc-desc">Generate a chronological timeline of case or CRI events</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Case Risk Assessment Prompt</div><div class="rc-desc">Evaluate case risk factors and suggest mitigations</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">CRI Risk Assessment Prompt</div><div class="rc-desc">Assess CRI risk level and recommend actions</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">M365 Agent</div><div class="rc-desc">Microsoft 365 Copilot agent for MCS workflows</div></div><span class="rc-arrow">→</span></div>
+    <div class="res-card"><div class="rc-info"><div class="rc-title">Zebra AI Experiment</div><div class="rc-desc">AI experiment for shared services integration</div></div><span class="rc-arrow">→</span></div>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div class="pane" id="feedback">
+  <div class="pane-header"><h2>Feedback</h2><p>Submit feedback, feature requests, or report issues</p></div>
+  <div class="feedback-form">
+    <div class="form-group">
+      <label>Feedback Type</label>
+      <select>
+        <option>Bug Report</option>
+        <option>Feature Request</option>
+        <option>Content Update</option>
+        <option>General Feedback</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Subject</label>
+      <input type="text" placeholder="Brief summary of your feedback" />
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea placeholder="Please describe in detail..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Priority</label>
+      <select>
+        <option>Low</option>
+        <option>Medium</option>
+        <option selected>Normal</option>
+        <option>High</option>
+        <option>Critical</option>
+      </select>
+    </div>
+    <button class="submit-btn" onclick="alert('Thank you for your feedback!')">Submit Feedback</button>
   </div>
 </div>
 
@@ -401,8 +464,20 @@ function showTab(id) {
   var pane = document.getElementById(id);
   if(pane) pane.classList.add('active');
   var pills = document.querySelectorAll('.cat-pill');
-  var names = ['playbooks','templates','guides','checklists','reports','flows','training','reference','comms','agent'];
+  var names = ['access','playbooks','knowme','reports','training','planning','ai','feedback'];
   for(var i=0;i<pills.length;i++){ if(names[i]===id) pills[i].classList.add('active'); }
+}
+function filterPlaybooks(feature, el) {
+  document.querySelectorAll('.sub-pill').forEach(function(p){ p.classList.remove('active'); });
+  el.classList.add('active');
+  var cards = document.querySelectorAll('#playbooks-grid .res-card');
+  cards.forEach(function(c){
+    if(feature === 'all' || c.getAttribute('data-feature') === feature) {
+      c.style.display = '';
+    } else {
+      c.style.display = 'none';
+    }
+  });
 }
 </script>
 </body>
