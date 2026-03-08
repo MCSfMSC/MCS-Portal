@@ -1,0 +1,173 @@
+[
+  {
+    "tenantId": "5b973f99-77df-4beb-b27d-aa0c70b8482c",
+    "dataAsOf": "2026-03-06T00:00:00Z",
+    "servicePostureSummary": "EY is under elevated MCS service pressure. The current open MCS backlog is 69, with 61 open Sev A/B cases, a strong Purview concentration, and a meaningful history of escalation-linked work that should be managed as a service narrative, not just as case volume.",
+    "riskScore": 81,
+    "statusLabel": "Under pressure",
+    "topConcern": "Purview-led service pressure",
+    "openMcsCases": 69,
+    "openMcsCasesNote": "Live cluster snapshot from getSEDICSupportRequestsTbl shows 69 open MCS cases. The executive question is backlog quality and concentration, not raw historic total.",
+    "openSevAB": 61,
+    "openSevABNote": "Most open MCS cases currently sit in Sev A/B, which means review discipline and update quality matter more than average-case metrics.",
+    "icmLinked": 538,
+    "icmLinkedNote": "Historical ICM linkage is high enough that escalation posture should be treated as a core part of customer health.",
+    "irMetRate": "97%",
+    "irMetRateNote": "IR is mostly being met based on current cluster counts, but that should not mask trust risk if ownership churn and product blockers persist.",
+    "topOpenProductGroup": "Purview",
+    "topOpenProductNote": "Purview leads current open MCS pressure, followed by MTP and Identity. This is where the service story is sharpest today.",
+    "customerTrustRisk": "Elevated",
+    "customerTrustRiskNote": "Trust risk is elevated because support execution, product limitations, and cross-team accountability all remain visible at the same time.",
+    "topAgeBucketSummary": ">7<=30 Days leads with 35 open cases; 19 more are 0<=7 days, which means the customer view should track both freshness and carry-over.",
+    "primaryQueueSummary": "SCIM MCSfMSC UR currently holds 39 open cases, with OneSupport System Holding holding 26. Queue concentration is operationally meaningful.",
+    "escalationShape": "538 ICM-linked records historically, 184 CritSit-tagged cases, 49 reopened cases, and 1,706 transfers indicate that escalation shape is a first-class executive signal.",
+    "corePrinciple": "Use the cluster-backed support picture to explain current service posture first. Customer background should only appear when it changes delivery or escalation behavior.",
+    "productMix": [
+      {
+        "label": "Purview",
+        "value": 35
+      },
+      {
+        "label": "MTP",
+        "value": 25
+      },
+      {
+        "label": "Identity",
+        "value": 20
+      },
+      {
+        "label": "Intune",
+        "value": 16
+      },
+      {
+        "label": "SecurityCopilot",
+        "value": 4
+      }
+    ],
+    "semanticModelInsights": {
+      "summary": "EY's active-case backlog is elevated and has recently stepped up rather than simply aged in place. The current open-case picture is driven by newer backlog and coordination-heavy waiting states, with Purview accounting for the largest product concentration.",
+      "sourceLabel": "Open MCSfMSC semantic model",
+      "sourceUrl": "https://msit.powerbi.com/onelake/details/fcfe010e-fd9a-4f99-bf69-de43ffdee697/dataset/55d4063f-4663-4e3d-810a-7284acab7580/overview?experience=power-bi",
+      "reportLabel": "Open Case Backlog report",
+      "reportUrl": "https://msit.powerbi.com/groups/fcfe010e-fd9a-4f99-bf69-de43ffdee697/reports/40a1efe9-aff9-41cf-ba14-4b89c310dfeb/3dad4b1d82e0ca45946c?experience=power-bi",
+      "activeCasesCurrent": 76,
+      "activeCasesTrendSummary": "Active cases rose from 57 on Feb 20 to 75 on Mar 6, with a local peak of 76 on Feb 27. The last week has stayed elevated in the mid-70s instead of returning to the late-February baseline.",
+      "ageMixSummary": "59 of 76 open cases are 30 days old or newer. Another 11 are 31-60 days, while only 6 cases are older than 60 days, so the backlog is growing but still relatively young.",
+      "statusMixSummary": "The largest open-case states are Pending customer response (24), Waiting for product team (20), and Waiting for customer confirmation (13), indicating coordination friction rather than only troubleshooting load.",
+      "productMixSummary": "Purview leads with 30 open cases, followed by MTP (17), Identity (15), Intune (11), and SecurityCopilot (3).",
+      "ageBuckets": [
+        {
+          "label": "<=30 days",
+          "value": 59,
+          "valueLabel": "59 cases"
+        },
+        {
+          "label": "31-60 days",
+          "value": 11,
+          "valueLabel": "11 cases"
+        },
+        {
+          "label": "61-90 days",
+          "value": 3,
+          "valueLabel": "3 cases"
+        },
+        {
+          "label": "91-180 days",
+          "value": 3,
+          "valueLabel": "3 cases"
+        }
+      ],
+      "productMix": [
+        {
+          "label": "Purview",
+          "value": 30,
+          "valueLabel": "30 cases"
+        },
+        {
+          "label": "MTP",
+          "value": 17,
+          "valueLabel": "17 cases"
+        },
+        {
+          "label": "Identity",
+          "value": 15,
+          "valueLabel": "15 cases"
+        },
+        {
+          "label": "Intune",
+          "value": 11,
+          "valueLabel": "11 cases"
+        },
+        {
+          "label": "SecurityCopilot",
+          "value": 3,
+          "valueLabel": "3 cases"
+        }
+      ],
+      "statusMix": [
+        {
+          "title": "Pending customer response",
+          "detail": "24 open cases are currently waiting on customer response, making customer follow-through the single largest visible bottleneck in the current backlog."
+        },
+        {
+          "title": "Waiting for product team",
+          "detail": "20 open cases are waiting on the product team, which reinforces that part of the customer risk is cross-team execution rather than pure case handling."
+        },
+        {
+          "title": "Waiting for customer confirmation",
+          "detail": "13 open cases are waiting for customer confirmation, so closure discipline and explicit ask tracking matter for backlog cleanup."
+        },
+        {
+          "title": "Troubleshooting and mitigated cases remain active",
+          "detail": "9 cases are still in troubleshooting and 9 more are mitigated but not yet fully cleared, so the team should separate true in-flight engineering work from closure friction."
+        }
+      ],
+      "trendHighlights": [
+        {
+          "title": "Backlog stepped up and stayed elevated",
+          "detail": "EY active cases increased from 57 on Feb 20 to 75 on Mar 6, with the last week holding in the mid-70s instead of dropping back after the Feb 27 peak."
+        },
+        {
+          "title": "The backlog is young, not just old and stuck",
+          "detail": "Most of the current open volume sits inside the 30-day bucket, which means recent accumulation is a bigger driver than long-tail aging alone."
+        },
+        {
+          "title": "Purview remains the center of gravity",
+          "detail": "Purview is the largest active-case cluster, so it should anchor the service review unless another workload materially changes the narrative."
+        }
+      ]
+    },
+    "serviceInsights": [
+      {
+        "title": "Purview is the current service center of gravity",
+        "detail": "Purview is the largest open MCS product cluster in the live tenant snapshot. That makes it the right place to anchor the service review unless another workload starts materially changing the story."
+      },
+      {
+        "title": "Severity pressure is active, not theoretical",
+        "detail": "61 of 69 open MCS cases are currently Sev A/B. This means the page should emphasize executive posture, owner clarity, and escalation quality over descriptive customer context."
+      },
+      {
+        "title": "Escalation history is part of the customer health signal",
+        "detail": "High ICM linkage, CritSit counts, reopen patterns, and transfer volume suggest this customer should be managed through support insight and ownership discipline, not just dashboard observation."
+      }
+    ],
+    "escalationHealth": [
+      {
+        "title": "Aging open cases are concentrated in the 8 to 30 day range",
+        "detail": "35 of the current open MCS cases fall in the >7<=30 day bucket, which means the service review should focus on whether these issues are moving forward or just staying alive."
+      },
+      {
+        "title": "Severity exposure remains high",
+        "detail": "61 of 69 open MCS cases are Sev A/B, so support quality and escalation handling matter more than raw response-time optics."
+      },
+      {
+        "title": "Reopen and transfer patterns suggest motion friction",
+        "detail": "49 reopened cases and 1,706 transfers indicate that ownership churn and support handoffs need active management."
+      },
+      {
+        "title": "Queue concentration is visible",
+        "detail": "SCIM MCSfMSC UR and OneSupport System Holding account for almost all current open MCS cases, making queue-level execution a relevant management signal."
+      }
+    ]
+  }
+]

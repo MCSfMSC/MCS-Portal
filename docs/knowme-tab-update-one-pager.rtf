@@ -1,0 +1,83 @@
+{\rtf1\ansi\deff0
+{\fonttbl{\f0 Calibri;}{\f1 Consolas;}}
+\viewkind4\uc1
+\pard\sa240\sl276\slmult1\f0\fs32\b Know Me Tab Update One-Pager\b0\par
+
+\pard\sa200\sl276\slmult1\fs22\b Overview\b0\par
+\pard\sa140\sl276\slmult1\fs22 The Know Me tab has been reshaped from a customer profile view into a service decision page. The goal is that a user can open one customer and quickly understand current service risk, why it matters, and what Microsoft needs to do next without jumping across CRM, Power BI, ADO, and support reports.\par
+
+\pard\sa200\sl276\slmult1\fs22 This update focused on three outcomes:\par
+\pard\li360\sa120\fs22\bullet\tab Reduce noise and remove profile-style content that does not change delivery behavior\par
+\pard\li360\sa120\fs22\bullet\tab Bring current service and backlog signals into the page through Power BI insights\par
+\pard\li360\sa200\fs22\bullet\tab Add onboarding readiness context so teams can see pre-onboarding risk before it becomes a support problem\par
+
+\pard\sa200\sl276\slmult1\fs22\b What Changed\b0\par
+
+\pard\sa140\sl276\slmult1\fs22\b 1. Added Power BI Insights to Know Me\b0\par
+\pard\sa120\sl276\slmult1\fs22 The page now includes a dedicated Power BI Insights section sourced from the MCSfMSC semantic model. It surfaces filtered active-case pattern, backlog age mix, product concentration, status bottlenecks, and trend highlights. This turns the page from a static summary into a view that reflects actual case pressure and backlog shape.\par
+
+\pard\sa140\sl276\slmult1\fs22\b 2. Added Customer Onboarding Status and ADO Signals\b0\par
+\pard\sa120\sl276\slmult1\fs22 The page now includes a derived onboarding status plus a list of Shalini-related ADO onboarding signals. The onboarding status is derived from participant stage, participant status, and onboard date. The ADO signals make open program-level pre-onboarding work visible in the page instead of leaving that context buried in Azure DevOps.\par
+
+\pard\sa140\sl276\slmult1\fs22\b 3. Simplified and De-duplicated the Layout\b0\par
+\pard\sa120\sl276\slmult1\fs22 Removed:\par
+\pard\li360\sa100\fs22\bullet\tab View Intent card next to the customer selector\par
+\pard\li360\sa100\fs22\bullet\tab Scope Boundaries\par
+\pard\li360\sa100\fs22\bullet\tab Special Operating Model\par
+\pard\li360\sa100\fs22\bullet\tab Partner / Dependency\par
+\pard\li360\sa140\fs22\bullet\tab Core Principle footer block\par
+\pard\sa120\sl276\slmult1\fs22 Renamed:\par
+\pard\li360\sa140\fs22\bullet\tab Power BI Semantic Model Insights -> Power BI Insights\par
+\pard\sa120\sl276\slmult1\fs22 Merged:\par
+\pard\li360\sa100\fs22\bullet\tab Customer Improvement Plan + Current Product Owner Motion -> Recovery Plan And Ownership\par
+\pard\li360\sa200\fs22\bullet\tab Program stage concepts are now represented mainly through the onboarding status block rather than repeated in separate cards\par
+
+\pard\sa200\sl276\slmult1\fs22\b Why This Matters\b0\par
+\pard\sa120\sl276\slmult1\fs22 Before this work, the Know Me tab still required users to interpret multiple disconnected signals on their own. After this work, the page does more synthesis directly in the UI.\par
+\pard\li360\sa100\fs22\bullet\tab Better executive readability\par
+\pard\li360\sa100\fs22\bullet\tab Faster meeting preparation\par
+\pard\li360\sa100\fs22\bullet\tab Clearer ownership and next move\par
+\pard\li360\sa100\fs22\bullet\tab Better separation of support problems versus product-gap problems\par
+\pard\li360\sa200\fs22\bullet\tab Earlier visibility into onboarding risk and readiness\par
+
+\pard\sa200\sl276\slmult1\fs22\b Before vs. After\b0\par
+\pard\sa120\sl276\slmult1\f1\fs20 Area                         Before                                 After\par
+Page role                    Customer context page                  Service decision page\par
+Power BI data                Separate analysis outside the page     Embedded as Power BI Insights\par
+Onboarding context           Spread across CRM and ADO              Visible in Know Me as status plus ADO signals\par
+Next-step guidance           Split across multiple cards            Consolidated into clearer risk and recovery sections\par
+Readability                  More profile-oriented                  More action-oriented and review-ready\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\b Updated Information Flow\b0\par
+\pard\sa120\sl276\slmult1\f1\fs20 CRM customer data ----\>\par
+Support insights JSON --+--> Know Me tab --> Customer context that changes delivery\par
+Power BI semantic model -+                 --> Current service posture\par
+ADO onboarding items ----+                 --> Power BI insights\par
+                                          --> Top risks and escalation health\par
+                                          --> Recovery plan and ownership\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\b Screen Structure\b0\par
+\pard\sa120\sl276\slmult1\f1\fs20 Customer selector\par
+  -> Customer Context That Changes Delivery\par
+  -> Possible Customer Onboarding Status\par
+  -> Current Service Posture\par
+  -> Power BI Insights\par
+  -> Top Risks\par
+  -> Escalation Health\par
+  -> Product Gaps And Next Moves\par
+  -> Customer Actions\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\b Architecture Snapshot\b0\par
+\pard\sa120\sl276\slmult1\f1\fs20 Sources: mcs-customers.json | support-insights.json | Power BI MCP derived insights | ADO onboarding signals\par
+Page logic: index.html | derived onboarding status rules | risk and insight rendering\par
+Outcome: meeting-ready customer story | risk clarity | ownership clarity | earlier onboarding visibility\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\b Key Implementation Notes\b0\par
+\pard\li360\sa100\fs22\bullet\tab EY semantic-model insights were added into the support insight layer and rendered directly in Know Me\par
+\pard\li360\sa100\fs22\bullet\tab A front-end binding bug in the Know Me update flow was fixed so support insights render correctly for selected customers\par
+\pard\li360\sa100\fs22\bullet\tab ADO MCP was added and validated, but the page currently uses embedded ADO onboarding signals rather than a live browser-side call\par
+\pard\li360\sa200\fs22\bullet\tab The onboarding status is currently rule-based and derived from CRM-style customer fields already present in the local data\par
+
+\pard\sa200\sl276\slmult1\fs22\b Executive Takeaway\b0\par
+\pard\sa120\sl276\slmult1\fs22 The Know Me tab is no longer just a place to look up customer information. It is now closer to a single-page service brief that combines customer context, support pressure, backlog shape, onboarding readiness, and next-action framing in one place. That is the right direction for leadership reviews, support escalations, and customer-facing preparation.\par
+}

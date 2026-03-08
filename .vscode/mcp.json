@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "ado": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "${input:ado_org}"
+      ]
+    },
+    "Security360-MCP": {
+      "type": "http",
+      "url": "https://security360-mcp.azurewebsites.net/mcp"
+    }
+  },
+  "inputs": [
+    {
+      "id": "ado_org",
+      "type": "promptString",
+      "description": "Azure DevOps organization name (e.g. 'contoso')"
+    }
+  ]
+}

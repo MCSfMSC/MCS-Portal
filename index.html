@@ -27,7 +27,7 @@
   --shadow-lg: 0 8px 40px rgba(74,58,107,.08);
   --gradient: linear-gradient(135deg, #8B6FC0 0%, #7B8ED8 40%, #F0919B 80%, #F4C5A0 100%);
   --gradient-pill: linear-gradient(135deg, #8B6FC0, #7B8ED8);
-  /* Tab colors — soft palette (8 tabs) */
+  /* Tab colors — soft palette (7 tabs used) */
   --c1: #5BBAC6; --c2: #8B6FC0; --c3: #F0919B; --c4: #7B8ED8;
   --c5: #E8A96B; --c6: #6BBF8A; --c7: #6B5F8D; --c8: #C476B8;
 }
@@ -123,8 +123,112 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 .info-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; }
 .info-card .info-label { font-size:11px; font-weight:600; text-transform:uppercase; color:var(--text-3); letter-spacing:.5px; margin-bottom:8px; }
 .info-card .info-value { font-size:14px; font-weight:500; color:var(--text); }
+.info-card .info-value.small { font-size:13px; font-weight:400; line-height:1.6; color:var(--text-2); white-space:pre-wrap; }
 .info-card .info-value a { color:var(--purple); text-decoration:none; }
 .info-card .info-value a:hover { text-decoration:underline; }
+.knowme-toolbar { display:flex; gap:14px; align-items:flex-end; flex-wrap:wrap; margin-bottom:24px; }
+.knowme-picker { flex:1; min-width:280px; }
+.knowme-picker select { width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:14px; font-family:inherit; outline:none; background:var(--surface); }
+.knowme-picker select:focus { border-color:var(--purple); }
+.knowme-meta { min-width:260px; }
+.knowme-meta .info-value { font-size:13px; color:var(--text-2); }
+.knowme-panels { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:24px; }
+.knowme-panel { min-height:220px; }
+.knowme-panel .info-value { font-size:13px; font-weight:400; color:var(--text-2); line-height:1.6; white-space:pre-wrap; }
+.knowme-empty { color:var(--text-3); }
+.knowme-story { display:grid; grid-template-columns:1.15fr .85fr; gap:16px; margin-bottom:24px; }
+.story-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow-sm); }
+.story-card h3 { font-size:18px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-.2px; }
+.story-card p { font-size:13px; line-height:1.7; color:var(--text-2); }
+.story-badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.story-badge { padding:6px 12px; border-radius:999px; background:var(--lavender-light); color:var(--purple); font-size:12px; font-weight:600; }
+.story-badges a.story-badge { text-decoration:none; }
+.metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+.metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; }
+.metric-card .metric-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--text-3); margin-bottom:10px; }
+.metric-card .metric-value { font-size:28px; font-weight:700; color:var(--text); letter-spacing:-.8px; }
+.metric-card .metric-subtext { font-size:12px; color:var(--text-2); margin-top:8px; line-height:1.5; }
+.metric-card .metric-value.alert { color:#C75A65; }
+.metric-card .metric-value.good { color:#3D8C63; }
+.insight-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:24px; }
+.insight-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; }
+.insight-card h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:12px; }
+.insight-list { display:flex; flex-direction:column; gap:10px; }
+.insight-item { padding:12px 14px; border-radius:12px; background:var(--bg); border:1px solid var(--border); }
+.insight-item strong { display:block; font-size:13px; color:var(--text); margin-bottom:4px; }
+.insight-item span { display:block; font-size:12px; color:var(--text-2); line-height:1.5; white-space:pre-wrap; }
+.portal-note { background:linear-gradient(135deg, rgba(139,111,192,.12), rgba(123,142,216,.12)); border:1px solid rgba(139,111,192,.18); border-radius:var(--radius); padding:22px 24px; margin-bottom:24px; }
+.portal-note h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:8px; }
+.portal-note p { font-size:13px; line-height:1.7; color:var(--text-2); }
+.executive-block { margin-bottom:28px; }
+.executive-block .pane-header { margin-bottom:16px; }
+.executive-block .pane-header h2 { font-size:19px; }
+.executive-block .pane-header p { font-size:12px; }
+.context-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:16px; }
+.risk-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+.risk-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:20px; box-shadow:var(--shadow-sm); }
+.risk-card h4 { font-size:15px; line-height:1.35; color:var(--text); margin-bottom:10px; letter-spacing:-.2px; }
+.risk-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.risk-pill { padding:5px 10px; border-radius:999px; background:var(--lavender-light); color:var(--purple); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.35px; }
+.risk-card p { font-size:12px; line-height:1.6; color:var(--text-2); margin-bottom:12px; }
+.risk-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.risk-action { background:var(--bg); border-radius:12px; padding:10px 12px; }
+.risk-action strong { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.35px; color:var(--text-3); margin-bottom:4px; }
+.risk-action span { display:block; font-size:12px; color:var(--text); line-height:1.5; }
+.dashboard-shell { display:grid; grid-template-columns:1.2fr .8fr; gap:16px; margin-bottom:24px; }
+.hero-dashboard { background:linear-gradient(135deg, #fff 0%, #fbf7ff 55%, #fff7f3 100%); border:1px solid rgba(139,111,192,.18); border-radius:24px; padding:28px; position:relative; overflow:hidden; box-shadow:var(--shadow-md); }
+.hero-dashboard::before { content:''; position:absolute; inset:auto -40px -60px auto; width:220px; height:220px; background:radial-gradient(circle, rgba(240,145,155,.26) 0%, rgba(240,145,155,0) 70%); }
+.hero-kicker { display:flex; align-items:center; gap:10px; margin-bottom:14px; position:relative; z-index:1; }
+.hero-icon { width:42px; height:42px; border-radius:14px; background:linear-gradient(135deg, #8B6FC0, #F0919B); display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; box-shadow:0 10px 22px rgba(139,111,192,.24); }
+.hero-kicker span { font-size:12px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--purple); }
+.hero-dashboard h3 { font-size:28px; line-height:1.15; letter-spacing:-.8px; color:var(--text); margin-bottom:10px; position:relative; z-index:1; }
+.hero-dashboard p { max-width:720px; font-size:14px; line-height:1.75; color:var(--text-2); position:relative; z-index:1; }
+.hero-band { margin-top:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; position:relative; z-index:1; }
+.hero-band-card { background:rgba(255,255,255,.76); border:1px solid rgba(139,111,192,.1); border-radius:16px; padding:14px 16px; backdrop-filter:blur(8px); }
+.hero-band-label { font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-3); letter-spacing:.45px; margin-bottom:6px; }
+.hero-band-value { font-size:15px; font-weight:700; color:var(--text); }
+.cockpit-card { background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:24px; box-shadow:var(--shadow-md); }
+.cockpit-card h3 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:14px; }
+.gauge-wrap { display:flex; align-items:center; gap:18px; }
+.risk-gauge { --gauge:72; width:148px; height:148px; border-radius:50%; background:conic-gradient(#C75A65 0 calc(var(--gauge) * 1%), #F4C5A0 calc(var(--gauge) * 1%) calc((var(--gauge) + 12) * 1%), #ECE7F5 0); position:relative; flex-shrink:0; }
+.risk-gauge::after { content:''; position:absolute; inset:16px; background:#fff; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(139,111,192,.08); }
+.risk-gauge-core { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1; }
+.risk-gauge-core strong { font-size:34px; color:var(--text); letter-spacing:-1px; }
+.risk-gauge-core span { font-size:11px; text-transform:uppercase; letter-spacing:.45px; color:var(--text-3); font-weight:700; }
+.gauge-legend { display:flex; flex-direction:column; gap:10px; }
+.legend-row { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--text-2); }
+.legend-dot { width:10px; height:10px; border-radius:999px; flex-shrink:0; }
+.legend-dot.critical { background:#C75A65; }
+.legend-dot.watch { background:#F4C5A0; }
+.legend-dot.stable { background:#8B6FC0; }
+.chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+.chart-card { background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:24px; box-shadow:var(--shadow-sm); }
+.chart-card h3 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:16px; }
+.chart-subtitle { font-size:12px; color:var(--text-2); margin-top:-6px; margin-bottom:16px; }
+.stack-bar { display:flex; height:18px; border-radius:999px; overflow:hidden; background:#F1EDF7; margin-bottom:14px; }
+.stack-seg-open { background:linear-gradient(90deg, #F0919B, #E85C82); }
+.stack-seg-sev { background:linear-gradient(90deg, #8B6FC0, #6B5F8D); }
+.stack-seg-icm { background:linear-gradient(90deg, #7B8ED8, #5BBAC6); }
+.stack-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.stack-metric { background:var(--bg); border-radius:14px; padding:12px; }
+.stack-metric strong { display:block; font-size:18px; color:var(--text); margin-bottom:2px; }
+.stack-metric span { display:block; font-size:11px; color:var(--text-2); text-transform:uppercase; letter-spacing:.4px; }
+.bar-list { display:flex; flex-direction:column; gap:14px; }
+.bar-row { display:grid; grid-template-columns:140px 1fr 48px; gap:10px; align-items:center; }
+.bar-row label { font-size:12px; color:var(--text); font-weight:600; }
+.bar-track { height:12px; border-radius:999px; background:#F1EDF7; overflow:hidden; }
+.bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg, #8B6FC0, #F0919B); }
+.bar-row span { font-size:12px; color:var(--text-2); text-align:right; }
+.timeline { display:flex; flex-direction:column; gap:14px; }
+.timeline-item { position:relative; padding-left:22px; }
+.timeline-item::before { content:''; position:absolute; left:0; top:5px; width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg, #8B6FC0, #F0919B); box-shadow:0 0 0 4px rgba(139,111,192,.12); }
+.timeline-item::after { content:''; position:absolute; left:4px; top:18px; bottom:-16px; width:2px; background:#EEE7F6; }
+.timeline-item:last-child::after { display:none; }
+.timeline-item strong { display:block; font-size:13px; color:var(--text); margin-bottom:4px; }
+.timeline-item span { display:block; font-size:12px; color:var(--text-2); line-height:1.55; }
+.section-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.section-title h3 { font-size:18px; color:var(--text); letter-spacing:-.3px; }
+.section-pill { font-size:11px; text-transform:uppercase; letter-spacing:.5px; font-weight:700; color:var(--purple); background:var(--lavender-light); padding:7px 12px; border-radius:999px; }
 
 /* ── Feedback form ── */
 .feedback-form { max-width:640px; margin:0 auto; }
@@ -147,7 +251,7 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 
 /* ── Resource Cards ── */
 .res-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.res-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:all .2s; }
+.res-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:all .2s; text-decoration:none; color:inherit; }
 .res-card:hover { border-color:var(--purple); box-shadow:var(--shadow-md); transform:translateY(-2px); }
 .res-card .rc-info { flex:1; min-width:0; }
 .res-card .rc-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:-.1px; }
@@ -168,8 +272,8 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 .agent-prompts .prompt { padding:9px 18px; border:1px solid var(--border); border-radius:24px; font-size:12px; font-weight:500; color:var(--text-2); cursor:pointer; background:var(--surface); transition:all .2s; box-shadow:var(--shadow-sm); }
 .agent-prompts .prompt:hover { border-color:var(--purple); color:var(--purple); box-shadow:var(--shadow-md); transform:translateY(-1px); }
 
-@media(max-width:960px) { .res-grid{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:640px) { .res-grid{grid-template-columns:1fr;} .cat-bar{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding:16px;} .hero h1{font-size:26px;} .hero{padding:48px 20px 40px;} .main{padding:24px 16px;} }
+@media(max-width:960px) { .res-grid,.metric-grid,.insight-grid,.knowme-story,.dashboard-shell,.chart-grid,.risk-grid,.context-grid{grid-template-columns:repeat(2,1fr);} .knowme-story,.dashboard-shell,.chart-grid{grid-template-columns:1fr;} .hero-band{grid-template-columns:1fr;} }
+@media(max-width:640px) { .res-grid,.metric-grid,.insight-grid,.info-grid,.knowme-panels,.hero-band,.risk-grid,.context-grid{grid-template-columns:1fr;} .gauge-wrap{flex-direction:column; align-items:flex-start;} .bar-row{grid-template-columns:1fr;}.cat-bar{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding:16px;} .hero h1{font-size:26px;} .hero{padding:48px 20px 40px;} .main{padding:24px 16px;} }
 </style>
 </head>
 <body>
@@ -206,11 +310,7 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 
 <!-- ═══ CATEGORY PILLS ═══ -->
 <div class="cat-bar">
-  <div class="cat-pill active" data-color="c1" onclick="showTab('access')">
-    <svg viewBox="0 0 20 20"><path d="M10 2a4 4 0 00-4 4v2H5a1 1 0 00-1 1v8a1 1 0 001 1h10a1 1 0 001-1V9a1 1 0 00-1-1h-1V6a4 4 0 00-4-4zm-2 4a2 2 0 114 0v2H8V6zm2 6a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>
-    Access
-  </div>
-  <div class="cat-pill" data-color="c2" onclick="showTab('playbooks')">
+  <div class="cat-pill active" data-color="c2" onclick="showTab('playbooks')">
     <svg viewBox="0 0 20 20"><path d="M4 3a1 1 0 00-1 1v12a1 1 0 001 1h5V3H4zm7 0v14h5a1 1 0 001-1V4a1 1 0 00-1-1h-5z"/></svg>
     Playbooks
   </div>
@@ -242,153 +342,323 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
 
 <!-- ═══ CONTENT PANES ═══ -->
 <div class="main">
-
-<!-- ACCESS -->
-<div class="pane active" id="access">
-  <div class="pane-header"><h2>Access</h2><p>Groups you need to join and what they enable</p></div>
-  <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MyHorizons Tool (CLE Onboarding)</div><div class="rc-desc">Geordie's CLE onboarding checklist & access setup</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Security Groups Overview</div><div class="rc-desc">Summary of required AD/SG groups and what they unlock</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">CRM Access & Permissions</div><div class="rc-desc">Request CRM access, role assignment, and data visibility</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Power BI Workspace Access</div><div class="rc-desc">Join PBI workspace groups for dashboards & reports</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">IcM / DFM Access</div><div class="rc-desc">IcM stamping permissions and DFM tool access</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SharePoint & Teams Channels</div><div class="rc-desc">Join MCS SharePoint sites and Teams channels</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">ADO (Azure DevOps) Access</div><div class="rc-desc">Get access to Delivery and PM backlogs</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Intake Portal Access</div><div class="rc-desc">aka.ms/mcsfmscintake permissions</div></div><span class="rc-arrow">→</span></div>
-  </div>
-</div>
-
 <!-- PLAYBOOKS (sub-divided by Feature) -->
-<div class="pane" id="playbooks">
-  <div class="pane-header"><h2>Playbooks</h2><p>Scenario-driven operational guidance — sub-divided by feature</p></div>
+<div class="pane active" id="playbooks">
+  <div class="pane-header"><h2>Playbooks</h2><p>Consolidated playbooks, guides, checklists, process flows, and reference materials — sub-divided by feature</p></div>
   <div class="sub-pills">
     <div class="sub-pill active" onclick="filterPlaybooks('all',this)">All</div>
-    <div class="sub-pill" onclick="filterPlaybooks('onboarding',this)">Onboarding</div>
-    <div class="sub-pill" onclick="filterPlaybooks('escalation',this)">Escalation</div>
-    <div class="sub-pill" onclick="filterPlaybooks('issue',this)">Issue Resolution</div>
-    <div class="sub-pill" onclick="filterPlaybooks('readiness',this)">Readiness</div>
-    <div class="sub-pill" onclick="filterPlaybooks('process',this)">Process & Routing</div>
+    <div class="sub-pill" onclick="filterPlaybooks('customer-onboarding',this)">Customer Onboarding</div>
+    <div class="sub-pill" onclick="filterPlaybooks('issue-resolution',this)">Issue Resolution</div>
+    <div class="sub-pill" onclick="filterPlaybooks('strategic-guidance',this)">Strategic Guidance</div>
+    <div class="sub-pill" onclick="filterPlaybooks('technical-assessment',this)">Technical Assessment</div>
   </div>
   <div class="res-grid" id="playbooks-grid">
-    <!-- Onboarding -->
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">MCS Onboarding – Pre-Onboarding & Customer Setup</div><div class="rc-desc">Phase-based customer setup guidance before kickoff</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">MCS Onboarding – Business & Technical</div><div class="rc-desc">Kickoff through technical enablement</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Onboarding a MCSfMSC Customer</div><div class="rc-desc">End-to-end onboarding operational guide</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Customer Pipeline Management Guide</div><div class="rc-desc">Nomination → Deal → Onboarding</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Pre-Onboarding Customer Setup Checklist</div><div class="rc-desc">Setup validation before kickoff</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Customer Onboarding End-to-End Flow</div><div class="rc-desc">Nomination → Onboarding → Run-state visual flow</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">MCSfMSC Customer Onboarding Template (v2.0)</div><div class="rc-desc">Official kickoff & onboarding deck</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="onboarding"><div class="rc-info"><div class="rc-title">Customer Onboarding Follow-Up Email</div><div class="rc-desc">Post-kickoff reusable customer email template</div></div><span class="rc-arrow">→</span></div>
-    <!-- Escalation -->
-    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">Care/PHE Purview Escalation Playbook</div><div class="rc-desc">Escalation paths for Purview incidents</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">Care/PHE Escalation (Intune, MDO, Security Copilot)</div><div class="rc-desc">Product-specific escalation paths</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">CSS to Care/PHE Escalation Path</div><div class="rc-desc">Cross-team escalation routing & visual flow</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">SEV One Escalation Process</div><div class="rc-desc">Sev1/A escalation handling steps</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">MCS Email Escalation Workflow</div><div class="rc-desc">How customers escalate to MCS (step-by-step + visual)</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="escalation"><div class="rc-info"><div class="rc-title">Escalation Authorization & Sender Rules</div><div class="rc-desc">Who can escalate, required data format</div></div><span class="rc-arrow">→</span></div>
-    <!-- Issue Resolution -->
-    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">Issue Resolution Playbook (MCS)</div><div class="rc-desc">Issue handling & resolution flows</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">Sev 1/A Issue Resolution Process Flow</div><div class="rc-desc">Severity-based resolution workflow</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">Crisis Prevention & MIRP</div><div class="rc-desc">Major Incident Response Plan</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">IcM / DFM Stamping Guide</div><div class="rc-desc">How to stamp incidents in IcM</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="issue"><div class="rc-info"><div class="rc-title">How to Submit CRM Deliverables</div><div class="rc-desc">CRM operational task instructions</div></div><span class="rc-arrow">→</span></div>
-    <!-- Readiness -->
-    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">MCS Readiness Playbook</div><div class="rc-desc">Sentinel readiness resources & updates</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">Role-Specific Readiness Steps</div><div class="rc-desc">CLE / CSS / PHE / CEM per-role actions</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">MCS Change Readiness Log</div><div class="rc-desc">Sprint-scoped release readiness checklist</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">SLA Definitions (15-min Initial Response)</div><div class="rc-desc">Response time commitments per MBR docs</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="readiness"><div class="rc-info"><div class="rc-title">Role Definitions (CLE/PHE/CSS/SCIM/Care)</div><div class="rc-desc">Responsibilities per playbooks & onboarding</div></div><span class="rc-arrow">→</span></div>
-    <!-- Process & Routing -->
-    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">Direct Connect Process Playbook</div><div class="rc-desc">Customer re-education & escalation guidance</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">Routing Enablement Guidance (Week 4 / Day 5)</div><div class="rc-desc">Playbook-referenced routing timing</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">DCR Playbooks (Entra, Intune, Purview, MTP)</div><div class="rc-desc">Design Change Request workflows per product</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">MCS Intake Template (v2.0)</div><div class="rc-desc">Standardized intake data capture</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card" data-feature="process"><div class="rc-info"><div class="rc-title">MCAPS Onboarding FAQ</div><div class="rc-desc">Common onboarding & process questions</div></div><span class="rc-arrow">→</span></div>
+    <a class="res-card" data-feature="customer-onboarding" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/SED%20Customer%20Onboarding.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Onboarding a MCSfMSC Customer</div><div class="rc-desc">End-to-end onboarding operational guide</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="customer-onboarding" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Onboarding-an-MCSfMSC-Customer-V2.1.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCSfMSC Customer Onboarding Template (v2.0)</div><div class="rc-desc">Official kickoff & onboarding deck</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="customer-onboarding" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/_layouts/15/Doc.aspx?sourcedoc=%7B9A378551-EDCB-4D8B-A7A6-C9D57681715B%7D&file=MCS%20Intake%20-%20Template.docx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS Intake Template (v2.0)</div><div class="rc-desc">Standardized intake data capture for new customer onboarding</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="issue-resolution" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Care/PHE Purview Escalation Playbook</div><div class="rc-desc">Escalation paths for Purview incidents</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="issue-resolution" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Care/PHE Escalation (Intune, MDO, Security Copilot)</div><div class="rc-desc">Product-specific escalation paths</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="issue-resolution" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Issue Resolution Playbook (MCS)</div><div class="rc-desc">Issue handling & resolution flows</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="strategic-guidance" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Direct Connect Process Playbook</div><div class="rc-desc">Customer re-education and escalation guidance</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" data-feature="strategic-guidance" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS Readiness Playbook</div><div class="rc-desc">Sentinel readiness resources and updates</div></div><span class="rc-arrow">→</span></a>
   </div>
 </div>
 
 <!-- KNOW ME -->
 <div class="pane" id="knowme">
-  <div class="pane-header"><h2>Know Me</h2><p>Customer summary view — sourced from CRM</p></div>
-  <!-- Customer selector -->
-  <div style="margin-bottom:24px;">
-    <select style="padding:10px 16px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:14px; font-family:inherit; outline:none; min-width:300px; background:var(--surface);">
-      <option>Select a customer...</option>
-      <option>Contoso Ltd.</option>
-      <option>Fabrikam Inc.</option>
-      <option>Woodgrove Bank</option>
-    </select>
+  <div class="pane-header"><h2>Know Me</h2><p>Service-insights view for Mission Critical Services: current posture, risk drivers, ownership, and what needs to happen next</p></div>
+  <div class="knowme-toolbar">
+    <div class="knowme-picker">
+      <label for="customer-select" style="display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;">Customer</label>
+      <select id="customer-select">
+        <option>Loading Mission Critical Services customers...</option>
+      </select>
+    </div>
   </div>
-  <!-- Read-only summary cards -->
+  <div class="executive-block">
+    <div class="pane-header"><h2>1. Customer Context That Changes Delivery</h2><p>Only the context that materially changes service motion</p></div>
+    <div class="context-grid">
+      <div class="info-card">
+        <div class="info-label">Primary Tenant</div>
+        <div class="info-value" id="km-tenant">Loading...</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">When MCS Service Signed</div>
+        <div class="info-value" id="km-service-signed">Loading...</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Other Program</div>
+        <div class="info-value" id="km-programs">Loading...</div>
+      </div>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-label">In-Scope Workloads</div>
+        <div class="info-value" id="km-tech">Loading...</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Key Microsoft Contacts</div>
+        <div class="info-value" id="km-team">Loading...</div>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="info-card">
+        <div class="info-label">Possible Customer Onboarding Status</div>
+        <div class="info-value" id="km-onboarding-title">Loading...</div>
+        <div class="info-value small" id="km-onboarding-detail">Loading...</div>
+      </div>
+      <div class="insight-card">
+        <div class="info-label">Shalini ADO Onboarding Signals</div>
+        <h3>Program-level pre-onboarding work still open</h3>
+        <div class="insight-list" id="km-onboarding-ado-list"></div>
+      </div>
+    </div>
+  </div>
+  <div class="executive-block">
+    <div class="pane-header"><h2>2. Current Service Posture</h2><p>What is happening now</p></div>
+  <div class="dashboard-shell">
+    <div class="hero-dashboard">
+      <div class="hero-kicker">
+        <div class="hero-icon">◎</div>
+        <span>Current service posture</span>
+      </div>
+      <h3 id="km-customer-name">Loading...</h3>
+      <p id="km-customer-story">Loading...</p>
+      <div class="hero-band">
+        <div class="hero-band-card">
+          <div class="hero-band-label">Status</div>
+          <div class="hero-band-value" id="km-status-label">Loading...</div>
+        </div>
+        <div class="hero-band-card">
+          <div class="hero-band-label">Top concern</div>
+          <div class="hero-band-value" id="km-top-concern">Loading...</div>
+        </div>
+        <div class="hero-band-card">
+          <div class="hero-band-label">Next review</div>
+          <div class="hero-band-value" id="km-next-review">Loading...</div>
+        </div>
+      </div>
+    </div>
+    <div class="cockpit-card">
+      <div class="section-title">
+        <h3>Service decision lens</h3>
+        <span class="section-pill">What matters now</span>
+      </div>
+      <div class="gauge-wrap">
+        <div class="risk-gauge" id="km-risk-gauge">
+          <div class="risk-gauge-core">
+            <strong id="km-risk-score">72</strong>
+            <span>risk mix</span>
+          </div>
+        </div>
+        <div class="gauge-legend">
+          <div class="legend-row"><span class="legend-dot critical"></span><span>Support execution pressure</span></div>
+          <div class="legend-row"><span class="legend-dot watch"></span><span>Escalation and delivery watch-outs</span></div>
+          <div class="legend-row"><span class="legend-dot stable"></span><span>Ownership and program coverage</span></div>
+        </div>
+      </div>
+      <p id="km-dan-guidance" style="margin-top:18px;">This panel should tell the team whether the customer is stable, where the service risk is coming from, and what the next Microsoft action should be.</p>
+      <div class="story-badges">
+        <span class="story-badge">Risk-led</span>
+        <span class="story-badge">Actionable</span>
+        <span class="story-badge">Review-ready</span>
+      </div>
+    </div>
+  </div>
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="metric-label">Open MCS Backlog</div>
+      <div class="metric-value" id="km-open-cases">Loading...</div>
+      <div class="metric-subtext" id="km-open-cases-note">Loading...</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Open Sev A/B</div>
+      <div class="metric-value alert" id="km-sev-ab">Loading...</div>
+      <div class="metric-subtext" id="km-sev-ab-note">Loading...</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">ICM-Linked Cases</div>
+      <div class="metric-value" id="km-mcs-linked">Loading...</div>
+      <div class="metric-subtext" id="km-mcs-linked-note">Loading...</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">IR Met</div>
+      <div class="metric-value good" id="km-ir-rate">Loading...</div>
+      <div class="metric-subtext" id="km-ir-rate-note">Loading...</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Most Pressured Product</div>
+      <div class="metric-value" id="km-top-product">Loading...</div>
+      <div class="metric-subtext" id="km-top-product-note">Loading...</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Customer Trust Risk</div>
+      <div class="metric-value" id="km-crm-momentum">Loading...</div>
+      <div class="metric-subtext" id="km-crm-momentum-note">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <div class="executive-block">
+    <div class="pane-header"><h2>3. Power BI Insights</h2><p>Filtered active-case signals from the MCSfMSC semantic model via Power BI MCP</p></div>
+    <div class="chart-grid">
+      <div class="story-card">
+        <h3>Filtered active-case pattern</h3>
+        <p id="km-semantic-summary">Loading...</p>
+        <div class="story-badges">
+          <a class="story-badge" id="km-semantic-source" href="#" target="_blank" rel="noopener noreferrer">Semantic model unavailable</a>
+          <a class="story-badge" id="km-semantic-report" href="#" target="_blank" rel="noopener noreferrer">Report unavailable</a>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="info-label">Trend Readout</div>
+        <h3>What changed in backlog shape</h3>
+        <div class="insight-list">
+          <div class="insight-item"><strong>Trend</strong><span id="km-semantic-trend-summary">Loading...</span></div>
+          <div class="insight-item"><strong>Age mix</strong><span id="km-semantic-age-summary">Loading...</span></div>
+          <div class="insight-item"><strong>Status bottleneck</strong><span id="km-semantic-status-summary">Loading...</span></div>
+          <div class="insight-item"><strong>Product concentration</strong><span id="km-semantic-product-summary">Loading...</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="section-title">
+          <h3>Age Mix</h3>
+          <span class="section-pill">Current backlog</span>
+        </div>
+        <div class="bar-list" id="km-semantic-age-bars"></div>
+      </div>
+      <div class="chart-card">
+        <div class="section-title">
+          <h3>Product Concentration</h3>
+          <span class="section-pill">Active cases</span>
+        </div>
+        <div class="bar-list" id="km-semantic-product-bars"></div>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="section-title">
+          <h3>Status Bottlenecks</h3>
+          <span class="section-pill">Where cases are waiting</span>
+        </div>
+        <div class="insight-list" id="km-semantic-status-list"></div>
+      </div>
+      <div class="chart-card">
+        <div class="section-title">
+          <h3>Trend Highlights</h3>
+          <span class="section-pill">Recent movement</span>
+        </div>
+        <div class="timeline" id="km-semantic-trend-list"></div>
+      </div>
+    </div>
+  </div>
+  <div class="executive-block">
+    <div class="pane-header"><h2>4. Top Risks</h2><p>Where should we focus</p></div>
+    <div class="risk-grid" id="km-top-risks"></div>
+  </div>
+  <div class="executive-block">
+    <div class="pane-header"><h2>5. Escalation Health</h2><p>Is support execution creating or amplifying customer risk</p></div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="section-title">
+        <h3>Aging and Severity Pattern</h3>
+        <span class="section-pill">Support posture</span>
+      </div>
+      <div class="chart-subtitle">Backlog, severity, and escalation concentration in one read</div>
+      <div class="stack-bar">
+        <div class="stack-seg-open" id="km-stack-open" style="width:40%"></div>
+        <div class="stack-seg-sev" id="km-stack-sev" style="width:35%"></div>
+        <div class="stack-seg-icm" id="km-stack-icm" style="width:25%"></div>
+      </div>
+      <div class="stack-metrics">
+        <div class="stack-metric"><strong id="km-open-cases-mini">0</strong><span>Open backlog</span></div>
+        <div class="stack-metric"><strong id="km-sev-mini">0</strong><span>Sev A/B</span></div>
+        <div class="stack-metric"><strong id="km-icm-mini">0</strong><span>MCS/ICM</span></div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="section-title">
+        <h3>Execution Watch-outs</h3>
+        <span class="section-pill">Support motion</span>
+      </div>
+      <div class="chart-subtitle">Signals that support execution may be amplifying customer risk</div>
+      <div class="insight-list" id="km-escalation-health-list"></div>
+    </div>
+  </div>
+  </div>
+  <div class="executive-block">
+    <div class="pane-header"><h2>6. Product Gaps And Next Moves</h2><p>What needs product ownership versus service execution follow-through</p></div>
   <div class="info-grid">
     <div class="info-card">
-      <div class="info-label">Internal Contacts</div>
-      <div class="info-value">CLE: Jane Doe &bull; PHE: John Smith &bull; CSAM: Alex Lee</div>
+      <div class="info-label">Recovery Plan And Ownership</div>
+      <div class="info-value" id="km-improvement-plan">Loading...</div>
     </div>
     <div class="info-card">
-      <div class="info-label">Customer Contacts</div>
-      <div class="info-value">Primary: Sarah Johnson (VP Eng) &bull; Technical: Mike Chen</div>
-    </div>
-    <div class="info-card">
-      <div class="info-label">Contract Dates</div>
-      <div class="info-value">Start: 2024-06-01 &bull; End: 2026-05-31</div>
-    </div>
-    <div class="info-card">
-      <div class="info-label">Customer-Specific DGs</div>
-      <div class="info-value">mcs-contoso@microsoft.com &bull; contoso-cri@microsoft.com</div>
+      <div class="info-label">Open DCR / Feature Evidence</div>
+      <div class="info-value" id="km-dcr-summary">Loading...</div>
     </div>
   </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="info-label">Product Gaps</div>
+      <h3>Which support issues are actually product gaps</h3>
+      <div class="insight-list" id="km-product-gaps"></div>
+    </div>
+    <div class="insight-card">
+      <div class="info-label">Actions And Ownership</div>
+      <h3>What Microsoft should do next</h3>
+      <div class="insight-list" id="km-crm-signals"></div>
+    </div>
+  </div>
+  <div class="knowme-panels">
+    <div class="info-card knowme-panel">
+      <div class="info-label">Why This Customer Matters For Service</div>
+      <div class="info-value" id="km-overview">Loading...</div>
+    </div>
+    <div class="info-card knowme-panel">
+      <div class="info-label">Delivery Constraints And Watch-Outs</div>
+      <div class="info-value" id="km-key-things">Loading...</div>
+    </div>
+  </div>
+  </div>
   <!-- CRM edit links -->
-  <div class="pane-header" style="margin-top:16px;"><h2>CRM Views</h2><p>Edit access in CRM as the system of truth</p></div>
+  <div class="pane-header" style="margin-top:16px;"><h2>Customer Actions</h2><p>Customer-specific CRM jump plus supporting reference content</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Customer Account (CRM)</div><div class="rc-desc">Open full customer record in CRM for editing</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Contact Management (CRM)</div><div class="rc-desc">Update internal & customer contacts</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Contract & Entitlements (CRM)</div><div class="rc-desc">View and edit contract details</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Deliverables Tracker (CRM)</div><div class="rc-desc">Track and submit CRM deliverables</div></div><span class="rc-arrow">→</span></div>
+    <a class="res-card" id="km-crm-record" href="#" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Program Participant Record (CRM)</div><div class="rc-desc">Open the selected customer's CRM participant record</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/Shared%20Documents/Forms/DispForm.aspx?ID=111&web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Contact Management (CRM)</div><div class="rc-desc">CRM contacts walkthrough and update guidance</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/Shared%20Documents/Forms/DispForm.aspx?ID=116&web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Contract & Entitlements (CRM)</div><div class="rc-desc">CRM engagements walkthrough for contract and entitlement workflows</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/How-to-track-MCS-customers.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Deliverables Tracker (CRM)</div><div class="rc-desc">Open MCS customer tracking guidance and deliverables workflow details</div></div><span class="rc-arrow">→</span></a>
   </div>
 </div>
 
 <!-- REPORTS -->
 <div class="pane" id="reports">
-  <div class="pane-header"><h2>Reports</h2><p>Data-driven status and decision-making tools</p></div>
+  <div class="pane-header"><h2>Reports</h2><p>Links to Power BI dashboards including Subha's PBI app and Support Health 360</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS PBI App (Subha's Dashboard)</div><div class="rc-desc">Onboarding, Cases, Incidents, RCAs — all-in-one PBI app</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Support Health 360</div><div class="rc-desc">Security 360 health metrics & insights</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCSfMSC Power BI</div><div class="rc-desc">Main MCS Power BI dashboard</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Dash Case Insights</div><div class="rc-desc">Case-level analytics</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS BI Scorecards</div><div class="rc-desc">Performance scorecards</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM CRI Deep Dive</div><div class="rc-desc">CRI analytics deep dive</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM WSR Drilldown</div><div class="rc-desc">Weekly service review analytics</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">SCIM Case Heatmap</div><div class="rc-desc">Case distribution analysis</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Proactive Resiliency Dashboard</div><div class="rc-desc">Service health & resilience monitoring</div></div><span class="rc-arrow">→</span></div>
+    <a class="res-card" href="https://msit.powerbi.com/groups/me/apps/bcd35a39-45ba-44d4-8a6a-1507094b8ead/reports/08478d49-01ce-42a6-9250-5239f2eda42c/65d000afc1647f473bd3?experience=power-bi" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS PBI App (Subha's Dashboard)</div><div class="rc-desc">Onboarding, Cases, Incidents, RCAs — all-in-one PBI app</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://msit.powerbi.com/groups/3acda1d0-a9e5-4477-8aea-5ac7d87e6e69/reports/f3146d2e-89e5-4f97-a82e-d9eca1aba5c5" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Support Health 360</div><div class="rc-desc">Security 360 health metrics & insights (Security CxE BI workspace)</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://msit.powerbi.com/groups/d7d61cbf-8bf8-4cdd-806c-5998fc10c734/reports/4dd4572a-769f-4f07-84e8-6cb38a9caf8c/3dad4b1d82e0ca45946c?experience=power-bi" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCSfMSC Power BI</div><div class="rc-desc">Main MCS Power BI dashboard</div></div><span class="rc-arrow">→</span></a>
   </div>
 </div>
 
 <!-- TRAINING -->
 <div class="pane" id="training">
-  <div class="pane-header"><h2>Training</h2><p>Learning-oriented content, ramp plans, and QA resources</p></div>
+  <div class="pane-header"><h2>Training</h2><p>Links to QA objects, MyHorizons checklist, ramp plans, and training recordings</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MyHorizons Checklist (Geordie)</div><div class="rc-desc">CLE onboarding ramp checklist & milestones</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">QA Objects & Assessments</div><div class="rc-desc">Links to quality assurance training objects</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Job Task Analysis / CLE-PHE Ramp Plans</div><div class="rc-desc">Role-based competency development</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Program Scrum Recordings</div><div class="rc-desc">Operational training via meeting recordings</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Onboarding Processes & Tooling Review</div><div class="rc-desc">Training session on onboarding gaps & tools</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCAPS Onboarding Field Operations Playbook</div><div class="rc-desc">Broader onboarding framework</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Walking Decks (Azure/M365/Internal)</div><div class="rc-desc">Internal training presentation decks</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Support Case Best Practices Deck</div><div class="rc-desc">Customer expectations & case handling training</div></div><span class="rc-arrow">→</span></div>
+    <a class="res-card" href="https://microsofteur.sharepoint.com/teams/MyHorizon/SitePages/VolunteerCenter.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MyHorizons Checklist (Geordie)</div><div class="rc-desc">CLE onboarding ramp checklist & milestones</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://platform.qa.com" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">QA Objects & Assessments</div><div class="rc-desc">Links to quality assurance training objects</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Overview-of-CxE-CARE.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">CxE CARE Onboarding & Ramp Hub</div><div class="rc-desc">Role-based onboarding, competency development, and learning hub</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://microsoft-my.sharepoint.com/personal/subhasahoo_microsoft_com/Documents/Forms/DispForm.aspx?ID=82595&web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS Program Scrum Recordings</div><div class="rc-desc">Operational training via meeting recordings</div></div><span class="rc-arrow">→</span></a>
   </div>
 </div>
 
 <!-- PLANNING -->
 <div class="pane" id="planning">
-  <div class="pane-header"><h2>Planning</h2><p>ADO backlogs and project tracking</p></div>
+  <div class="pane-header"><h2>Planning</h2><p>Top-level ADO links for CLE team wiki and sprint planning dashboard</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">ADO Backlog — Delivery (Jeremy's Team)</div><div class="rc-desc">Azure DevOps backlog for delivery engineering work items</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">ADO Backlog — PM (Our Team)</div><div class="rc-desc">Azure DevOps backlog for PM planning & feature requests</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Sprint Planning Dashboard</div><div class="rc-desc">Current sprint status, velocity, and burndown</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Roadmap</div><div class="rc-desc">Feature roadmap and milestone tracking</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">MCS Change Readiness + Sprint Planning</div><div class="rc-desc">Sprint-scoped readiness activities</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Evolution of ROB and SIP for MCSfMSC</div><div class="rc-desc">Health Review & SIP definitions</div></div><span class="rc-arrow">→</span></div>
+    <a class="res-card" href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_wiki/wikis/CxE-Security-Care.wiki/306/Customer-Lead-Engineering-(CLE)-Team" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">CLE Team Wiki</div><div class="rc-desc">Top-level CLE team planning and operating context</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_dashboards/dashboard/696053df-70fb-4b46-8cc5-1c82faabcb4c" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Sprint Planning Dashboard</div><div class="rc-desc">Sprint planning dashboard and backlog tracking</div></div><span class="rc-arrow">→</span></a>
   </div>
 </div>
 
@@ -398,31 +668,31 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
     <div class="copilot-icon">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
     </div>
-    <h2>MCS AI Assistant</h2>
-    <p>Prompt templates and AI-powered tools for CLE scenarios</p>
+    <h2>MCS AI Prompts</h2>
+    <p>Prompt templates for CLE scenarios: case or CRI timeline, case risk, and CRI risk assessment</p>
     <div class="agent-chat">
-      <input type="text" placeholder="Ask MCS AI anything..." />
+      <input type="text" placeholder="Search prompt templates for a CLE scenario..." />
     </div>
     <div class="agent-prompts">
       <div class="prompt">Summarize case timeline for [case #]</div>
+      <div class="prompt">Analyze case risk for [case #]</div>
       <div class="prompt">Assess CRI risk for [customer]</div>
-      <div class="prompt">Draft escalation summary</div>
-      <div class="prompt">Analyze case risk factors</div>
     </div>
   </div>
   <div class="pane-header" style="margin-top:32px;"><h2>Prompt Templates</h2><p>Pre-built prompts for common CLE scenarios</p></div>
   <div class="res-grid">
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Case / CRI Timeline Prompt</div><div class="rc-desc">Generate a chronological timeline of case or CRI events</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Case Risk Assessment Prompt</div><div class="rc-desc">Evaluate case risk factors and suggest mitigations</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">CRI Risk Assessment Prompt</div><div class="rc-desc">Assess CRI risk level and recommend actions</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">M365 Agent</div><div class="rc-desc">Microsoft 365 Copilot agent for MCS workflows</div></div><span class="rc-arrow">→</span></div>
-    <div class="res-card"><div class="rc-info"><div class="rc-title">Zebra AI Experiment</div><div class="rc-desc">AI experiment for shared services integration</div></div><span class="rc-arrow">→</span></div>
+    <a class="res-card" href="https://microsoft.sharepoint-df.com/teams/CxESecurityCare/_layouts/15/Doc.aspx?sourcedoc=%7B56B9E5EB-25AF-497F-B8D9-F1B5E6329C72%7D&file=OES%20Newsletter%20-%202026-02%20Prep.docx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">CRI Risk Score Agent (M365 Copilot)</div><div class="rc-desc">CRI risk assessment via M365 Copilot — severity, idle time, ownership churn</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://microsoftapc-my.sharepoint.com/personal/weiyihu_microsoft_com/Documents/Recordings/You're%20Invited!%20FY26%20CSS%20GCR%20Talent%20Development%20Program%20%20How%20Security%20CxE%20PM%20team%20uses%20AI%20to%20accelerate%20escalation-20260303_110221-Meeting%20Recording.mp4?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Zebra AI Case Review</div><div class="rc-desc">Case timeline, delay analysis, risk identification experiments</div></div><span class="rc-arrow">→</span></a>
   </div>
 </div>
 
 <!-- FEEDBACK -->
 <div class="pane" id="feedback">
-  <div class="pane-header"><h2>Feedback</h2><p>Submit feedback, feature requests, or report issues</p></div>
+  <div class="pane-header"><h2>Feedback</h2><p>Intake form for portal feedback, feature requests, and bug reports</p></div>
+  <div class="res-grid" style="margin-bottom:24px;">
+    <a class="res-card" href="https://aka.ms/mcsfmscintake" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCSfMSC Intake Form</div><div class="rc-desc">Primary intake form Ankit shared for portal requests and updates</div></div><span class="rc-arrow">→</span></a>
+    <a class="res-card" href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_workitems/edit/25909" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Sample ADO from Intake</div><div class="rc-desc">Example downstream work item created from the intake flow</div></div><span class="rc-arrow">→</span></a>
+  </div>
   <div class="feedback-form">
     <div class="form-group">
       <label>Feedback Type</label>
@@ -451,7 +721,7 @@ body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:
         <option>Critical</option>
       </select>
     </div>
-    <button class="submit-btn" onclick="alert('Thank you for your feedback!')">Submit Feedback</button>
+    <button class="submit-btn" onclick="window.open('https://aka.ms/mcsfmscintake', '_blank', 'noopener,noreferrer')">Open Intake Form</button>
   </div>
 </div>
 
@@ -464,7 +734,7 @@ function showTab(id) {
   var pane = document.getElementById(id);
   if(pane) pane.classList.add('active');
   var pills = document.querySelectorAll('.cat-pill');
-  var names = ['access','playbooks','knowme','reports','training','planning','ai','feedback'];
+  var names = ['playbooks','knowme','reports','training','planning','ai','feedback'];
   for(var i=0;i<pills.length;i++){ if(names[i]===id) pills[i].classList.add('active'); }
 }
 function filterPlaybooks(feature, el) {
@@ -479,7 +749,461 @@ function filterPlaybooks(feature, el) {
     }
   });
 }
+
+var knowMeCustomers = [];
+var supportInsightsByTenant = {};
+var onboardingProgramSignals = [
+  {
+    title: 'ADO 27405 | Pre-Onboarding',
+    detail: 'Assigned to Shalini Hada and still New. This suggests the onboarding backlog still contains pre-onboarding items that have not yet moved into active execution.',
+    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/27405'
+  },
+  {
+    title: 'ADO 25743 | Pre-Onboarding',
+    detail: 'Assigned to Shalini Hada and still New. This reinforces her point that onboarding templates and readiness checks are still evolving rather than fully standardized.',
+    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/25743'
+  },
+  {
+    title: 'ADO 25697 | Pre-Onboarding',
+    detail: 'Assigned to Shalini Hada and still New. Another open pre-onboarding item points to program-level readiness work still in flight.',
+    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/25697'
+  },
+  {
+    title: 'ADO 13197 | Pre-onboarding discovery',
+    detail: 'Assigned to Shalini Hada and still New. This item is explicitly about identifying the program executive sponsor and engaging regional M1s for successful pre-onboarding discovery.',
+    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/13197'
+  }
+];
+
+function formatKnowMeDate(value) {
+  if (!value) return 'Not available';
+  var date = new Date(value);
+  if (isNaN(date.getTime())) return 'Not available';
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function formatKnowMeText(value, fallback) {
+  if (!value) return fallback || 'Not available';
+  return String(value).trim() || (fallback || 'Not available');
+}
+
+function setKnowMeText(id, value, fallback) {
+  var element = document.getElementById(id);
+  if (element) element.textContent = formatKnowMeText(value, fallback);
+}
+
+function setKnowMeList(id, items, emptyTitle, emptyText) {
+  var element = document.getElementById(id);
+  if (!element) return;
+  element.innerHTML = '';
+  if (!items || !items.length) {
+    var emptyItem = document.createElement('div');
+    emptyItem.className = 'insight-item';
+    emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No items available') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
+    element.appendChild(emptyItem);
+    return;
+  }
+
+  items.forEach(function(item) {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'insight-item';
+    wrapper.innerHTML = '<strong>' + formatKnowMeText(item.title, 'Untitled') + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
+    element.appendChild(wrapper);
+  });
+}
+
+function setKnowMeTimeline(id, items, emptyTitle, emptyText) {
+  var element = document.getElementById(id);
+  if (!element) return;
+  element.innerHTML = '';
+  if (!items || !items.length) {
+    var emptyItem = document.createElement('div');
+    emptyItem.className = 'timeline-item';
+    emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No timeline items') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
+    element.appendChild(emptyItem);
+    return;
+  }
+
+  items.forEach(function(item) {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'timeline-item';
+    wrapper.innerHTML = '<strong>' + formatKnowMeText(item.title, 'Untitled') + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
+    element.appendChild(wrapper);
+  });
+}
+
+function setKnowMeBars(id, items) {
+  var element = document.getElementById(id);
+  if (!element) return;
+  element.innerHTML = '';
+  if (!items || !items.length) {
+    var row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = '<label>No workload mix</label><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span>0%</span>';
+    element.appendChild(row);
+    return;
+  }
+
+  var maxValue = items.reduce(function(currentMax, item) {
+    return Math.max(currentMax, Number(item.value) || 0);
+  }, 0) || 1;
+
+  items.forEach(function(item) {
+    var rawValue = Number(item.value) || 0;
+    var width = rawValue > 0 ? Math.max(8, Math.min(100, Math.round((rawValue / maxValue) * 100))) : 0;
+    var label = item.valueLabel || String(rawValue);
+    var row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = '<label>' + formatKnowMeText(item.label, 'Unknown') + '</label><div class="bar-track"><div class="bar-fill" style="width:' + width + '%"></div></div><span>' + formatKnowMeText(label, '0') + '</span>';
+    element.appendChild(row);
+  });
+}
+
+function setKnowMeLink(id, url, label, fallback) {
+  var element = document.getElementById(id);
+  if (!element) return;
+
+  if (url) {
+    element.href = url;
+    element.textContent = formatKnowMeText(label, 'Open link');
+    element.style.pointerEvents = 'auto';
+    element.setAttribute('aria-disabled', 'false');
+    return;
+  }
+
+  element.href = '#';
+  element.textContent = fallback || 'Link unavailable';
+  element.style.pointerEvents = 'none';
+  element.setAttribute('aria-disabled', 'true');
+}
+
+function setKnowMeLinkedList(id, items, emptyTitle, emptyText) {
+  var element = document.getElementById(id);
+  if (!element) return;
+  element.innerHTML = '';
+  if (!items || !items.length) {
+    var emptyItem = document.createElement('div');
+    emptyItem.className = 'insight-item';
+    emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No items available') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
+    element.appendChild(emptyItem);
+    return;
+  }
+
+  items.forEach(function(item) {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'insight-item';
+    var title = formatKnowMeText(item.title, 'Untitled');
+    if (item.url) {
+      title = '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + title + '</a>';
+    }
+    wrapper.innerHTML = '<strong>' + title + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
+    element.appendChild(wrapper);
+  });
+}
+
+function deriveOnboardingStatus(customer) {
+  if (!customer) {
+    return {
+      title: 'No onboarding status available',
+      detail: 'Select a customer to evaluate onboarding status.'
+    };
+  }
+
+  var stage = String(customer.participantStage || '').trim();
+  var status = String(customer.participantStatus || '').trim();
+  var onboardDate = customer.onboardDate ? new Date(customer.onboardDate) : null;
+  var hasValidOnboardDate = onboardDate && !isNaN(onboardDate.getTime());
+  var daysSinceOnboard = hasValidOnboardDate ? Math.floor((Date.now() - onboardDate.getTime()) / 86400000) : null;
+
+  if (!hasValidOnboardDate && /new|nomination|pre/i.test(status)) {
+    return {
+      title: 'Likely pre-onboarding or nomination stage',
+      detail: 'This customer has onboarding-style status markers but no reliable onboard date yet. Treat the account as pre-onboarding until scope, ownership, and service start are confirmed.'
+    };
+  }
+
+  if (hasValidOnboardDate && daysSinceOnboard <= 90) {
+    return {
+      title: 'Recently onboarded',
+      detail: 'The service start date is within the last 90 days, so this customer should still be treated as onboarding-sensitive even if support is already active.'
+    };
+  }
+
+  if (/active/i.test(stage) && /new/i.test(status) && hasValidOnboardDate) {
+    return {
+      title: 'Onboarded, but still carrying a new-participant signal',
+      detail: 'The customer is active and has an onboard date, but the participant status still reads New. Treat this as post-onboarding stabilization rather than a fully mature steady-state signal.'
+    };
+  }
+
+  if (/active/i.test(stage)) {
+    return {
+      title: 'In active run-state',
+      detail: 'The customer appears to be beyond pre-onboarding. Use onboarding context as delivery history, not as the primary operating status.'
+    };
+  }
+
+  return {
+    title: 'Onboarding status needs confirmation',
+    detail: 'The available CRM fields do not cleanly distinguish pre-onboarding from run-state. Validate participant stage, participant status, and onboard date before using this as a meeting signal.'
+  };
+}
+
+function buildRecoveryPlan(customer) {
+  if (!customer) return 'Not available';
+
+  var parts = [];
+  if (customer.customerImprovementPlan) parts.push(String(customer.customerImprovementPlan).trim());
+  if (customer.ownerMotion) parts.push('Owner motion: ' + String(customer.ownerMotion).trim());
+
+  return parts.length ? parts.join('\n\n') : 'Not available';
+}
+
+function setKnowMeRiskCards(id, items) {
+  var element = document.getElementById(id);
+  if (!element) return;
+  element.innerHTML = '';
+  if (!items || !items.length) {
+    var empty = document.createElement('div');
+    empty.className = 'risk-card';
+    empty.innerHTML = '<h4>No top risks available</h4><p>No risk data available for this customer.</p>';
+    element.appendChild(empty);
+    return;
+  }
+
+  items.forEach(function(item) {
+    var card = document.createElement('div');
+    card.className = 'risk-card';
+    var dueLabel = item.dueDate ? 'Due date' : 'Review date';
+    card.innerHTML = '' +
+      '<h4>' + formatKnowMeText(item.title, 'Untitled risk') + '</h4>' +
+      '<div class="risk-meta">' +
+        '<span class="risk-pill">' + formatKnowMeText(item.state, 'Open') + '</span>' +
+        '<span class="risk-pill">Owner: ' + formatKnowMeText(item.owner, 'Unassigned') + '</span>' +
+      '</div>' +
+      '<p>' + formatKnowMeText(item.whyItMatters, 'No details available') + '</p>' +
+      '<div class="risk-actions">' +
+        '<div class="risk-action"><strong>Next action</strong><span>' + formatKnowMeText(item.nextAction, 'Not available') + '</span></div>' +
+        '<div class="risk-action"><strong>' + dueLabel + '</strong><span>' + formatKnowMeText(item.dueDate || item.reviewDate, 'Not available') + '</span></div>' +
+      '</div>';
+    element.appendChild(card);
+  });
+}
+
+function parseMetricNumber(value) {
+  var numeric = Number(String(value || '').replace(/[^0-9.]/g, ''));
+  return isNaN(numeric) ? 0 : numeric;
+}
+
+function findSupportInsights(customer) {
+  if (!customer) return null;
+  if (customer.tenantId && supportInsightsByTenant[customer.tenantId]) return supportInsightsByTenant[customer.tenantId];
+
+  var scoped = String(customer.scopedTenants || '').split(',').map(function(item) { return item.trim(); }).filter(Boolean);
+  for (var index = 0; index < scoped.length; index++) {
+    if (supportInsightsByTenant[scoped[index]]) return supportInsightsByTenant[scoped[index]];
+  }
+
+  return null;
+}
+
+function setRiskGauge(score) {
+  var gauge = document.getElementById('km-risk-gauge');
+  var value = document.getElementById('km-risk-score');
+  var normalized = Math.max(0, Math.min(100, Number(score) || 0));
+  if (gauge) gauge.style.setProperty('--gauge', String(normalized));
+  if (value) value.textContent = String(normalized);
+}
+
+function updateKnowMe(customer) {
+  var supportInsights = findSupportInsights(customer);
+  if (!customer) {
+    setKnowMeText('km-customer-name', '', 'Select a customer to view details');
+    setKnowMeText('km-customer-story', '', 'No customer narrative available');
+    setKnowMeText('km-tenant', '', 'Not available');
+    setKnowMeText('km-service-signed', '', 'Not available');
+    setKnowMeText('km-next-review', '', 'Not available');
+    setKnowMeText('km-status-label', '', 'Not available');
+    setKnowMeText('km-top-concern', '', 'Not available');
+    setKnowMeText('km-dan-guidance', '', 'No portal guidance available');
+    setRiskGauge(0);
+    setKnowMeText('km-open-cases', '', 'Not available');
+    setKnowMeText('km-open-cases-note', '', 'Not available');
+    setKnowMeText('km-sev-ab', '', 'Not available');
+    setKnowMeText('km-sev-ab-note', '', 'Not available');
+    setKnowMeText('km-ir-rate', '', 'Not available');
+    setKnowMeText('km-ir-rate-note', '', 'Not available');
+    setKnowMeText('km-mcs-linked', '', 'Not available');
+    setKnowMeText('km-mcs-linked-note', '', 'Not available');
+    setKnowMeText('km-top-product', '', 'Not available');
+    setKnowMeText('km-top-product-note', '', 'Not available');
+    setKnowMeText('km-crm-momentum', '', 'Not available');
+    setKnowMeText('km-crm-momentum-note', '', 'Not available');
+    setKnowMeText('km-onboarding-title', '', 'No onboarding status available');
+    setKnowMeText('km-onboarding-detail', '', 'Select a customer to evaluate onboarding status.');
+    setKnowMeText('km-improvement-plan', '', 'Not available');
+    setKnowMeText('km-dcr-summary', '', 'Not available');
+    setKnowMeText('km-tech', '', 'Not available');
+    setKnowMeText('km-dates', '', 'Not available');
+    setKnowMeText('km-team', '', 'Not available');
+    setKnowMeText('km-overview', '', 'No customer overview available');
+    setKnowMeText('km-key-things', '', 'No key notes available');
+    setKnowMeText('km-programs', '', 'Not available');
+    setKnowMeText('km-semantic-summary', '', 'No semantic model insights available');
+    setKnowMeText('km-semantic-trend-summary', '', 'No semantic model trend available');
+    setKnowMeText('km-semantic-age-summary', '', 'No semantic age mix available');
+    setKnowMeText('km-semantic-status-summary', '', 'No semantic status mix available');
+    setKnowMeText('km-semantic-product-summary', '', 'No semantic product mix available');
+    setKnowMeLink('km-semantic-source', '', '', 'Semantic model unavailable');
+    setKnowMeLink('km-semantic-report', '', '', 'Report unavailable');
+    setKnowMeRiskCards('km-top-risks', []);
+    setKnowMeList('km-escalation-health-list', [], 'No escalation signals', 'No escalation-health signals available');
+    setKnowMeList('km-product-gaps', [], 'No product gaps', 'No product-gap signals available');
+    setKnowMeList('km-crm-signals', [], 'No CRM signals', 'No CRM signals available');
+    setKnowMeLinkedList('km-onboarding-ado-list', [], 'No ADO onboarding signals', 'No onboarding items to display.');
+    setKnowMeList('km-semantic-status-list', [], 'No status bottlenecks', 'No semantic model status signals available');
+    setKnowMeTimeline('km-semantic-trend-list', [], 'No trend highlights', 'No semantic model trend highlights available');
+    setKnowMeBars('km-product-bars', []);
+    setKnowMeBars('km-semantic-age-bars', []);
+    setKnowMeBars('km-semantic-product-bars', []);
+    setKnowMeText('km-open-cases-mini', '', '0');
+    setKnowMeText('km-sev-mini', '', '0');
+    setKnowMeText('km-icm-mini', '', '0');
+    document.getElementById('km-stack-open').style.width = '0%';
+    document.getElementById('km-stack-sev').style.width = '0%';
+    document.getElementById('km-stack-icm').style.width = '0%';
+    return;
+  }
+
+  setKnowMeText('km-customer-name', customer.customerName, 'Not available');
+  setKnowMeText('km-customer-story', supportInsights && supportInsights.servicePostureSummary ? supportInsights.servicePostureSummary : customer.customerStory, customer.customerOverview || 'No customer narrative available');
+  var semanticInsights = supportInsights && supportInsights.semanticModelInsights ? supportInsights.semanticModelInsights : null;
+  setKnowMeText('km-tenant', customer.tenantId, 'Not available');
+  setKnowMeText('km-service-signed', formatKnowMeDate(customer.onboardDate), 'Not available');
+  setKnowMeText('km-next-review', customer.nextReviewDate, 'Not scheduled');
+  setKnowMeText('km-status-label', supportInsights ? supportInsights.statusLabel : customer.statusLabel, 'Not available');
+  setKnowMeText('km-top-concern', supportInsights ? supportInsights.topConcern : customer.topImpactedProduct, 'Not available');
+  setKnowMeText('km-dan-guidance', customer.danGuidance || customer.portalNote, 'No portal guidance available');
+  setRiskGauge((supportInsights && supportInsights.riskScore) || customer.riskScore || 64);
+  setKnowMeText('km-open-cases', supportInsights ? supportInsights.openMcsCases : customer.openCases, 'Not available');
+  setKnowMeText('km-open-cases-note', supportInsights ? supportInsights.openMcsCasesNote : customer.openCasesNote, 'Not available');
+  setKnowMeText('km-sev-ab', supportInsights ? supportInsights.openSevAB : customer.sevABExposure, 'Not available');
+  setKnowMeText('km-sev-ab-note', supportInsights ? supportInsights.openSevABNote : customer.sevABExposureNote, 'Not available');
+  setKnowMeText('km-ir-rate', supportInsights ? supportInsights.irMetRate : customer.irMetRate, 'Not available');
+  setKnowMeText('km-ir-rate-note', supportInsights ? supportInsights.irMetRateNote : customer.irMetRateNote, 'Not available');
+  setKnowMeText('km-mcs-linked', supportInsights ? supportInsights.icmLinked : customer.mcsLinkedCases, 'Not available');
+  setKnowMeText('km-mcs-linked-note', supportInsights ? supportInsights.icmLinkedNote : customer.mcsLinkedCasesNote, 'Not available');
+  setKnowMeText('km-top-product', supportInsights ? supportInsights.topOpenProductGroup : customer.topImpactedProduct, 'Not available');
+  setKnowMeText('km-top-product-note', supportInsights ? supportInsights.topOpenProductNote : customer.topImpactedProductNote, 'Not available');
+  setKnowMeText('km-crm-momentum', supportInsights ? supportInsights.customerTrustRisk : customer.crmMomentum, 'Not available');
+  setKnowMeText('km-crm-momentum-note', supportInsights ? supportInsights.customerTrustRiskNote : customer.crmMomentumNote, 'Not available');
+  var onboardingStatus = deriveOnboardingStatus(customer);
+  setKnowMeText('km-onboarding-title', onboardingStatus.title, 'No onboarding status available');
+  setKnowMeText('km-onboarding-detail', onboardingStatus.detail, 'No onboarding detail available');
+  setKnowMeText('km-improvement-plan', buildRecoveryPlan(customer), 'Not available');
+  setKnowMeText('km-dcr-summary', customer.dcrSummary, 'Not available');
+  setKnowMeText('km-tech', customer.technologyVertical, 'Not available');
+  setKnowMeText('km-dates', 'Onboard: ' + formatKnowMeDate(customer.onboardDate) + ' | Contract end: ' + formatKnowMeDate(customer.contractExpiryDate), 'Not available');
+  setKnowMeText('km-team', [customer.ownerName, customer.assignedPm, customer.assignedEngineer1, customer.assignedEngineer2].filter(Boolean).join(' | '), 'Not available');
+  setKnowMeText('km-overview', customer.customerOverview, 'No customer overview available');
+  setKnowMeText('km-key-things', customer.keyThingsToKnow, 'No key notes available');
+  setKnowMeText('km-programs', customer.otherPrograms, 'None listed');
+  setKnowMeText('km-semantic-summary', semanticInsights ? semanticInsights.summary : '', 'No semantic model insights available');
+  setKnowMeText('km-semantic-trend-summary', semanticInsights ? semanticInsights.activeCasesTrendSummary : '', 'No semantic model trend available');
+  setKnowMeText('km-semantic-age-summary', semanticInsights ? semanticInsights.ageMixSummary : '', 'No semantic age mix available');
+  setKnowMeText('km-semantic-status-summary', semanticInsights ? semanticInsights.statusMixSummary : '', 'No semantic status mix available');
+  setKnowMeText('km-semantic-product-summary', semanticInsights ? semanticInsights.productMixSummary : '', 'No semantic product mix available');
+  setKnowMeLink('km-semantic-source', semanticInsights ? semanticInsights.sourceUrl : '', semanticInsights ? semanticInsights.sourceLabel : '', 'Semantic model unavailable');
+  setKnowMeLink('km-semantic-report', semanticInsights ? semanticInsights.reportUrl : '', semanticInsights ? semanticInsights.reportLabel : '', 'Report unavailable');
+  setKnowMeRiskCards('km-top-risks', customer.topRisks);
+  setKnowMeList('km-escalation-health-list', supportInsights && supportInsights.escalationHealth ? supportInsights.escalationHealth : [], 'No escalation signals', 'No escalation-health signals available');
+  setKnowMeList('km-product-gaps', customer.productGaps, 'No product gaps', 'No product-gap signals available');
+  setKnowMeList('km-crm-signals', customer.crmSignals, 'No CRM signals', 'No CRM signals available');
+  setKnowMeLinkedList('km-onboarding-ado-list', onboardingProgramSignals, 'No ADO onboarding signals', 'No onboarding items to display.');
+  setKnowMeList('km-semantic-status-list', semanticInsights ? semanticInsights.statusMix : [], 'No status bottlenecks', 'No semantic model status signals available');
+  setKnowMeTimeline('km-semantic-trend-list', semanticInsights ? semanticInsights.trendHighlights : [], 'No trend highlights', 'No semantic model trend highlights available');
+  setKnowMeBars('km-product-bars', supportInsights && supportInsights.productMix ? supportInsights.productMix : []);
+  setKnowMeBars('km-semantic-age-bars', semanticInsights ? semanticInsights.ageBuckets : []);
+  setKnowMeBars('km-semantic-product-bars', semanticInsights ? semanticInsights.productMix : []);
+
+  var openCount = parseMetricNumber(supportInsights ? supportInsights.openMcsCases : customer.openCases);
+  var sevCount = parseMetricNumber(supportInsights ? supportInsights.openSevAB : (customer.sevABCount || customer.sevABExposure));
+  var icmCount = parseMetricNumber(supportInsights ? supportInsights.icmLinked : (customer.mcsLinkedCount || customer.mcsLinkedCases));
+  var total = Math.max(openCount, sevCount + icmCount, 1);
+  var openPct = Math.max(12, Math.min(68, Math.round((openCount / total) * 100)));
+  var sevPct = Math.max(10, Math.min(52, Math.round((sevCount / Math.max(openCount, 1)) * 100)));
+  var icmPct = Math.max(8, Math.min(40, Math.round((icmCount / Math.max(openCount, 1)) * 100)));
+  document.getElementById('km-stack-open').style.width = openPct + '%';
+  document.getElementById('km-stack-sev').style.width = sevPct + '%';
+  document.getElementById('km-stack-icm').style.width = icmPct + '%';
+  setKnowMeText('km-open-cases-mini', openCount || customer.openCases, '0');
+  setKnowMeText('km-sev-mini', sevCount || customer.sevABExposure, '0');
+  setKnowMeText('km-icm-mini', icmCount || customer.mcsLinkedCases, '0');
+
+  var crmRecord = document.getElementById('km-crm-record');
+  if (crmRecord) {
+    crmRecord.href = customer.crmUrl || '#';
+    crmRecord.setAttribute('aria-disabled', customer.crmUrl ? 'false' : 'true');
+  }
+}
+
+function populateKnowMe(customers) {
+  knowMeCustomers = customers || [];
+  var select = document.getElementById('customer-select');
+  if (!select) return;
+
+  select.innerHTML = '';
+  if (!knowMeCustomers.length) {
+    var emptyOption = document.createElement('option');
+    emptyOption.textContent = 'No MCS customers available';
+    select.appendChild(emptyOption);
+    updateKnowMe(null);
+    return;
+  }
+
+  knowMeCustomers.forEach(function(customer, index) {
+    var option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = customer.customerName;
+    select.appendChild(option);
+  });
+
+  select.addEventListener('change', function() {
+    updateKnowMe(knowMeCustomers[Number(select.value)]);
+  });
+
+  var defaultIndex = knowMeCustomers.findIndex(function(customer) {
+    return /Ernst & Young|EY GLOBAL SERVICES LIMITED|\bEY\b/i.test(customer.customerName || '');
+  });
+  if (defaultIndex < 0) defaultIndex = 0;
+
+  select.value = String(defaultIndex);
+  updateKnowMe(knowMeCustomers[defaultIndex]);
+}
+
+Promise.all([
+  fetch('data/mcs-customers.json').then(function(response) {
+    if (!response.ok) throw new Error('Failed to load customer data');
+    return response.json();
+  }),
+  fetch('data/support-insights.json').then(function(response) {
+    if (!response.ok) return [];
+    return response.json();
+  }).catch(function() { return []; })
+])
+  .then(function(results) {
+    var customers = results[0] || [];
+    var supportInsights = results[1] || [];
+    supportInsightsByTenant = {};
+    supportInsights.forEach(function(item) {
+      if (item && item.tenantId) supportInsightsByTenant[item.tenantId] = item;
+    });
+    populateKnowMe(customers);
+  })
+  .catch(function() {
+    populateKnowMe([]);
+  });
 </script>
 </body>
 </html>
-<!-- v1.1 -->
+<!-- v1.6 -->
