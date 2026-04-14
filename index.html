@@ -1,1310 +1,3490 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MCS Unified Portal</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-:root {
-  --deep-purple: #4A3A6B;
-  --purple: #8B6FC0;
-  --blue-purple: #7B8ED8;
-  --coral: #F0919B;
-  --magenta: #C476B8;
-  --lavender: #DED0F0;
-  --lavender-light: #F6F2FB;
-  --bg: #F9F8FC;
-  --surface: #FFFFFF;
-  --text: #2D2D3A;
-  --text-2: #6E6E82;
-  --text-3: #B0B0C0;
-  --border: #EEEBF4;
-  --radius: 14px;
-  --radius-sm: 10px;
-  --shadow-sm: 0 1px 3px rgba(74,58,107,.04);
-  --shadow-md: 0 4px 20px rgba(74,58,107,.06);
-  --shadow-lg: 0 8px 40px rgba(74,58,107,.08);
-  --gradient: linear-gradient(135deg, #8B6FC0 0%, #7B8ED8 40%, #F0919B 80%, #F4C5A0 100%);
-  --gradient-pill: linear-gradient(135deg, #8B6FC0, #7B8ED8);
-  /* Tab colors — soft palette (7 tabs used) */
-  --c1: #5BBAC6; --c2: #8B6FC0; --c3: #F0919B; --c4: #7B8ED8;
-  --c5: #E8A96B; --c6: #6BBF8A; --c7: #6B5F8D; --c8: #C476B8;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Inter','Segoe UI Variable',system-ui,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCS Unified Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* ── Top Bar ── */
-.topbar { height:52px; background:var(--surface); display:flex; align-items:center; padding:0 40px; position:sticky; top:0; z-index:100; border-bottom:1px solid var(--border); }
-.topbar-brand { font-size:15px; font-weight:700; color:var(--text); letter-spacing:-.3px; display:flex; align-items:center; gap:10px; }
-.topbar-brand .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--gradient); }
-.topbar-nav { margin-left:32px; display:flex; gap:0; }
-.topbar-nav a { color:var(--text-2); font-size:13px; font-weight:500; padding:16px 16px; text-decoration:none; border-bottom:2px solid transparent; transition:all .15s; }
-.topbar-nav a:hover { color:var(--text); }
-.topbar-nav a.active { color:var(--purple); border-bottom-color:var(--purple); }
-.topbar-right { margin-left:auto; display:flex; align-items:center; gap:12px; }
-.topbar-right .icon-btn { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s; border:none; background:transparent; }
-.topbar-right .icon-btn:hover { background:var(--lavender-light); }
-.topbar-right .icon-btn svg { width:18px; height:18px; fill:var(--text-2); }
-.avatar { width:32px; height:32px; border-radius:50%; background:var(--gradient); display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:600; cursor:pointer; }
+    :root {
+      --deep-purple: #4A3A6B;
+      --purple: #8B6FC0;
+      --blue-purple: #7B8ED8;
+      --coral: #F0919B;
+      --magenta: #C476B8;
+      --lavender: #DED0F0;
+      --lavender-light: #F6F2FB;
+      --bg: #F9F8FC;
+      --surface: #FFFFFF;
+      --text: #2D2D3A;
+      --text-2: #6E6E82;
+      --text-3: #B0B0C0;
+      --border: #EEEBF4;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow-sm: 0 1px 3px rgba(74, 58, 107, .04);
+      --shadow-md: 0 4px 20px rgba(74, 58, 107, .06);
+      --shadow-lg: 0 8px 40px rgba(74, 58, 107, .08);
+      --gradient: linear-gradient(135deg, #8B6FC0 0%, #7B8ED8 40%, #F0919B 80%, #F4C5A0 100%);
+      --gradient-pill: linear-gradient(135deg, #8B6FC0, #7B8ED8);
+      /* Tab colors — soft palette (7 tabs used) */
+      --c1: #5BBAC6;
+      --c2: #8B6FC0;
+      --c3: #F0919B;
+      --c4: #7B8ED8;
+      --c5: #E8A96B;
+      --c6: #6BBF8A;
+      --c7: #6B5F8D;
+      --c8: #C476B8;
+    }
 
-/* ── Hero ── */
-.hero { background:#FAFAFE; padding:80px 40px 64px; text-align:center; position:relative; overflow:visible; z-index:3; }
-.hero::before,.hero::after { content:none; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ── Decorative Blobs ── */
-.blob-container { position:absolute; top:-40px; right:-60px; width:600px; height:500px; pointer-events:none; z-index:0; }
-.blob { position:absolute; border-radius:50%; filter:blur(0px); }
-.blob-1 { width:340px; height:340px; background:rgba(241,128,110,.55); top:10px; right:0; border-radius:62% 38% 46% 54% / 60% 44% 56% 40%; animation:morph1 12s ease-in-out infinite; }
-.blob-2 { width:280px; height:260px; background:rgba(232,92,130,.45); top:80px; right:120px; border-radius:50% 50% 46% 54% / 36% 56% 44% 64%; animation:morph2 14s ease-in-out infinite; }
-.blob-3 { width:200px; height:200px; background:rgba(230,130,178,.35); top:160px; right:20px; border-radius:40% 60% 54% 46% / 52% 40% 60% 48%; animation:morph3 10s ease-in-out infinite; }
-.blob-4 { width:160px; height:160px; background:rgba(246,168,140,.4); top:-10px; right:200px; border-radius:54% 46% 38% 62% / 44% 58% 42% 56%; animation:morph2 16s ease-in-out infinite reverse; }
-.blob-5 { width:120px; height:120px; background:rgba(240,160,200,.3); top:220px; right:260px; border-radius:46% 54% 62% 38% / 56% 42% 58% 44%; animation:morph1 11s ease-in-out infinite reverse; }
+    body {
+      font-family: 'Inter', 'Segoe UI Variable', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
 
-@keyframes morph1 {
-  0%,100% { border-radius:62% 38% 46% 54% / 60% 44% 56% 40%; transform:translate(0,0) rotate(0deg); }
-  33% { border-radius:48% 52% 58% 42% / 44% 56% 44% 56%; transform:translate(-8px,12px) rotate(3deg); }
-  66% { border-radius:56% 44% 40% 60% / 52% 48% 52% 48%; transform:translate(6px,-8px) rotate(-2deg); }
-}
-@keyframes morph2 {
-  0%,100% { border-radius:50% 50% 46% 54% / 36% 56% 44% 64%; transform:translate(0,0) rotate(0deg); }
-  33% { border-radius:42% 58% 54% 46% / 50% 40% 60% 50%; transform:translate(10px,6px) rotate(-3deg); }
-  66% { border-radius:58% 42% 48% 52% / 44% 56% 44% 56%; transform:translate(-6px,-10px) rotate(2deg); }
-}
-@keyframes morph3 {
-  0%,100% { border-radius:40% 60% 54% 46% / 52% 40% 60% 48%; transform:translate(0,0) scale(1); }
-  50% { border-radius:56% 44% 46% 54% / 40% 60% 40% 60%; transform:translate(-5px,8px) scale(1.05); }
-}
-.hero h1 { font-size:42px; font-weight:300; color:var(--text); margin-bottom:10px; letter-spacing:-.8px; line-height:1.15; position:relative; z-index:1; }
-.hero h1 strong { background:linear-gradient(135deg, #6B5F8D, #8B6FC0, #C476B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700; }
-.hero p { font-size:16px; color:var(--text-2); margin-bottom:36px; font-weight:400; line-height:1.5; position:relative; z-index:1; }
-.hero p a { color:var(--purple); text-decoration:none; font-weight:600; }
-.hero p a:hover { text-decoration:underline; }
-.search-box { width:min(560px, calc(100vw - 48px)); margin:0 auto; position:relative; z-index:30; }
-.search-box input { width:100%; height:52px; border:1.5px solid rgba(139,111,192,.15); border-radius:26px; padding:0 54px 0 22px; font-size:15px; color:var(--text); outline:none; transition:all .2s; background:#fff; box-shadow:0 4px 20px rgba(107,95,141,.06); font-family:inherit; }
-.search-box input::placeholder { color:var(--text-3); }
-.search-box input:focus { border-color:var(--purple); box-shadow:0 4px 28px rgba(139,111,192,.12); }
-.search-box .send-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); width:38px; height:38px; border:none; background:linear-gradient(135deg, #8B6FC0, #7B8ED8); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .15s, box-shadow .15s; }
-.search-box .send-btn:hover { transform:translateY(-50%) scale(1.08); box-shadow:0 4px 16px rgba(139,111,192,.25); }
-.search-box .send-btn svg { width:16px; height:16px; fill:#fff; }
-.search-results { position:absolute; top:calc(100% + 10px); left:0; right:0; background:rgba(255,255,255,.98); border:1px solid rgba(139,111,192,.16); border-radius:18px; box-shadow:0 18px 42px rgba(74,58,107,.12); overflow:hidden; display:none; text-align:left; backdrop-filter:blur(14px); z-index:40; }
-.search-results.visible { display:block; }
-.search-results-header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--border); background:linear-gradient(180deg, rgba(246,242,251,.9), rgba(255,255,255,.92)); }
-.search-results-title { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.45px; color:var(--purple); }
-.search-results-hint { font-size:11px; color:var(--text-3); }
-.search-results-list { max-height:300px; overflow:auto; }
-.search-result { padding:12px 16px; border-bottom:1px solid rgba(238,235,244,.85); cursor:pointer; transition:background .15s, transform .15s; }
-.search-result:last-child { border-bottom:none; }
-.search-result:hover,.search-result.active { background:rgba(246,242,251,.95); }
-.search-result-main { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
-.search-result-copy { min-width:0; }
-.search-result-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; }
-.search-result-desc { font-size:11px; line-height:1.5; color:var(--text-2); }
-.search-result-meta { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-.search-result-kind { display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; background:var(--lavender-light); color:var(--purple); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.45px; }
-.search-result-pane { font-size:11px; color:var(--text-3); white-space:nowrap; }
-.search-empty { padding:18px 16px; font-size:12px; color:var(--text-2); }
-.search-hit { animation:searchPulse 1.8s ease; border-color:var(--purple) !important; box-shadow:0 0 0 3px rgba(139,111,192,.16), var(--shadow-md) !important; }
-@keyframes searchPulse {
-  0% { box-shadow:0 0 0 0 rgba(139,111,192,.26); }
-  40% { box-shadow:0 0 0 8px rgba(139,111,192,.12); }
-  100% { box-shadow:0 0 0 0 rgba(139,111,192,0); }
-}
+    /* ── Top Bar ── */
+    .topbar {
+      height: 52px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
 
-/* ── Category Pills ── */
-.cat-bar { padding:28px 40px 0; display:flex; justify-content:center; flex-wrap:wrap; gap:10px; position:relative; z-index:1; }
-.cat-pill { display:flex; align-items:center; gap:7px; padding:10px 22px; border-radius:28px; border:1.5px solid var(--border); background:var(--surface); font-size:13px; font-weight:500; color:var(--text-2); cursor:pointer; transition:all .2s; white-space:nowrap; box-shadow:var(--shadow-sm); }
-.cat-pill svg { width:15px; height:15px; fill:var(--text-3); flex-shrink:0; transition:fill .2s; }
-.cat-pill:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
-.cat-pill.active { color:#fff; border-color:transparent; box-shadow:0 4px 20px rgba(0,0,0,.15); transform:translateY(-1px); }
-.cat-pill.active svg { fill:#fff; }
-.cat-pill[data-color="c1"]:hover,.cat-pill[data-color="c1"].active { background:var(--c1); border-color:var(--c1); color:#fff; }
-.cat-pill[data-color="c1"]:hover svg,.cat-pill[data-color="c1"].active svg { fill:#fff; }
-.cat-pill[data-color="c2"]:hover,.cat-pill[data-color="c2"].active { background:var(--c2); border-color:var(--c2); color:#fff; }
-.cat-pill[data-color="c2"]:hover svg,.cat-pill[data-color="c2"].active svg { fill:#fff; }
-.cat-pill[data-color="c3"]:hover,.cat-pill[data-color="c3"].active { background:var(--c3); border-color:var(--c3); color:#fff; }
-.cat-pill[data-color="c3"]:hover svg,.cat-pill[data-color="c3"].active svg { fill:#fff; }
-.cat-pill[data-color="c4"]:hover,.cat-pill[data-color="c4"].active { background:var(--c4); border-color:var(--c4); color:#fff; }
-.cat-pill[data-color="c4"]:hover svg,.cat-pill[data-color="c4"].active svg { fill:#fff; }
-.cat-pill[data-color="c5"]:hover,.cat-pill[data-color="c5"].active { background:var(--c5); border-color:var(--c5); color:#fff; }
-.cat-pill[data-color="c5"]:hover svg,.cat-pill[data-color="c5"].active svg { fill:#fff; }
-.cat-pill[data-color="c6"]:hover,.cat-pill[data-color="c6"].active { background:var(--c6); border-color:var(--c6); color:#fff; }
-.cat-pill[data-color="c6"]:hover svg,.cat-pill[data-color="c6"].active svg { fill:#fff; }
-.cat-pill[data-color="c7"]:hover,.cat-pill[data-color="c7"].active { background:var(--c7); border-color:var(--c7); color:#fff; }
-.cat-pill[data-color="c7"]:hover svg,.cat-pill[data-color="c7"].active svg { fill:#fff; }
-.cat-pill[data-color="c8"]:hover,.cat-pill[data-color="c8"].active { background:var(--c8); border-color:var(--c8); color:#fff; }
-.cat-pill[data-color="c8"]:hover svg,.cat-pill[data-color="c8"].active svg { fill:#fff; }
+    .topbar-brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-/* ── Sub-category pills ── */
-.sub-pills { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-.sub-pill { padding:7px 18px; border-radius:20px; border:1px solid var(--border); background:var(--surface); font-size:12px; font-weight:500; color:var(--text-2); cursor:pointer; transition:all .2s; }
-.sub-pill:hover { border-color:var(--purple); color:var(--purple); }
-.sub-pill.active { background:var(--purple); color:#fff; border-color:var(--purple); }
+    .topbar-brand .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gradient);
+    }
 
-/* ── Know Me section ── */
-.info-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:24px; }
-.info-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; }
-.info-card .info-label { font-size:11px; font-weight:600; text-transform:uppercase; color:var(--text-3); letter-spacing:.5px; margin-bottom:8px; }
-.info-card .info-value { font-size:14px; font-weight:500; color:var(--text); }
-.info-card .info-value.small { font-size:13px; font-weight:400; line-height:1.6; color:var(--text-2); white-space:pre-wrap; }
-.info-card .info-value a { color:var(--purple); text-decoration:none; }
-.info-card .info-value a:hover { text-decoration:underline; }
-.knowme-toolbar { display:flex; gap:14px; align-items:flex-end; flex-wrap:wrap; margin-bottom:24px; }
-.knowme-picker { flex:1; min-width:280px; }
-.knowme-picker select { width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:14px; font-family:inherit; outline:none; background:var(--surface); }
-.knowme-picker select:focus { border-color:var(--purple); }
-.knowme-meta { min-width:260px; }
-.knowme-meta .info-value { font-size:13px; color:var(--text-2); }
-.knowme-panels { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:24px; }
-.knowme-panel { min-height:220px; }
-.knowme-panel .info-value { font-size:13px; font-weight:400; color:var(--text-2); line-height:1.6; white-space:pre-wrap; }
-.knowme-empty { color:var(--text-3); }
-.knowme-story { display:grid; grid-template-columns:1.15fr .85fr; gap:16px; margin-bottom:24px; }
-.story-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow-sm); }
-.story-card h3 { font-size:18px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-.2px; }
-.story-card p { font-size:13px; line-height:1.7; color:var(--text-2); }
-.story-badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
-.story-badge { padding:6px 12px; border-radius:999px; background:var(--lavender-light); color:var(--purple); font-size:12px; font-weight:600; }
-.story-badges a.story-badge { text-decoration:none; }
-.metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
-.metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; }
-.metric-card .metric-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--text-3); margin-bottom:10px; }
-.metric-card .metric-value { font-size:28px; font-weight:700; color:var(--text); letter-spacing:-.8px; }
-.metric-card .metric-subtext { font-size:12px; color:var(--text-2); margin-top:8px; line-height:1.5; }
-.metric-card .metric-value.alert { color:#C75A65; }
-.metric-card .metric-value.good { color:#3D8C63; }
-.insight-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:24px; }
-.insight-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; }
-.insight-card h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:12px; }
-.insight-list { display:flex; flex-direction:column; gap:10px; }
-.insight-item { padding:12px 14px; border-radius:12px; background:var(--bg); border:1px solid var(--border); }
-.insight-item strong { display:block; font-size:13px; color:var(--text); margin-bottom:4px; }
-.insight-item span { display:block; font-size:12px; color:var(--text-2); line-height:1.5; white-space:pre-wrap; }
-.portal-note { background:linear-gradient(135deg, rgba(139,111,192,.12), rgba(123,142,216,.12)); border:1px solid rgba(139,111,192,.18); border-radius:var(--radius); padding:22px 24px; margin-bottom:24px; }
-.portal-note h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:8px; }
-.portal-note p { font-size:13px; line-height:1.7; color:var(--text-2); }
-.executive-block { margin-bottom:28px; }
-.executive-block .pane-header { margin-bottom:16px; }
-.executive-block .pane-header h2 { font-size:19px; }
-.executive-block .pane-header p { font-size:12px; }
-.context-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:16px; }
-.risk-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
-.risk-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:20px; box-shadow:var(--shadow-sm); }
-.risk-card h4 { font-size:15px; line-height:1.35; color:var(--text); margin-bottom:10px; letter-spacing:-.2px; }
-.risk-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.risk-pill { padding:5px 10px; border-radius:999px; background:var(--lavender-light); color:var(--purple); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.35px; }
-.risk-card p { font-size:12px; line-height:1.6; color:var(--text-2); margin-bottom:12px; }
-.risk-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.risk-action { background:var(--bg); border-radius:12px; padding:10px 12px; }
-.risk-action strong { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.35px; color:var(--text-3); margin-bottom:4px; }
-.risk-action span { display:block; font-size:12px; color:var(--text); line-height:1.5; }
-.dashboard-shell { display:grid; grid-template-columns:1.2fr .8fr; gap:16px; margin-bottom:24px; }
-.hero-dashboard { background:linear-gradient(135deg, #fff 0%, #fbf7ff 55%, #fff7f3 100%); border:1px solid rgba(139,111,192,.18); border-radius:24px; padding:28px; position:relative; overflow:hidden; box-shadow:var(--shadow-md); }
-.hero-dashboard::before { content:''; position:absolute; inset:auto -40px -60px auto; width:220px; height:220px; background:radial-gradient(circle, rgba(240,145,155,.26) 0%, rgba(240,145,155,0) 70%); }
-.hero-kicker { display:flex; align-items:center; gap:10px; margin-bottom:14px; position:relative; z-index:1; }
-.hero-icon { width:42px; height:42px; border-radius:14px; background:linear-gradient(135deg, #8B6FC0, #F0919B); display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; box-shadow:0 10px 22px rgba(139,111,192,.24); }
-.hero-kicker span { font-size:12px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--purple); }
-.hero-dashboard h3 { font-size:28px; line-height:1.15; letter-spacing:-.8px; color:var(--text); margin-bottom:10px; position:relative; z-index:1; }
-.hero-dashboard p { max-width:720px; font-size:14px; line-height:1.75; color:var(--text-2); position:relative; z-index:1; }
-.hero-band { margin-top:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; position:relative; z-index:1; }
-.hero-band-card { background:rgba(255,255,255,.76); border:1px solid rgba(139,111,192,.1); border-radius:16px; padding:14px 16px; backdrop-filter:blur(8px); }
-.hero-band-label { font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-3); letter-spacing:.45px; margin-bottom:6px; }
-.hero-band-value { font-size:15px; font-weight:700; color:var(--text); }
-.cockpit-card { background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:24px; box-shadow:var(--shadow-md); }
-.cockpit-card h3 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:14px; }
-.gauge-wrap { display:flex; align-items:center; gap:18px; }
-.risk-gauge { --gauge:72; width:148px; height:148px; border-radius:50%; background:conic-gradient(#C75A65 0 calc(var(--gauge) * 1%), #F4C5A0 calc(var(--gauge) * 1%) calc((var(--gauge) + 12) * 1%), #ECE7F5 0); position:relative; flex-shrink:0; }
-.risk-gauge::after { content:''; position:absolute; inset:16px; background:#fff; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(139,111,192,.08); }
-.risk-gauge-core { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1; }
-.risk-gauge-core strong { font-size:34px; color:var(--text); letter-spacing:-1px; }
-.risk-gauge-core span { font-size:11px; text-transform:uppercase; letter-spacing:.45px; color:var(--text-3); font-weight:700; }
-.gauge-legend { display:flex; flex-direction:column; gap:10px; }
-.legend-row { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--text-2); }
-.legend-dot { width:10px; height:10px; border-radius:999px; flex-shrink:0; }
-.legend-dot.critical { background:#C75A65; }
-.legend-dot.watch { background:#F4C5A0; }
-.legend-dot.stable { background:#8B6FC0; }
-.chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
-.chart-card { background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:24px; box-shadow:var(--shadow-sm); }
-.chart-card h3 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:16px; }
-.chart-subtitle { font-size:12px; color:var(--text-2); margin-top:-6px; margin-bottom:16px; }
-.stack-bar { display:flex; height:18px; border-radius:999px; overflow:hidden; background:#F1EDF7; margin-bottom:14px; }
-.stack-seg-open { background:linear-gradient(90deg, #F0919B, #E85C82); }
-.stack-seg-sev { background:linear-gradient(90deg, #8B6FC0, #6B5F8D); }
-.stack-seg-icm { background:linear-gradient(90deg, #7B8ED8, #5BBAC6); }
-.stack-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.stack-metric { background:var(--bg); border-radius:14px; padding:12px; }
-.stack-metric strong { display:block; font-size:18px; color:var(--text); margin-bottom:2px; }
-.stack-metric span { display:block; font-size:11px; color:var(--text-2); text-transform:uppercase; letter-spacing:.4px; }
-.bar-list { display:flex; flex-direction:column; gap:14px; }
-.bar-row { display:grid; grid-template-columns:140px 1fr 48px; gap:10px; align-items:center; }
-.bar-row label { font-size:12px; color:var(--text); font-weight:600; }
-.bar-track { height:12px; border-radius:999px; background:#F1EDF7; overflow:hidden; }
-.bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg, #8B6FC0, #F0919B); }
-.bar-row span { font-size:12px; color:var(--text-2); text-align:right; }
-.timeline { display:flex; flex-direction:column; gap:14px; }
-.timeline-item { position:relative; padding-left:22px; }
-.timeline-item::before { content:''; position:absolute; left:0; top:5px; width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg, #8B6FC0, #F0919B); box-shadow:0 0 0 4px rgba(139,111,192,.12); }
-.timeline-item::after { content:''; position:absolute; left:4px; top:18px; bottom:-16px; width:2px; background:#EEE7F6; }
-.timeline-item:last-child::after { display:none; }
-.timeline-item strong { display:block; font-size:13px; color:var(--text); margin-bottom:4px; }
-.timeline-item span { display:block; font-size:12px; color:var(--text-2); line-height:1.55; }
-.section-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
-.section-title h3 { font-size:18px; color:var(--text); letter-spacing:-.3px; }
-.section-pill { font-size:11px; text-transform:uppercase; letter-spacing:.5px; font-weight:700; color:var(--purple); background:var(--lavender-light); padding:7px 12px; border-radius:999px; }
+    .topbar-nav {
+      margin-left: 32px;
+      display: flex;
+      gap: 0;
+    }
 
-/* ── Feedback form ── */
-.feedback-form { max-width:640px; margin:0 auto; }
-.feedback-form .form-group { margin-bottom:20px; }
-.feedback-form label { display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px; }
-.feedback-form input, .feedback-form textarea, .feedback-form select { width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:14px; font-family:inherit; outline:none; transition:border-color .2s; background:var(--surface); }
-.feedback-form input:focus, .feedback-form textarea:focus, .feedback-form select:focus { border-color:var(--purple); }
-.feedback-form textarea { min-height:120px; resize:vertical; }
-.feedback-form .submit-btn { padding:12px 32px; background:var(--gradient); color:#fff; border:none; border-radius:28px; font-size:14px; font-weight:600; cursor:pointer; transition:transform .15s, box-shadow .15s; font-family:inherit; }
-.feedback-form .submit-btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(139,111,192,.3); }
+    .topbar-nav a {
+      color: var(--text-2);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 16px 16px;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: all .15s;
+    }
 
-/* ── Main Content ── */
-.main { max-width:1120px; margin:0 auto; padding:36px 40px 60px; }
-.pane { display:none; animation:fadeIn .25s ease; }
-.pane.active { display:block; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-.pane-header { margin-bottom:24px; }
-.pane-header h2 { font-size:22px; font-weight:700; color:var(--text); letter-spacing:-.3px; }
-.pane-header p { font-size:13px; color:var(--text-2); margin-top:4px; font-weight:400; }
+    .topbar-nav a:hover {
+      color: var(--text);
+    }
 
-/* ── Resource Cards ── */
-.res-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.res-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:all .2s; text-decoration:none; color:inherit; }
-.res-card:hover { border-color:var(--purple); box-shadow:var(--shadow-md); transform:translateY(-2px); }
-.res-card.static-card { cursor:default; }
-.res-card.static-card:hover { border-color:var(--border); box-shadow:none; transform:none; }
-.res-card.static-card .rc-arrow { display:none; }
-.res-card .rc-info { flex:1; min-width:0; }
-.res-card .rc-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:-.1px; }
-.res-card .rc-desc { font-size:12px; color:var(--text-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.res-card .rc-arrow { flex-shrink:0; margin-left:16px; width:28px; height:28px; border-radius:50%; background:var(--lavender-light); display:flex; align-items:center; justify-content:center; color:var(--text-3); font-size:14px; transition:all .2s; }
-.res-card:hover .rc-arrow { background:var(--lavender); color:var(--purple); }
+    .topbar-nav a.active {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+    }
 
-/* ── Agent Tab ── */
-.agent-hero { text-align:center; padding:56px 24px 32px; }
-.agent-hero .copilot-icon { width:56px; height:56px; margin:0 auto 20px; background:var(--gradient); border-radius:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 32px rgba(15,108,189,.2); }
-.agent-hero .copilot-icon svg { width:30px; height:30px; fill:#fff; }
-.agent-hero h2 { font-size:24px; font-weight:700; margin-bottom:6px; letter-spacing:-.3px; }
-.agent-hero p { font-size:15px; color:var(--text-2); margin-bottom:28px; }
-.agent-chat { max-width:600px; margin:0 auto; position:relative; }
-.agent-chat input { width:100%; height:52px; border:1.5px solid var(--border); border-radius:28px; padding:0 56px 0 24px; font-size:14px; outline:none; font-family:inherit; background:var(--surface); box-shadow:var(--shadow-sm); transition:all .2s; }
-.agent-chat input:focus { border-color:var(--purple); box-shadow:0 0 0 3px rgba(107,63,160,.12), var(--shadow-md); }
-.agent-prompts { display:flex; gap:8px; justify-content:center; margin-top:20px; flex-wrap:wrap; }
-.agent-prompts .prompt { padding:9px 18px; border:1px solid var(--border); border-radius:24px; font-size:12px; font-weight:500; color:var(--text-2); cursor:pointer; background:var(--surface); transition:all .2s; box-shadow:var(--shadow-sm); }
-.agent-prompts .prompt:hover { border-color:var(--purple); color:var(--purple); box-shadow:var(--shadow-md); transform:translateY(-1px); }
-.arch-option-tag { padding:6px 10px; border-radius:999px; background:var(--lavender-light); color:var(--purple); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.45px; }
-.arch-option h4 { position:relative; z-index:1; font-size:20px; letter-spacing:-.5px; color:var(--text); margin-bottom:8px; }
-.arch-option p { position:relative; z-index:1; font-size:12px; line-height:1.6; color:var(--text-2); margin-bottom:16px; }
-.arch-mini { position:relative; z-index:1; min-height:208px; border-radius:20px; padding:16px; background:rgba(255,255,255,.82); border:1px solid rgba(139,111,192,.1); }
-.arch-mini.executive { background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(246,242,251,.95)); }
-.arch-mini.product { background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(243,248,255,.92)); }
-.arch-mini.formal { background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,246,241,.94)); }
-.mini-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.45px; color:var(--text-3); margin-bottom:10px; }
-.mini-flow { display:grid; gap:10px; }
-.mini-node { padding:12px 14px; border-radius:16px; background:#fff; border:1px solid rgba(139,111,192,.12); box-shadow:0 8px 20px rgba(74,58,107,.05); }
-.mini-node strong { display:block; font-size:13px; color:var(--text); }
-.mini-node span { display:block; margin-top:4px; font-size:11px; line-height:1.5; color:var(--text-2); }
-.mini-node.core { background:linear-gradient(135deg, rgba(139,111,192,.16), rgba(196,118,184,.12)); border-color:rgba(139,111,192,.18); }
-.mini-arrow { width:2px; height:24px; background:linear-gradient(180deg, rgba(139,111,192,.2), rgba(139,111,192,.9)); border-radius:999px; margin:0 auto; position:relative; }
-.mini-arrow::after { content:''; position:absolute; left:50%; bottom:-2px; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid var(--purple); }
-.mini-surface { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:12px; }
-.mini-surface-block { padding:10px 8px; border-radius:14px; background:#fff; border:1px solid rgba(139,111,192,.12); text-align:center; }
-.mini-surface-block strong { display:block; font-size:12px; color:var(--text); }
-.mini-surface-block span { display:block; margin-top:3px; font-size:9px; text-transform:uppercase; letter-spacing:.35px; color:var(--text-3); }
-.mini-runtime { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:12px; }
-.mini-runtime .mini-node { padding:10px; min-height:84px; }
-.mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.mini-grid .mini-node:last-child { grid-column:1 / -1; }
-.arch-option-note { position:relative; z-index:1; margin-top:14px; padding-top:14px; border-top:1px solid rgba(139,111,192,.1); font-size:11px; color:var(--text-2); line-height:1.6; }
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-@media(max-width:960px) { .res-grid,.metric-grid,.insight-grid,.knowme-story,.dashboard-shell,.chart-grid,.risk-grid,.context-grid,.arch-summary,.arch-options{grid-template-columns:repeat(2,1fr);} .knowme-story,.dashboard-shell,.chart-grid,.arch-stage,.arch-platform-top,.arch-sync{grid-template-columns:1fr;} .hero-band{grid-template-columns:1fr;} .arch-arrow{width:2px; height:42px; justify-self:center; background:linear-gradient(180deg, rgba(139,111,192,.16), rgba(139,111,192,.9));} .arch-arrow::after{right:auto; left:50%; top:auto; bottom:-1px; transform:translateX(-50%); border-left:7px solid transparent; border-right:7px solid transparent; border-top:11px solid var(--purple); border-bottom:none;} .arch-runtime-grid,.mini-runtime{grid-template-columns:1fr;} .mini-surface{grid-template-columns:repeat(2, 1fr);} }
-@media(max-width:640px) { .res-grid,.metric-grid,.insight-grid,.info-grid,.knowme-panels,.hero-band,.risk-grid,.context-grid,.arch-summary,.arch-options{grid-template-columns:1fr;} .gauge-wrap{flex-direction:column; align-items:flex-start;} .bar-row{grid-template-columns:1fr;}.cat-bar{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding:16px;} .hero h1{font-size:26px;} .hero{padding:48px 20px 40px;} .main{padding:24px 16px;} .search-results{left:-4px; right:-4px;} .search-result-main{flex-direction:column;} .search-result-meta{justify-content:space-between; width:100%;} .arch-shell{padding:22px 18px;} .arch-head{display:block;} .arch-head h3{font-size:24px;} .mini-surface,.mini-grid{grid-template-columns:1fr;} }
-</style>
+    .topbar-right .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .15s;
+      border: none;
+      background: transparent;
+    }
+
+    .topbar-right .icon-btn:hover {
+      background: var(--lavender-light);
+    }
+
+    .topbar-right .icon-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--text-2);
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: #FAFAFE;
+      padding: 80px 40px 64px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+      z-index: 3;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: none;
+    }
+
+    /* ── Decorative Blobs ── */
+    .blob-container {
+      position: absolute;
+      top: -40px;
+      right: -60px;
+      width: 600px;
+      height: 500px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(0px);
+    }
+
+    .blob-1 {
+      width: 340px;
+      height: 340px;
+      background: rgba(241, 128, 110, .55);
+      top: 10px;
+      right: 0;
+      border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+      animation: morph1 12s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 280px;
+      height: 260px;
+      background: rgba(232, 92, 130, .45);
+      top: 80px;
+      right: 120px;
+      border-radius: 50% 50% 46% 54% / 36% 56% 44% 64%;
+      animation: morph2 14s ease-in-out infinite;
+    }
+
+    .blob-3 {
+      width: 200px;
+      height: 200px;
+      background: rgba(230, 130, 178, .35);
+      top: 160px;
+      right: 20px;
+      border-radius: 40% 60% 54% 46% / 52% 40% 60% 48%;
+      animation: morph3 10s ease-in-out infinite;
+    }
+
+    .blob-4 {
+      width: 160px;
+      height: 160px;
+      background: rgba(246, 168, 140, .4);
+      top: -10px;
+      right: 200px;
+      border-radius: 54% 46% 38% 62% / 44% 58% 42% 56%;
+      animation: morph2 16s ease-in-out infinite reverse;
+    }
+
+    .blob-5 {
+      width: 120px;
+      height: 120px;
+      background: rgba(240, 160, 200, .3);
+      top: 220px;
+      right: 260px;
+      border-radius: 46% 54% 62% 38% / 56% 42% 58% 44%;
+      animation: morph1 11s ease-in-out infinite reverse;
+    }
+
+    @keyframes morph1 {
+
+      0%,
+      100% {
+        border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      33% {
+        border-radius: 48% 52% 58% 42% / 44% 56% 44% 56%;
+        transform: translate(-8px, 12px) rotate(3deg);
+      }
+
+      66% {
+        border-radius: 56% 44% 40% 60% / 52% 48% 52% 48%;
+        transform: translate(6px, -8px) rotate(-2deg);
+      }
+    }
+
+    @keyframes morph2 {
+
+      0%,
+      100% {
+        border-radius: 50% 50% 46% 54% / 36% 56% 44% 64%;
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      33% {
+        border-radius: 42% 58% 54% 46% / 50% 40% 60% 50%;
+        transform: translate(10px, 6px) rotate(-3deg);
+      }
+
+      66% {
+        border-radius: 58% 42% 48% 52% / 44% 56% 44% 56%;
+        transform: translate(-6px, -10px) rotate(2deg);
+      }
+    }
+
+    @keyframes morph3 {
+
+      0%,
+      100% {
+        border-radius: 40% 60% 54% 46% / 52% 40% 60% 48%;
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        border-radius: 56% 44% 46% 54% / 40% 60% 40% 60%;
+        transform: translate(-5px, 8px) scale(1.05);
+      }
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -.8px;
+      line-height: 1.15;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 strong {
+      background: linear-gradient(135deg, #6B5F8D, #8B6FC0, #C476B8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--text-2);
+      margin-bottom: 36px;
+      font-weight: 400;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero p a:hover {
+      text-decoration: underline;
+    }
+
+    .search-box {
+      width: min(560px, calc(100vw - 48px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 30;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 52px;
+      border: 1.5px solid rgba(139, 111, 192, .15);
+      border-radius: 26px;
+      padding: 0 54px 0 22px;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition: all .2s;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(107, 95, 141, .06);
+      font-family: inherit;
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-3);
+    }
+
+    .search-box input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 4px 28px rgba(139, 111, 192, .12);
+    }
+
+    .search-box .send-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border: none;
+      background: linear-gradient(135deg, #8B6FC0, #7B8ED8);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .search-box .send-btn:hover {
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 4px 16px rgba(139, 111, 192, .25);
+    }
+
+    .search-box .send-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+
+    .search-results {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, .98);
+      border: 1px solid rgba(139, 111, 192, .16);
+      border-radius: 18px;
+      box-shadow: 0 18px 42px rgba(74, 58, 107, .12);
+      overflow: hidden;
+      display: none;
+      text-align: left;
+      backdrop-filter: blur(14px);
+      z-index: 40;
+    }
+
+    .search-results.visible {
+      display: block;
+    }
+
+    .search-results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(246, 242, 251, .9), rgba(255, 255, 255, .92));
+    }
+
+    .search-results-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .45px;
+      color: var(--purple);
+    }
+
+    .search-results-hint {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    .search-results-list {
+      max-height: 300px;
+      overflow: auto;
+    }
+
+    .search-result {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(238, 235, 244, .85);
+      cursor: pointer;
+      transition: background .15s, transform .15s;
+    }
+
+    .search-result:last-child {
+      border-bottom: none;
+    }
+
+    .search-result:hover,
+    .search-result.active {
+      background: rgba(246, 242, 251, .95);
+    }
+
+    .search-result-main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .search-result-copy {
+      min-width: 0;
+    }
+
+    .search-result-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .search-result-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-2);
+    }
+
+    .search-result-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .search-result-kind {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--lavender-light);
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .45px;
+    }
+
+    .search-result-pane {
+      font-size: 11px;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    .search-empty {
+      padding: 18px 16px;
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .search-hit {
+      animation: searchPulse 1.8s ease;
+      border-color: var(--purple) !important;
+      box-shadow: 0 0 0 3px rgba(139, 111, 192, .16), var(--shadow-md) !important;
+    }
+
+    @keyframes searchPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(139, 111, 192, .26);
+      }
+
+      40% {
+        box-shadow: 0 0 0 8px rgba(139, 111, 192, .12);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(139, 111, 192, 0);
+      }
+    }
+
+    /* ── Category Pills ── */
+    .cat-bar {
+      padding: 28px 40px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cat-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 22px;
+      border-radius: 28px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cat-pill svg {
+      width: 15px;
+      height: 15px;
+      fill: var(--text-3);
+      flex-shrink: 0;
+      transition: fill .2s;
+    }
+
+    .cat-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cat-pill.active {
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+      transform: translateY(-1px);
+    }
+
+    .cat-pill.active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c1"]:hover,
+    .cat-pill[data-color="c1"].active {
+      background: var(--c1);
+      border-color: var(--c1);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c1"]:hover svg,
+    .cat-pill[data-color="c1"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c2"]:hover,
+    .cat-pill[data-color="c2"].active {
+      background: var(--c2);
+      border-color: var(--c2);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c2"]:hover svg,
+    .cat-pill[data-color="c2"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c3"]:hover,
+    .cat-pill[data-color="c3"].active {
+      background: var(--c3);
+      border-color: var(--c3);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c3"]:hover svg,
+    .cat-pill[data-color="c3"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c4"]:hover,
+    .cat-pill[data-color="c4"].active {
+      background: var(--c4);
+      border-color: var(--c4);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c4"]:hover svg,
+    .cat-pill[data-color="c4"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c5"]:hover,
+    .cat-pill[data-color="c5"].active {
+      background: var(--c5);
+      border-color: var(--c5);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c5"]:hover svg,
+    .cat-pill[data-color="c5"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c6"]:hover,
+    .cat-pill[data-color="c6"].active {
+      background: var(--c6);
+      border-color: var(--c6);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c6"]:hover svg,
+    .cat-pill[data-color="c6"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c7"]:hover,
+    .cat-pill[data-color="c7"].active {
+      background: var(--c7);
+      border-color: var(--c7);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c7"]:hover svg,
+    .cat-pill[data-color="c7"].active svg {
+      fill: #fff;
+    }
+
+    .cat-pill[data-color="c8"]:hover,
+    .cat-pill[data-color="c8"].active {
+      background: var(--c8);
+      border-color: var(--c8);
+      color: #fff;
+    }
+
+    .cat-pill[data-color="c8"]:hover svg,
+    .cat-pill[data-color="c8"].active svg {
+      fill: #fff;
+    }
+
+    /* ── Sub-category pills ── */
+    .sub-pills {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .sub-pill {
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .sub-pill:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    .sub-pill.active {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    /* ── Know Me section ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+
+    .info-card .info-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-3);
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .info-card .info-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .info-card .info-value.small {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-2);
+      white-space: pre-wrap;
+    }
+
+    .info-card .info-value a {
+      color: var(--purple);
+      text-decoration: none;
+    }
+
+    .info-card .info-value a:hover {
+      text-decoration: underline;
+    }
+
+    .knowme-toolbar {
+      display: flex;
+      gap: 14px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .knowme-picker {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .knowme-picker select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background: var(--surface);
+    }
+
+    .knowme-picker select:focus {
+      border-color: var(--purple);
+    }
+
+    .knowme-meta {
+      min-width: 260px;
+    }
+
+    .knowme-meta .info-value {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    .knowme-panels {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .knowme-panel {
+      min-height: 220px;
+    }
+
+    .knowme-panel .info-value {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-2);
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .knowme-empty {
+      color: var(--text-3);
+    }
+
+    .knowme-story {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .story-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -.2px;
+    }
+
+    .story-card p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    .story-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .story-badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--lavender-light);
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .story-badges a.story-badge {
+      text-decoration: none;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+    }
+
+    .metric-card .metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--text-3);
+      margin-bottom: 10px;
+    }
+
+    .metric-card .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.8px;
+    }
+
+    .metric-card .metric-subtext {
+      font-size: 12px;
+      color: var(--text-2);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .metric-card .metric-value.alert {
+      color: #C75A65;
+    }
+
+    .metric-card .metric-value.good {
+      color: #3D8C63;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+
+    .insight-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .insight-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .insight-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+
+    .insight-item strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .insight-item span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .portal-note {
+      background: linear-gradient(135deg, rgba(139, 111, 192, .12), rgba(123, 142, 216, .12));
+      border: 1px solid rgba(139, 111, 192, .18);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 24px;
+    }
+
+    .portal-note h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .portal-note p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    .executive-block {
+      margin-bottom: 28px;
+    }
+
+    .executive-block .pane-header {
+      margin-bottom: 16px;
+    }
+
+    .executive-block .pane-header h2 {
+      font-size: 19px;
+    }
+
+    .executive-block .pane-header p {
+      font-size: 12px;
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .risk-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .risk-card h4 {
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -.2px;
+    }
+
+    .risk-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .risk-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--lavender-light);
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+    }
+
+    .risk-card p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-2);
+      margin-bottom: 12px;
+    }
+
+    .risk-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .risk-action {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .risk-action strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .risk-action span {
+      display: block;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .dashboard-shell {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-dashboard {
+      background: linear-gradient(135deg, #fff 0%, #fbf7ff 55%, #fff7f3 100%);
+      border: 1px solid rgba(139, 111, 192, .18);
+      border-radius: 24px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-dashboard::before {
+      content: '';
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(240, 145, 155, .26) 0%, rgba(240, 145, 155, 0) 70%);
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8B6FC0, #F0919B);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 10px 22px rgba(139, 111, 192, .24);
+    }
+
+    .hero-kicker span {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+
+    .hero-dashboard h3 {
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -.8px;
+      color: var(--text);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-dashboard p {
+      max-width: 720px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-band {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-band-card {
+      background: rgba(255, 255, 255, .76);
+      border: 1px solid rgba(139, 111, 192, .1);
+      border-radius: 16px;
+      padding: 14px 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-band-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-3);
+      letter-spacing: .45px;
+      margin-bottom: 6px;
+    }
+
+    .hero-band-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cockpit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .cockpit-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .gauge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .risk-gauge {
+      --gauge: 72;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      background: conic-gradient(#C75A65 0 calc(var(--gauge) * 1%), #F4C5A0 calc(var(--gauge) * 1%) calc((var(--gauge) + 12) * 1%), #ECE7F5 0);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .risk-gauge::after {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(139, 111, 192, .08);
+    }
+
+    .risk-gauge-core {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .risk-gauge-core strong {
+      font-size: 34px;
+      color: var(--text);
+      letter-spacing: -1px;
+    }
+
+    .risk-gauge-core span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .45px;
+      color: var(--text-3);
+      font-weight: 700;
+    }
+
+    .gauge-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .legend-dot.critical {
+      background: #C75A65;
+    }
+
+    .legend-dot.watch {
+      background: #F4C5A0;
+    }
+
+    .legend-dot.stable {
+      background: #8B6FC0;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .chart-subtitle {
+      font-size: 12px;
+      color: var(--text-2);
+      margin-top: -6px;
+      margin-bottom: 16px;
+    }
+
+    .stack-bar {
+      display: flex;
+      height: 18px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #F1EDF7;
+      margin-bottom: 14px;
+    }
+
+    .stack-seg-open {
+      background: linear-gradient(90deg, #F0919B, #E85C82);
+    }
+
+    .stack-seg-sev {
+      background: linear-gradient(90deg, #8B6FC0, #6B5F8D);
+    }
+
+    .stack-seg-icm {
+      background: linear-gradient(90deg, #7B8ED8, #5BBAC6);
+    }
+
+    .stack-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stack-metric {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .stack-metric strong {
+      display: block;
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .stack-metric span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .bar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 48px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .bar-row label {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #F1EDF7;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #8B6FC0, #F0919B);
+    }
+
+    .bar-row span {
+      font-size: 12px;
+      color: var(--text-2);
+      text-align: right;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8B6FC0, #F0919B);
+      box-shadow: 0 0 0 4px rgba(139, 111, 192, .12);
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 18px;
+      bottom: -16px;
+      width: 2px;
+      background: #EEE7F6;
+    }
+
+    .timeline-item:last-child::after {
+      display: none;
+    }
+
+    .timeline-item strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-item span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title h3 {
+      font-size: 18px;
+      color: var(--text);
+      letter-spacing: -.3px;
+    }
+
+    .section-pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-weight: 700;
+      color: var(--purple);
+      background: var(--lavender-light);
+      padding: 7px 12px;
+      border-radius: 999px;
+    }
+
+    /* ── Feedback form ── */
+    .feedback-form {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .feedback-form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .feedback-form label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea,
+    .feedback-form select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+      background: var(--surface);
+    }
+
+    .feedback-form input:focus,
+    .feedback-form textarea:focus,
+    .feedback-form select:focus {
+      border-color: var(--purple);
+    }
+
+    .feedback-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .feedback-form .submit-btn {
+      padding: 12px 32px;
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      font-family: inherit;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .feedback-form .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(139, 111, 192, .3);
+    }
+
+    /* ── Main Content ── */
+    .main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 40px 60px;
+    }
+
+    .pane {
+      display: none;
+      animation: fadeIn .25s ease;
+    }
+
+    .pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .pane-header {
+      margin-bottom: 24px;
+    }
+
+    .pane-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.3px;
+    }
+
+    .pane-header p {
+      font-size: 13px;
+      color: var(--text-2);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* ── Resource Cards ── */
+    .res-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .res-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .res-card:hover {
+      border-color: var(--purple);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .res-card.static-card {
+      cursor: default;
+    }
+
+    .res-card.static-card:hover {
+      border-color: var(--border);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .res-card.static-card .rc-arrow {
+      display: none;
+    }
+
+    .res-card .rc-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .res-card .rc-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -.1px;
+    }
+
+    .res-card .rc-desc {
+      font-size: 12px;
+      color: var(--text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .res-card .rc-arrow {
+      flex-shrink: 0;
+      margin-left: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--lavender-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-3);
+      font-size: 14px;
+      transition: all .2s;
+    }
+
+    .res-card:hover .rc-arrow {
+      background: var(--lavender);
+      color: var(--purple);
+    }
+
+    /* ── Agent Tab ── */
+    .agent-hero {
+      text-align: center;
+      padding: 56px 24px 32px;
+    }
+
+    .agent-hero .copilot-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      background: var(--gradient);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(15, 108, 189, .2);
+    }
+
+    .agent-hero .copilot-icon svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
+    }
+
+    .agent-hero h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -.3px;
+    }
+
+    .agent-hero p {
+      font-size: 15px;
+      color: var(--text-2);
+      margin-bottom: 20px;
+    }
+
+    .agent-status-row {
+      max-width: 760px;
+      margin: 0 auto 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .agent-status-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      border: 1px solid rgba(139, 111, 192, .14);
+      background: rgba(255, 255, 255, .82);
+      color: var(--text);
+    }
+
+    .agent-status-pill.is-neutral {
+      background: rgba(255, 255, 255, .82);
+      color: var(--text);
+    }
+
+    .agent-status-pill.is-success {
+      background: rgba(229, 246, 238, .92);
+      border-color: rgba(61, 140, 99, .18);
+      color: #2D6C4D;
+    }
+
+    .agent-status-pill.is-warning {
+      background: rgba(255, 248, 236, .96);
+      border-color: rgba(238, 173, 97, .24);
+      color: #A96A1E;
+    }
+
+    .agent-status-pill.is-error {
+      background: rgba(255, 243, 244, .96);
+      border-color: rgba(199, 90, 101, .22);
+      color: #A24556;
+    }
+
+    .agent-status-detail {
+      max-width: 720px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    .agent-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .agent-btn {
+      min-width: 160px;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(139, 111, 192, .18);
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .agent-btn:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .agent-btn.primary {
+      background: var(--gradient);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(139, 111, 192, .24);
+    }
+
+    .agent-btn.primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(139, 111, 192, .28);
+    }
+
+    .agent-btn.secondary {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .agent-btn.secondary:hover:not(:disabled) {
+      border-color: var(--purple);
+      color: var(--purple);
+      box-shadow: var(--shadow-md);
+    }
+
+    .agent-shell {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(247, 244, 251, .95));
+      border: 1px solid rgba(139, 111, 192, .14);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .agent-shell-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .agent-shell-head h3 {
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: -.35px;
+      margin-bottom: 6px;
+    }
+
+    .agent-shell-head p {
+      max-width: 720px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    .agent-shell-meta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(139, 111, 192, .14);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+
+    .agent-prompts {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .agent-prompts .prompt {
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-2);
+      cursor: pointer;
+      background: var(--surface);
+      transition: all .2s;
+      box-shadow: var(--shadow-sm);
+      font-family: inherit;
+    }
+
+    .agent-prompts .prompt:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .agent-setup-note {
+      margin-bottom: 16px;
+    }
+
+    .agent-config-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .agent-config-field {
+      display: block;
+    }
+
+    .agent-config-field span {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .agent-config-field input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(139, 111, 192, .14);
+      background: rgba(255, 255, 255, .92);
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: all .2s;
+    }
+
+    .agent-config-field input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(107, 63, 160, .12);
+    }
+
+    .agent-config-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .agent-setup-hint {
+      margin-top: 14px;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    .agent-error {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 243, 244, .96);
+      border: 1px solid rgba(199, 90, 101, .2);
+      font-size: 12px;
+      line-height: 1.7;
+      color: #8F4453;
+    }
+
+    .agent-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 8px;
+      min-height: 440px;
+      padding: 28px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(246, 242, 251, .92));
+      border: 1px dashed rgba(139, 111, 192, .22);
+    }
+
+    .agent-empty-state h4 {
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: -.35px;
+    }
+
+    .agent-empty-state p {
+      max-width: 640px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    .agent-webchat {
+      min-height: 640px;
+      height: 640px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(139, 111, 192, .14);
+      background: #fff;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .72);
+    }
+
+    .agent-webchat:empty {
+      display: none;
+    }
+
+    .agent-webchat>* {
+      width: 100%;
+      height: 100%;
+    }
+
+    .arch-option-tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--lavender-light);
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .45px;
+    }
+
+    .arch-option h4 {
+      position: relative;
+      z-index: 1;
+      font-size: 20px;
+      letter-spacing: -.5px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .arch-option p {
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-2);
+      margin-bottom: 16px;
+    }
+
+    .arch-mini {
+      position: relative;
+      z-index: 1;
+      min-height: 208px;
+      border-radius: 20px;
+      padding: 16px;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid rgba(139, 111, 192, .1);
+    }
+
+    .arch-mini.executive {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(246, 242, 251, .95));
+    }
+
+    .arch-mini.product {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(243, 248, 255, .92));
+    }
+
+    .arch-mini.formal {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 246, 241, .94));
+    }
+
+    .mini-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .45px;
+      color: var(--text-3);
+      margin-bottom: 10px;
+    }
+
+    .mini-flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-node {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid rgba(139, 111, 192, .12);
+      box-shadow: 0 8px 20px rgba(74, 58, 107, .05);
+    }
+
+    .mini-node strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .mini-node span {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-2);
+    }
+
+    .mini-node.core {
+      background: linear-gradient(135deg, rgba(139, 111, 192, .16), rgba(196, 118, 184, .12));
+      border-color: rgba(139, 111, 192, .18);
+    }
+
+    .mini-arrow {
+      width: 2px;
+      height: 24px;
+      background: linear-gradient(180deg, rgba(139, 111, 192, .2), rgba(139, 111, 192, .9));
+      border-radius: 999px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .mini-arrow::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid var(--purple);
+    }
+
+    .mini-surface {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini-surface-block {
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(139, 111, 192, .12);
+      text-align: center;
+    }
+
+    .mini-surface-block strong {
+      display: block;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .mini-surface-block span {
+      display: block;
+      margin-top: 3px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+      color: var(--text-3);
+    }
+
+    .mini-runtime {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini-runtime .mini-node {
+      padding: 10px;
+      min-height: 84px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mini-grid .mini-node:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .arch-option-note {
+      position: relative;
+      z-index: 1;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(139, 111, 192, .1);
+      font-size: 11px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    @media(max-width:960px) {
+
+      .res-grid,
+      .metric-grid,
+      .insight-grid,
+      .knowme-story,
+      .dashboard-shell,
+      .chart-grid,
+      .risk-grid,
+      .context-grid,
+      .arch-summary,
+      .arch-options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .knowme-story,
+      .dashboard-shell,
+      .chart-grid,
+      .arch-stage,
+      .arch-platform-top,
+      .arch-sync {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-band {
+        grid-template-columns: 1fr;
+      }
+
+      .agent-shell-head {
+        flex-direction: column;
+      }
+
+      .agent-shell-meta {
+        width: 100%;
+      }
+
+      .arch-arrow {
+        width: 2px;
+        height: 42px;
+        justify-self: center;
+        background: linear-gradient(180deg, rgba(139, 111, 192, .16), rgba(139, 111, 192, .9));
+      }
+
+      .arch-arrow::after {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -1px;
+        transform: translateX(-50%);
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 11px solid var(--purple);
+        border-bottom: none;
+      }
+
+      .arch-runtime-grid,
+      .mini-runtime {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-surface {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:640px) {
+
+      .res-grid,
+      .metric-grid,
+      .insight-grid,
+      .info-grid,
+      .knowme-panels,
+      .hero-band,
+      .risk-grid,
+      .context-grid,
+      .arch-summary,
+      .arch-options {
+        grid-template-columns: 1fr;
+      }
+
+      .gauge-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+      }
+
+      .cat-bar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: 16px;
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .hero {
+        padding: 48px 20px 40px;
+      }
+
+      .main {
+        padding: 24px 16px;
+      }
+
+      .search-results {
+        left: -4px;
+        right: -4px;
+      }
+
+      .search-result-main {
+        flex-direction: column;
+      }
+
+      .search-result-meta {
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .agent-actions,
+      .agent-config-actions {
+        flex-direction: column;
+      }
+
+      .agent-btn {
+        width: 100%;
+      }
+
+      .agent-config-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .agent-empty-state {
+        min-height: 360px;
+      }
+
+      .agent-webchat {
+        min-height: 560px;
+        height: 560px;
+      }
+
+      .arch-shell {
+        padding: 22px 18px;
+      }
+
+      .arch-head {
+        display: block;
+      }
+
+      .arch-head h3 {
+        font-size: 24px;
+      }
+
+      .mini-surface,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ═══ TOP BAR ═══ -->
-<div class="topbar">
-  <div class="topbar-brand"><span class="brand-dot"></span>MCS Portal</div>
-  <div class="topbar-nav">
-    <a href="#" class="active">Home</a>
+  <!-- ═══ TOP BAR ═══ -->
+  <div class="topbar">
+    <div class="topbar-brand"><span class="brand-dot"></span>MCS Portal</div>
+    <div class="topbar-nav">
+      <a href="#" class="active">Home</a>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn"><svg viewBox="0 0 20 20">
+          <path d="M10 2a6 6 0 00-6 6v3l-1 2v1h14v-1l-1-2V8a6 6 0 00-6-6zm-2 14a2 2 0 004 0H8z" />
+        </svg></button>
+      <button class="icon-btn"><svg viewBox="0 0 20 20">
+          <path
+            d="M11.5 3a1.5 1.5 0 00-3 0h-1A2.5 2.5 0 005 5.5V6H4v2h12V6h-1v-.5A2.5 2.5 0 0012.5 3h-1zM5 10v5a2 2 0 002 2h6a2 2 0 002-2v-5H5z" />
+        </svg></button>
+      <div class="avatar">SS</div>
+    </div>
   </div>
-  <div class="topbar-right">
-    <button class="icon-btn"><svg viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v3l-1 2v1h14v-1l-1-2V8a6 6 0 00-6-6zm-2 14a2 2 0 004 0H8z"/></svg></button>
-    <button class="icon-btn"><svg viewBox="0 0 20 20"><path d="M11.5 3a1.5 1.5 0 00-3 0h-1A2.5 2.5 0 005 5.5V6H4v2h12V6h-1v-.5A2.5 2.5 0 0012.5 3h-1zM5 10v5a2 2 0 002 2h6a2 2 0 002-2v-5H5z"/></svg></button>
-    <div class="avatar">SS</div>
-  </div>
-</div>
 
-<!-- ═══ HERO ═══ -->
-<div class="hero">
-  <div class="blob-container">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-    <div class="blob blob-5"></div>
-  </div>
-  <h1>Welcome to <strong>Mission Critical Services</strong> Unified Portal</h1>
-  <p>Your single destination for all Mission Critical Services resources</p>
-  <div class="search-box">
-    <input type="text" id="portal-search-input" placeholder="Search playbooks, reports, planning, CRM links..." autocomplete="off" />
-    <button class="send-btn" id="portal-search-button" type="button" aria-label="Search portal"><svg viewBox="0 0 20 20"><path d="M2.7 3.2a.5.5 0 01.6-.1l14 7a.5.5 0 010 .9l-14 7a.5.5 0 01-.7-.5V11l8-1-8-1V3.7a.5.5 0 01.1-.5z"/></svg></button>
-    <div class="search-results" id="portal-search-results">
-      <div class="search-results-header">
-        <div class="search-results-title">Search Results</div>
-        <div class="search-results-hint">Enter to jump, Esc to close</div>
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="blob-container">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
+    </div>
+    <h1>Welcome to <strong>Mission Critical Services</strong> Unified Portal</h1>
+    <p>Your single destination for all Mission Critical Services resources</p>
+    <div class="search-box">
+      <input type="text" id="portal-search-input" placeholder="Search playbooks, reports, planning, CRM links..."
+        autocomplete="off" />
+      <button class="send-btn" id="portal-search-button" type="button" aria-label="Search portal"><svg
+          viewBox="0 0 20 20">
+          <path d="M2.7 3.2a.5.5 0 01.6-.1l14 7a.5.5 0 010 .9l-14 7a.5.5 0 01-.7-.5V11l8-1-8-1V3.7a.5.5 0 01.1-.5z" />
+        </svg></button>
+      <div class="search-results" id="portal-search-results">
+        <div class="search-results-header">
+          <div class="search-results-title">Search Results</div>
+          <div class="search-results-hint">Enter to jump, Esc to close</div>
+        </div>
+        <div class="search-results-list" id="portal-search-results-list"></div>
       </div>
-      <div class="search-results-list" id="portal-search-results-list"></div>
     </div>
   </div>
-</div>
 
-<!-- ═══ CATEGORY PILLS ═══ -->
-<div class="cat-bar">
-  <div class="cat-pill active" data-color="c2" onclick="showTab('playbooks')">
-    <svg viewBox="0 0 20 20"><path d="M4 3a1 1 0 00-1 1v12a1 1 0 001 1h5V3H4zm7 0v14h5a1 1 0 001-1V4a1 1 0 00-1-1h-5z"/></svg>
-    Playbooks
-  </div>
-  <div class="cat-pill" data-color="c4" onclick="showTab('reports')">
-    <svg viewBox="0 0 20 20"><path d="M3 14h2v3H3v-3zm4-4h2v7H7v-7zm4-3h2v10h-2V7zm4-4h2v14h-2V3z"/></svg>
-    Reports
-  </div>
-  <div class="cat-pill" data-color="c5" onclick="showTab('training')">
-    <svg viewBox="0 0 20 20"><path d="M10 2l8 4-8 4-8-4 8-4zm-6 7l6 3 6-3v2l-6 3-6-3v-2z"/></svg>
-    Training
-  </div>
-  <div class="cat-pill" data-color="c6" onclick="showTab('planning')">
-    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 9h12v7H4V9z"/></svg>
-    Planning
-  </div>
-  <div class="cat-pill" data-color="c7" onclick="showTab('ai')">
-    <svg viewBox="0 0 20 20"><path d="M10 1a5 5 0 00-5 5v2a1 1 0 00-1 1v3a1 1 0 001 1h1a4 4 0 008 0h1a1 1 0 001-1V9a1 1 0 00-1-1V6a5 5 0 00-5-5zm-1.5 8a1 1 0 110 2 1 1 0 010-2zm3 0a1 1 0 110 2 1 1 0 010-2zM6 16v1a2 2 0 002 2h4a2 2 0 002-2v-1H6z"/></svg>
-    AI
-  </div>
-  <div class="cat-pill" data-color="c8" onclick="showTab('feedback')">
-    <svg viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H8l-4 3v-3H4a2 2 0 01-2-2V5zm4 2a1 1 0 100 2h8a1 1 0 100-2H6zm0 3a1 1 0 100 2h5a1 1 0 100-2H6z"/></svg>
-    Feedback
-  </div>
-</div>
-
-<!-- ═══ CONTENT PANES ═══ -->
-<div class="main">
-<!-- PLAYBOOKS (sub-divided by Feature) -->
-<div class="pane active" id="playbooks">
-  <div class="pane-header"><h2>Playbooks</h2><p>Consolidated playbooks, guides, checklists, process flows, and reference materials — sub-divided by feature</p></div>
-  <div class="sub-pills">
-    <div class="sub-pill active" onclick="filterPlaybooks('all',this)">All</div>
-    <div class="sub-pill" onclick="filterPlaybooks('customer-onboarding',this)">Customer Onboarding</div>
-    <div class="sub-pill" onclick="filterPlaybooks('issue-resolution',this)">Issue Resolution</div>
-    <div class="sub-pill" onclick="filterPlaybooks('strategic-guidance',this)">Reliability &amp; Technical Engagement</div>
-    <div class="sub-pill" onclick="filterPlaybooks('technical-assessment',this)">Technical Assessment</div>
-  </div>
-  <div class="res-grid" id="playbooks-grid">
-    <a class="res-card" data-feature="customer-onboarding" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Onboarding a MCSfMSC Customer</div><div class="rc-desc">End-to-end onboarding operational guide</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" data-feature="issue-resolution" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Issue Resolution Playbooks</div><div class="rc-desc">Issue handling & resolution flows</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" data-feature="strategic-guidance" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS Readiness Playbook</div><div class="rc-desc">Sentinel readiness resources and updates</div></div><span class="rc-arrow">→</span></a>
-  </div>
-</div>
-
-<!-- REPORTS -->
-<div class="pane" id="reports">
-  <div class="pane-header"><h2>Reports</h2><p>Links to Power BI dashboards including the MCS PBI app and Support Health 360</p></div>
-  <div class="res-grid">
-    <a class="res-card" href="https://msit.powerbi.com/groups/me/apps/7213d7a1-0290-4404-99f9-0b136f49e765/reports/40a1efe9-aff9-41cf-ba14-4b89c310dfeb/a76f2d0ea310459c9b1a?experience=power-bi" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS PBI App</div><div class="rc-desc">Onboarding, Cases, Incidents, RCAs — all-in-one PBI app</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" href="https://msit.powerbi.com/groups/3acda1d0-a9e5-4477-8aea-5ac7d87e6e69/reports/f3146d2e-89e5-4f97-a82e-d9eca1aba5c5" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Support Health 360</div><div class="rc-desc">Security 360 health metrics & insights (Security CxE BI workspace)</div></div><span class="rc-arrow">→</span></a>
-  </div>
-</div>
-
-<!-- TRAINING -->
-<div class="pane" id="training">
-  <div class="pane-header"><h2>Training</h2><p>Links to QA objects, MyHorizons checklist, ramp plans, and training recordings</p></div>
-  <div class="res-grid">
-    <a class="res-card" href="https://microsofteur.sharepoint.com/teams/MyHorizon/SitePages/VolunteerCenter.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MyHorizons Checklist (Geordie)</div><div class="rc-desc">CLE onboarding ramp checklist & milestones</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" href="https://platform.qa.com" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">QA Objects & Assessments</div><div class="rc-desc">Links to quality assurance training objects</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Overview-of-CxE-CARE.aspx?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">CxE CARE Onboarding & Ramp Hub</div><div class="rc-desc">Role-based onboarding, competency development, and learning hub</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" href="https://microsoft-my.sharepoint.com/personal/subhasahoo_microsoft_com/Documents/Forms/DispForm.aspx?ID=82595&web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCS Program Scrum Recordings</div><div class="rc-desc">Operational training via meeting recordings</div></div><span class="rc-arrow">→</span></a>
-  </div>
-</div>
-
-<!-- PLANNING -->
-<div class="pane" id="planning">
-  <div class="pane-header"><h2>Planning</h2><p>Top-level ADO links for CLE team wiki and sprint planning dashboard</p></div>
-  <div class="res-grid">
-    <div class="res-card static-card"><div class="rc-info"><div class="rc-title">CLE Team Planning Dashboard</div><div class="rc-desc">Top-level CLE team planning and operating context</div></div></div>
-    <a class="res-card" href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_dashboards/dashboard/696053df-70fb-4b46-8cc5-1c82faabcb4c" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Sprint Planning Dashboard</div><div class="rc-desc">Sprint planning dashboard and backlog tracking</div></div><span class="rc-arrow">→</span></a>
-  </div>
-</div>
-
-<!-- AI -->
-<div class="pane" id="ai">
-  <div class="agent-hero">
-    <div class="copilot-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+  <!-- ═══ CATEGORY PILLS ═══ -->
+  <div class="cat-bar">
+    <div class="cat-pill active" data-color="c2" onclick="showTab('playbooks')">
+      <svg viewBox="0 0 20 20">
+        <path d="M4 3a1 1 0 00-1 1v12a1 1 0 001 1h5V3H4zm7 0v14h5a1 1 0 001-1V4a1 1 0 00-1-1h-5z" />
+      </svg>
+      Playbooks
     </div>
-    <h2>MCS AI Prompts</h2>
-    <p>Prompt templates for CLE scenarios: case or CRI timeline, case risk, and CRI risk assessment</p>
-    <div class="agent-chat">
-      <input type="text" placeholder="Search prompt templates for a CLE scenario..." />
+    <div class="cat-pill" data-color="c3" onclick="showTab('knowme')">
+      <svg viewBox="0 0 20 20">
+        <path
+          d="M10 2a5 5 0 00-5 5c0 2.1 1.3 3.9 3.1 4.7A7 7 0 003 18h2a5 5 0 0110 0h2a7 7 0 00-5.1-6.3A5 5 0 0015 7a5 5 0 00-5-5zm0 2a3 3 0 110 6 3 3 0 010-6z" />
+      </svg>
+      Know Me
     </div>
-    <div class="agent-prompts">
-      <div class="prompt">Summarize case timeline for [case #]</div>
-      <div class="prompt">Analyze case risk for [case #]</div>
-      <div class="prompt">Assess CRI risk for [customer]</div>
+    <div class="cat-pill" data-color="c4" onclick="showTab('reports')">
+      <svg viewBox="0 0 20 20">
+        <path d="M3 14h2v3H3v-3zm4-4h2v7H7v-7zm4-3h2v10h-2V7zm4-4h2v14h-2V3z" />
+      </svg>
+      Reports
+    </div>
+    <div class="cat-pill" data-color="c5" onclick="showTab('training')">
+      <svg viewBox="0 0 20 20">
+        <path d="M10 2l8 4-8 4-8-4 8-4zm-6 7l6 3 6-3v2l-6 3-6-3v-2z" />
+      </svg>
+      Training
+    </div>
+    <div class="cat-pill" data-color="c6" onclick="showTab('planning')">
+      <svg viewBox="0 0 20 20">
+        <path
+          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 9h12v7H4V9z" />
+      </svg>
+      Planning
+    </div>
+    <div class="cat-pill" data-color="c7" onclick="showTab('ai')">
+      <svg viewBox="0 0 20 20">
+        <path
+          d="M10 1a5 5 0 00-5 5v2a1 1 0 00-1 1v3a1 1 0 001 1h1a4 4 0 008 0h1a1 1 0 001-1V9a1 1 0 00-1-1V6a5 5 0 00-5-5zm-1.5 8a1 1 0 110 2 1 1 0 010-2zm3 0a1 1 0 110 2 1 1 0 010-2zM6 16v1a2 2 0 002 2h4a2 2 0 002-2v-1H6z" />
+      </svg>
+      AI
+    </div>
+    <div class="cat-pill" data-color="c8" onclick="showTab('feedback')">
+      <svg viewBox="0 0 20 20">
+        <path
+          d="M2 5a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H8l-4 3v-3H4a2 2 0 01-2-2V5zm4 2a1 1 0 100 2h8a1 1 0 100-2H6zm0 3a1 1 0 100 2h5a1 1 0 100-2H6z" />
+      </svg>
+      Feedback
     </div>
   </div>
-  <div class="pane-header" style="margin-top:32px;"><h2>Prompt Templates</h2><p>Pre-built prompts for common CLE scenarios</p></div>
-  <div class="res-grid">
-    <a class="res-card" href="https://microsoft.sharepoint-df.com/teams/CxESecurityCare/_layouts/15/Doc.aspx?sourcedoc=%7B56B9E5EB-25AF-497F-B8D9-F1B5E6329C72%7D&file=OES%20Newsletter%20-%202026-02%20Prep.docx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">CRI Risk Score Agent (M365 Copilot)</div><div class="rc-desc">CRI risk assessment via M365 Copilot — severity, idle time, ownership churn</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" href="https://microsoftapc-my.sharepoint.com/personal/weiyihu_microsoft_com/Documents/Recordings/You're%20Invited!%20FY26%20CSS%20GCR%20Talent%20Development%20Program%20%20How%20Security%20CxE%20PM%20team%20uses%20AI%20to%20accelerate%20escalation-20260303_110221-Meeting%20Recording.mp4?web=1" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Zebra AI Case Review</div><div class="rc-desc">Case timeline, delay analysis, risk identification experiments</div></div><span class="rc-arrow">→</span></a>
-  </div>
-</div>
 
-<!-- FEEDBACK -->
-<div class="pane" id="feedback">
-  <div class="pane-header"><h2>Feedback</h2><p>Intake form for portal feedback, feature requests, and bug reports</p></div>
-  <div class="res-grid" style="margin-bottom:24px;">
-    <a class="res-card" href="https://aka.ms/mcsfmscintake" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">MCSfMSC Intake Form</div><div class="rc-desc">Primary intake form Ankit shared for portal requests and updates</div></div><span class="rc-arrow">→</span></a>
-    <a class="res-card" href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_workitems/edit/25909" target="_blank" rel="noopener noreferrer"><div class="rc-info"><div class="rc-title">Sample ADO from Intake</div><div class="rc-desc">Example downstream work item created from the intake flow</div></div><span class="rc-arrow">→</span></a>
-  </div>
-  <div class="feedback-form">
-    <div class="form-group">
-      <label>Feedback Type</label>
-      <select>
-        <option>Bug Report</option>
-        <option>Feature Request</option>
-        <option>Content Update</option>
-        <option>General Feedback</option>
-      </select>
+  <!-- ═══ CONTENT PANES ═══ -->
+  <div class="main">
+    <!-- PLAYBOOKS (sub-divided by Feature) -->
+    <div class="pane active" id="playbooks">
+      <div class="pane-header">
+        <h2>Playbooks</h2>
+        <p>Consolidated playbooks, guides, checklists, process flows, and reference materials — sub-divided by feature
+        </p>
+      </div>
+      <div class="sub-pills">
+        <div class="sub-pill active" onclick="filterPlaybooks('all',this)">All</div>
+        <div class="sub-pill" onclick="filterPlaybooks('customer-onboarding',this)">Customer Onboarding</div>
+        <div class="sub-pill" onclick="filterPlaybooks('issue-resolution',this)">Issue Resolution</div>
+        <div class="sub-pill" onclick="filterPlaybooks('strategic-guidance',this)">Reliability &amp; Technical
+          Engagement</div>
+        <div class="sub-pill" onclick="filterPlaybooks('technical-assessment',this)">Technical Assessment</div>
+      </div>
+      <div class="res-grid" id="playbooks-grid">
+        <a class="res-card" data-feature="customer-onboarding"
+          href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">Onboarding a MCSfMSC Customer</div>
+            <div class="rc-desc">End-to-end onboarding operational guide</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card" data-feature="issue-resolution"
+          href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">Issue Resolution Playbooks</div>
+            <div class="rc-desc">Issue handling & resolution flows</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card" data-feature="strategic-guidance"
+          href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Playbooks.aspx?web=1"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">MCS Readiness Playbook</div>
+            <div class="rc-desc">Sentinel readiness resources and updates</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Subject</label>
-      <input type="text" placeholder="Brief summary of your feedback" />
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea placeholder="Please describe in detail..."></textarea>
-    </div>
-    <div class="form-group">
-      <label>Priority</label>
-      <select>
-        <option>Low</option>
-        <option>Medium</option>
-        <option selected>Normal</option>
-        <option>High</option>
-        <option>Critical</option>
-      </select>
-    </div>
-    <button class="submit-btn" onclick="window.open('https://aka.ms/mcsfmscintake', '_blank', 'noopener,noreferrer')">Open Intake Form</button>
-  </div>
-</div>
 
-</div><!-- /main -->
+    <!-- KNOW ME -->
+    <div class="pane" id="knowme">
+      <div class="pane-header">
+        <h2>Know Me</h2>
+        <p>Power BI report entry point for Know Me insights</p>
+      </div>
+      <div class="res-grid">
+        <div class="res-card static-card">
+          <div class="rc-info">
+            <div class="rc-title">Know Me PBI report</div>
+            <div class="rc-desc">Power BI report entry point reserved for Know Me insights</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<script>
-function showTab(id) {
-  document.querySelectorAll('.pane').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.cat-pill').forEach(function(t){ t.classList.remove('active'); });
-  var pane = document.getElementById(id);
-  if(pane) pane.classList.add('active');
-  var pills = document.querySelectorAll('.cat-pill');
-  var names = ['playbooks','reports','training','planning','ai','feedback'];
-  for(var i=0;i<pills.length;i++){ if(names[i]===id) pills[i].classList.add('active'); }
-}
-function filterPlaybooks(feature, el) {
-  document.querySelectorAll('.sub-pill').forEach(function(p){ p.classList.remove('active'); });
-  el.classList.add('active');
-  var cards = document.querySelectorAll('#playbooks-grid .res-card');
-  cards.forEach(function(c){
-    if(feature === 'all' || c.getAttribute('data-feature') === feature) {
-      c.style.display = '';
-    } else {
-      c.style.display = 'none';
+    <!-- REPORTS -->
+    <div class="pane" id="reports">
+      <div class="pane-header">
+        <h2>Reports</h2>
+        <p>Links to Power BI dashboards including the MCS PBI app and Support Health 360</p>
+      </div>
+      <div class="res-grid">
+        <a class="res-card"
+          href="https://msit.powerbi.com/reportEmbed?reportId=40a1efe9-aff9-41cf-ba14-4b89c310dfeb&autoAuth=true&pageName=a76f2d0ea310459c9b1a"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">MCS PBI App</div>
+            <div class="rc-desc">Onboarding, Cases, Incidents, RCAs — all-in-one PBI app</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card"
+          href="https://msit.powerbi.com/reportEmbed?reportId=f3146d2e-89e5-4f97-a82e-d9eca1aba5c5&autoAuth=true"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">Support Health 360</div>
+            <div class="rc-desc">Security 360 health metrics & insights (Security CxE BI workspace)</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="pane" id="training">
+      <div class="pane-header">
+        <h2>Training</h2>
+        <p>Links to QA objects, MyHorizons checklist, ramp plans, and training recordings</p>
+      </div>
+      <div class="res-grid">
+        <a class="res-card"
+          href="https://microsofteur.sharepoint.com/teams/MyHorizon/SitePages/VolunteerCenter.aspx?web=1"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">MyHorizons Checklist (Geordie)</div>
+            <div class="rc-desc">CLE onboarding ramp checklist & milestones</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card" href="https://platform.qa.com" rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">QA Objects & Assessments</div>
+            <div class="rc-desc">Links to quality assurance training objects</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card"
+          href="https://microsoft.sharepoint-df.com/sites/CxE-Security-Care/SitePages/Overview-of-CxE-CARE.aspx?web=1"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">CxE CARE Onboarding & Ramp Hub</div>
+            <div class="rc-desc">Role-based onboarding, competency development, and learning hub</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card"
+          href="https://microsoft-my.sharepoint.com/personal/subhasahoo_microsoft_com/Documents/Forms/DispForm.aspx?ID=82595&web=1"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">MCS Program Scrum Recordings</div>
+            <div class="rc-desc">Operational training via meeting recordings</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PLANNING -->
+    <div class="pane" id="planning">
+      <div class="pane-header">
+        <h2>Planning</h2>
+        <p>Top-level ADO links for CLE team wiki and sprint planning dashboard</p>
+      </div>
+      <div class="res-grid">
+        <div class="res-card static-card">
+          <div class="rc-info">
+            <div class="rc-title">CLE Team Planning Dashboard</div>
+            <div class="rc-desc">Top-level CLE team planning and operating context</div>
+          </div>
+        </div>
+        <a class="res-card"
+          href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_dashboards/dashboard/696053df-70fb-4b46-8cc5-1c82faabcb4c"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">Sprint Planning Dashboard</div>
+            <div class="rc-desc">Sprint planning dashboard and backlog tracking</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- AI -->
+    <div class="pane" id="ai">
+      <div class="agent-hero">
+        <div class="copilot-icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z" />
+          </svg>
+        </div>
+        <h2>MCS AI Prompts</h2>
+        <p>Prompt templates for CLE scenarios: case or CRI timeline, case risk, and CRI risk assessment</p>
+        <div class="agent-chat">
+          <input type="text" placeholder="Search prompt templates for a CLE scenario..." />
+        </div>
+        <div class="agent-prompts">
+          <div class="prompt">Summarize case timeline for [case #]</div>
+          <div class="prompt">Analyze case risk for [case #]</div>
+          <div class="prompt">Assess CRI risk for [customer]</div>
+        </div>
+      </div>
+
+      <div class="pane-header" style="margin-top:32px;">
+        <h2>Prompt Templates</h2>
+        <p>Pre-built prompts for common CLE scenarios</p>
+      </div>
+      <div class="res-grid">
+        <a class="res-card"
+          href="https://microsoft.sharepoint-df.com/teams/CxESecurityCare/_layouts/15/Doc.aspx?sourcedoc=%7B56B9E5EB-25AF-497F-B8D9-F1B5E6329C72%7D&file=OES%20Newsletter%20-%202026-02%20Prep.docx&action=default&mobileredirect=true&DefaultItemOpen=1"
+          target="_blank" rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">CRI Risk Score Agent (M365 Copilot)</div>
+            <div class="rc-desc">CRI risk assessment via M365 Copilot — severity, idle time, ownership churn</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card"
+          href="https://microsoftapc-my.sharepoint.com/personal/weiyihu_microsoft_com/Documents/Recordings/You're%20Invited!%20FY26%20CSS%20GCR%20Talent%20Development%20Program%20%20How%20Security%20CxE%20PM%20team%20uses%20AI%20to%20accelerate%20escalation-20260303_110221-Meeting%20Recording.mp4?web=1"
+          target="_blank" rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">Zebra AI Case Review</div>
+            <div class="rc-desc">Case timeline, delay analysis, risk identification experiments</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="pane" id="feedback">
+      <div class="pane-header">
+        <h2>Feedback</h2>
+        <p>Intake form for portal feedback, feature requests, and bug reports</p>
+      </div>
+      <div class="res-grid" style="margin-bottom:24px;">
+        <a class="res-card" href="https://aka.ms/mcsfmscintake" rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">MCSfMSC Intake Form</div>
+            <div class="rc-desc">Primary intake form Ankit shared for portal requests and updates</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+        <a class="res-card" href="https://dev.azure.com/MSEC-CxE/CxE%20Security%20Care/_workitems/edit/25909"
+          rel="noopener noreferrer">
+          <div class="rc-info">
+            <div class="rc-title">Sample ADO from Intake</div>
+            <div class="rc-desc">Example downstream work item created from the intake flow</div>
+          </div><span class="rc-arrow">→</span>
+        </a>
+      </div>
+      <div class="feedback-form">
+        <div class="form-group">
+          <label>Feedback Type</label>
+          <select>
+            <option>Bug Report</option>
+            <option>Feature Request</option>
+            <option>Content Update</option>
+            <option>General Feedback</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Brief summary of your feedback" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea placeholder="Please describe in detail..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Priority</label>
+          <select>
+            <option>Low</option>
+            <option>Medium</option>
+            <option selected>Normal</option>
+            <option>High</option>
+            <option>Critical</option>
+          </select>
+        </div>
+        <a class="submit-btn" href="https://aka.ms/mcsfmscintake" rel="noopener noreferrer" target="_blank">Open
+          Intake Form</a>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.pane').forEach(function (p) { p.classList.remove('active'); });
+      document.querySelectorAll('.cat-pill').forEach(function (t) { t.classList.remove('active'); });
+      var pane = document.getElementById(id);
+      if (pane) pane.classList.add('active');
+      var pills = document.querySelectorAll('.cat-pill');
+      var names = ['playbooks', 'knowme', 'reports', 'training', 'planning', 'ai', 'feedback'];
+      for (var i = 0; i < pills.length; i++) { if (names[i] === id) pills[i].classList.add('active'); }
     }
-  });
-}
-
-var portalSearchIndex = [];
-var supplementalSearchEntries = [];
-var portalSearchState = { results: [], activeIndex: -1 };
-var portalSearchElements = {};
-var portalSearchAliases = {
-  onboarding: ['onboard', 'kickoff', 'ramp'],
-  reports: ['report', 'dashboard', 'power bi', 'pbi'],
-  crm: ['participant', 'customer actions', 'deliverables', 'contacts'],
-  training: ['learning', 'recordings', 'checklist'],
-  planning: ['ado', 'sprint', 'wiki', 'backlog'],
-  ai: ['prompt', 'copilot', 'agent'],
-  sev: ['severity', 'sev a', 'sev b'],
-  incidents: ['incident', 'rca', 'cases']
-};
-
-function normalizeSearchText(text) {
-  return String(text || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-}
-
-function escapeSearchHtml(text) {
-  return String(text || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function tokenizeSearchQuery(query) {
-  return normalizeSearchText(query).split(/\s+/).filter(Boolean);
-}
-
-function expandSearchTokens(tokens) {
-  var expanded = tokens.slice();
-  tokens.forEach(function(token) {
-    Object.keys(portalSearchAliases).forEach(function(key) {
-      var aliases = portalSearchAliases[key] || [];
-      if (token === key || aliases.indexOf(token) !== -1) {
-        expanded.push(key);
-        aliases.forEach(function(alias) { expanded.push(alias); });
-      }
-    });
-  });
-  return Array.from(new Set(expanded));
-}
-
-function getPaneLabel(paneId) {
-  var pane = document.getElementById(paneId);
-  if (!pane) return paneId;
-  var heading = pane.querySelector('.pane-header h2') || pane.querySelector('h2');
-  return heading ? heading.textContent.trim() : paneId;
-}
-
-function resetPlaybookFilter() {
-  var defaultPill = document.querySelector('.sub-pill');
-  if (defaultPill) filterPlaybooks('all', defaultPill);
-}
-
-function clearSearchHit() {
-  document.querySelectorAll('.search-hit').forEach(function(node) {
-    node.classList.remove('search-hit');
-  });
-}
-
-function flashSearchHit(element) {
-  if (!element) return;
-  clearSearchHit();
-  element.classList.add('search-hit');
-  window.setTimeout(function() { element.classList.remove('search-hit'); }, 1800);
-}
-
-function resolveSearchTargetElement(entry) {
-  if (!entry) return null;
-  if (entry.targetElement) return entry.targetElement;
-  if (entry.targetSelector) return document.querySelector(entry.targetSelector);
-  return document.getElementById(entry.paneId);
-}
-
-function buildPortalSearchIndex() {
-  var entries = [];
-
-  document.querySelectorAll('.pane').forEach(function(pane) {
-    var paneId = pane.id;
-    var paneLabel = getPaneLabel(paneId);
-    var paneDescNode = pane.querySelector('.pane-header p');
-    entries.push({
-      kind: 'tab',
-      title: paneLabel,
-      description: paneDescNode ? paneDescNode.textContent.trim() : 'Open ' + paneLabel,
-      paneId: paneId,
-      targetElement: pane,
-      keywords: paneLabel + ' ' + paneId
-    });
-
-    pane.querySelectorAll('.res-card').forEach(function(card) {
-      var titleNode = card.querySelector('.rc-title');
-      var descNode = card.querySelector('.rc-desc');
-      var feature = card.getAttribute('data-feature') || '';
-      entries.push({
-        kind: 'link',
-        title: titleNode ? titleNode.textContent.trim() : 'Untitled link',
-        description: descNode ? descNode.textContent.trim() : 'Open resource',
-        paneId: paneId,
-        paneLabel: paneLabel,
-        targetElement: card,
-        href: card.getAttribute('href') || '',
-        keywords: [paneLabel, paneId, feature, card.id || ''].join(' ')
+    function filterPlaybooks(feature, el) {
+      document.querySelectorAll('.sub-pill').forEach(function (p) { p.classList.remove('active'); });
+      el.classList.add('active');
+      var cards = document.querySelectorAll('#playbooks-grid .res-card');
+      cards.forEach(function (c) {
+        if (feature === 'all' || c.getAttribute('data-feature') === feature) {
+          c.style.display = '';
+        } else {
+          c.style.display = 'none';
+        }
       });
-    });
-  });
+    }
 
-  supplementalSearchEntries.forEach(function(item) {
-    entries.push({
-      kind: item.kind || 'sub-playbook',
-      title: item.title || 'Untitled resource',
-      description: item.description || 'Open resource',
-      paneId: item.paneId || 'playbooks',
-      paneLabel: item.paneLabel || getPaneLabel(item.paneId || 'playbooks'),
-      href: item.href || '',
-      targetSelector: item.targetSelector || '',
-      openDirect: Boolean(item.href),
-      keywords: [item.keywords || '', item.section || '', item.group || ''].join(' ')
-    });
-  });
+    var portalSearchIndex = [];
+    var supplementalSearchEntries = [];
+    var portalSearchState = { results: [], activeIndex: -1 };
+    var portalSearchElements = {};
+    var portalSearchAliases = {
+      onboarding: ['onboard', 'kickoff', 'ramp'],
+      reports: ['report', 'dashboard', 'power bi', 'pbi'],
+      crm: ['participant', 'customer actions', 'deliverables', 'contacts'],
+      training: ['learning', 'recordings', 'checklist'],
+      planning: ['ado', 'sprint', 'wiki', 'backlog'],
+      ai: ['prompt', 'copilot', 'agent'],
+      sev: ['severity', 'sev a', 'sev b'],
+      incidents: ['incident', 'rca', 'cases']
+    };
 
-  portalSearchIndex = entries.map(function(entry) {
-    entry.normalizedTitle = normalizeSearchText(entry.title);
-    entry.normalizedDescription = normalizeSearchText(entry.description);
-    entry.normalizedKeywords = normalizeSearchText(entry.keywords || '');
-    entry.normalizedPane = normalizeSearchText(entry.paneLabel || getPaneLabel(entry.paneId));
-    return entry;
-  });
-}
+    function normalizeSearchText(text) {
+      return String(text || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    }
 
-function scoreSearchEntry(entry, normalizedQuery, exactTokens, expandedTokens) {
-  var score = 0;
-  if (entry.normalizedTitle === normalizedQuery) score += 180;
-  if (entry.normalizedTitle.indexOf(normalizedQuery) === 0) score += 120;
-  else if (entry.normalizedTitle.indexOf(normalizedQuery) !== -1) score += 80;
+    function escapeSearchHtml(text) {
+      return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
 
-  if (entry.normalizedKeywords.indexOf(normalizedQuery) !== -1) score += 55;
-  if (entry.normalizedDescription.indexOf(normalizedQuery) !== -1) score += 30;
-  if (entry.normalizedPane.indexOf(normalizedQuery) !== -1) score += 20;
+    function tokenizeSearchQuery(query) {
+      return normalizeSearchText(query).split(/\s+/).filter(Boolean);
+    }
 
-  exactTokens.forEach(function(token) {
-    if (entry.normalizedTitle.indexOf(token) !== -1) score += 25;
-    if (entry.normalizedKeywords.indexOf(token) !== -1) score += 18;
-    if (entry.normalizedDescription.indexOf(token) !== -1) score += 10;
-    if (entry.normalizedPane.indexOf(token) !== -1) score += 8;
-  });
+    function expandSearchTokens(tokens) {
+      var expanded = tokens.slice();
+      tokens.forEach(function (token) {
+        Object.keys(portalSearchAliases).forEach(function (key) {
+          var aliases = portalSearchAliases[key] || [];
+          if (token === key || aliases.indexOf(token) !== -1) {
+            expanded.push(key);
+            aliases.forEach(function (alias) { expanded.push(alias); });
+          }
+        });
+      });
+      return Array.from(new Set(expanded));
+    }
 
-  expandedTokens.forEach(function(token) {
-    if (exactTokens.indexOf(token) !== -1) return;
-    if (entry.normalizedTitle.indexOf(token) !== -1) score += 10;
-    if (entry.normalizedKeywords.indexOf(token) !== -1) score += 8;
-    if (entry.normalizedDescription.indexOf(token) !== -1) score += 4;
-  });
+    function getPaneLabel(paneId) {
+      var pane = document.getElementById(paneId);
+      if (!pane) return paneId;
+      var heading = pane.querySelector('.pane-header h2') || pane.querySelector('h2');
+      return heading ? heading.textContent.trim() : paneId;
+    }
 
-  return score;
-}
+    function resetPlaybookFilter() {
+      var defaultPill = document.querySelector('.sub-pill');
+      if (defaultPill) filterPlaybooks('all', defaultPill);
+    }
 
-function renderPortalSearchResults(results) {
-  var container = portalSearchElements.results;
-  var list = portalSearchElements.resultsList;
-  if (!container || !list) return;
+    function clearSearchHit() {
+      document.querySelectorAll('.search-hit').forEach(function (node) {
+        node.classList.remove('search-hit');
+      });
+    }
 
-  if (!results.length) {
-    list.innerHTML = '<div class="search-empty">No matching resources found. Try terms like onboarding, CRM, reports, Sev, or customer name.</div>';
-    container.classList.add('visible');
-    return;
-  }
+    function flashSearchHit(element) {
+      if (!element) return;
+      clearSearchHit();
+      element.classList.add('search-hit');
+      window.setTimeout(function () { element.classList.remove('search-hit'); }, 1800);
+    }
 
-  list.innerHTML = results.map(function(result, index) {
-    return '' +
-      '<div class="search-result' + (index === portalSearchState.activeIndex ? ' active' : '') + '" data-search-index="' + index + '">' +
-        '<div class="search-result-main">' +
+    function resolveSearchTargetElement(entry) {
+      if (!entry) return null;
+      if (entry.targetElement) return entry.targetElement;
+      if (entry.targetSelector) return document.querySelector(entry.targetSelector);
+      return document.getElementById(entry.paneId);
+    }
+
+    function getActivePaneId() {
+      var pane = document.querySelector('.pane.active');
+      return pane ? pane.id : '';
+    }
+
+    function buildPortalSearchIndex() {
+      var entries = [];
+
+      document.querySelectorAll('.pane').forEach(function (pane) {
+        var paneId = pane.id;
+        var paneLabel = getPaneLabel(paneId);
+        var paneDescNode = pane.querySelector('.pane-header p');
+        entries.push({
+          kind: 'tab',
+          title: paneLabel,
+          description: paneDescNode ? paneDescNode.textContent.trim() : 'Open ' + paneLabel,
+          paneId: paneId,
+          targetElement: pane,
+          keywords: paneLabel + ' ' + paneId
+        });
+
+        pane.querySelectorAll('.res-card').forEach(function (card) {
+          var titleNode = card.querySelector('.rc-title');
+          var descNode = card.querySelector('.rc-desc');
+          var feature = card.getAttribute('data-feature') || '';
+          entries.push({
+            kind: 'link',
+            title: titleNode ? titleNode.textContent.trim() : 'Untitled link',
+            description: descNode ? descNode.textContent.trim() : 'Open resource',
+            paneId: paneId,
+            paneLabel: paneLabel,
+            targetElement: card,
+            href: card.getAttribute('href') || '',
+            keywords: [paneLabel, paneId, feature, card.id || ''].join(' ')
+          });
+        });
+      });
+
+      supplementalSearchEntries.forEach(function (item) {
+        entries.push({
+          kind: item.kind || 'sub-playbook',
+          title: item.title || 'Untitled resource',
+          description: item.description || 'Open resource',
+          paneId: item.paneId || 'playbooks',
+          paneLabel: item.paneLabel || getPaneLabel(item.paneId || 'playbooks'),
+          href: item.href || '',
+          targetSelector: item.targetSelector || '',
+          openDirect: Boolean(item.href),
+          keywords: [item.keywords || '', item.section || '', item.group || ''].join(' ')
+        });
+      });
+
+      portalSearchIndex = entries.map(function (entry) {
+        entry.normalizedTitle = normalizeSearchText(entry.title);
+        entry.normalizedDescription = normalizeSearchText(entry.description);
+        entry.normalizedKeywords = normalizeSearchText(entry.keywords || '');
+        entry.normalizedPane = normalizeSearchText(entry.paneLabel || getPaneLabel(entry.paneId));
+        return entry;
+      });
+    }
+
+    function scoreSearchEntry(entry, normalizedQuery, exactTokens, expandedTokens) {
+      var score = 0;
+      if (entry.normalizedTitle === normalizedQuery) score += 180;
+      if (entry.normalizedTitle.indexOf(normalizedQuery) === 0) score += 120;
+      else if (entry.normalizedTitle.indexOf(normalizedQuery) !== -1) score += 80;
+
+      if (entry.normalizedKeywords.indexOf(normalizedQuery) !== -1) score += 55;
+      if (entry.normalizedDescription.indexOf(normalizedQuery) !== -1) score += 30;
+      if (entry.normalizedPane.indexOf(normalizedQuery) !== -1) score += 20;
+
+      exactTokens.forEach(function (token) {
+        if (entry.normalizedTitle.indexOf(token) !== -1) score += 25;
+        if (entry.normalizedKeywords.indexOf(token) !== -1) score += 18;
+        if (entry.normalizedDescription.indexOf(token) !== -1) score += 10;
+        if (entry.normalizedPane.indexOf(token) !== -1) score += 8;
+      });
+
+      expandedTokens.forEach(function (token) {
+        if (exactTokens.indexOf(token) !== -1) return;
+        if (entry.normalizedTitle.indexOf(token) !== -1) score += 10;
+        if (entry.normalizedKeywords.indexOf(token) !== -1) score += 8;
+        if (entry.normalizedDescription.indexOf(token) !== -1) score += 4;
+      });
+
+      return score;
+    }
+
+    function renderPortalSearchResults(results) {
+      var container = portalSearchElements.results;
+      var list = portalSearchElements.resultsList;
+      if (!container || !list) return;
+
+      if (!results.length) {
+        list.innerHTML = '<div class="search-empty">No matching resources found. Try terms like onboarding, CRM, reports, Sev, or customer name.</div>';
+        container.classList.add('visible');
+        return;
+      }
+
+      list.innerHTML = results.map(function (result, index) {
+        return '' +
+          '<div class="search-result' + (index === portalSearchState.activeIndex ? ' active' : '') + '" data-search-index="' + index + '">' +
+          '<div class="search-result-main">' +
           '<div class="search-result-copy">' +
-            '<div class="search-result-title">' + escapeSearchHtml(result.title) + '</div>' +
-            '<div class="search-result-desc">' + escapeSearchHtml(result.description) + '</div>' +
+          '<div class="search-result-title">' + escapeSearchHtml(result.title) + '</div>' +
+          '<div class="search-result-desc">' + escapeSearchHtml(result.description) + '</div>' +
           '</div>' +
           '<div class="search-result-meta">' +
-            '<span class="search-result-kind">' + escapeSearchHtml(result.kind) + '</span>' +
-            '<span class="search-result-pane">' + escapeSearchHtml(result.paneLabel || getPaneLabel(result.paneId)) + '</span>' +
+          '<span class="search-result-kind">' + escapeSearchHtml(result.kind) + '</span>' +
+          '<span class="search-result-pane">' + escapeSearchHtml(result.paneLabel || getPaneLabel(result.paneId)) + '</span>' +
           '</div>' +
-        '</div>' +
-      '</div>';
-  }).join('');
+          '</div>' +
+          '</div>';
+      }).join('');
 
-  container.classList.add('visible');
-}
-
-function closePortalSearchResults() {
-  if (portalSearchElements.results) portalSearchElements.results.classList.remove('visible');
-  portalSearchState.results = [];
-  portalSearchState.activeIndex = -1;
-}
-
-function executePortalSearchSelection(result) {
-  if (!result) return;
-
-  showTab(result.paneId);
-  if (result.paneId === 'playbooks') resetPlaybookFilter();
-
-  if (result.kind === 'customer') {
-    var select = document.getElementById('customer-select');
-    if (select) {
-      select.value = String(result.customerIndex);
-      updateKnowMe(knowMeCustomers[result.customerIndex]);
-      result.targetElement = document.querySelector('.knowme-toolbar') || document.getElementById('knowme');
+      container.classList.add('visible');
     }
-  }
 
-  closePortalSearchResults();
-  var target = resolveSearchTargetElement(result);
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    flashSearchHit(target);
-  }
-
-  if (result.openDirect && result.href) {
-    window.open(result.href, '_blank', 'noopener,noreferrer');
-  }
-}
-
-function updatePortalSearch(query) {
-  var normalizedQuery = normalizeSearchText(query);
-  if (!normalizedQuery) {
-    closePortalSearchResults();
-    return;
-  }
-
-  var exactTokens = tokenizeSearchQuery(query);
-  var expandedTokens = expandSearchTokens(exactTokens);
-  var results = portalSearchIndex
-    .map(function(entry) {
-      return { entry: entry, score: scoreSearchEntry(entry, normalizedQuery, exactTokens, expandedTokens) };
-    })
-    .filter(function(item) { return item.score > 0; })
-    .sort(function(left, right) { return right.score - left.score; })
-    .slice(0, 8)
-    .map(function(item) { return item.entry; });
-
-  portalSearchState.results = results;
-  portalSearchState.activeIndex = results.length ? 0 : -1;
-  renderPortalSearchResults(results);
-}
-
-function movePortalSearchSelection(direction) {
-  if (!portalSearchState.results.length) return;
-  var nextIndex = portalSearchState.activeIndex + direction;
-  if (nextIndex < 0) nextIndex = portalSearchState.results.length - 1;
-  if (nextIndex >= portalSearchState.results.length) nextIndex = 0;
-  portalSearchState.activeIndex = nextIndex;
-  renderPortalSearchResults(portalSearchState.results);
-}
-
-function bindPortalSearch() {
-  portalSearchElements.input = document.getElementById('portal-search-input');
-  portalSearchElements.button = document.getElementById('portal-search-button');
-  portalSearchElements.results = document.getElementById('portal-search-results');
-  portalSearchElements.resultsList = document.getElementById('portal-search-results-list');
-
-  if (!portalSearchElements.input || !portalSearchElements.button || !portalSearchElements.resultsList) return;
-
-  buildPortalSearchIndex();
-
-  portalSearchElements.input.addEventListener('input', function(event) {
-    updatePortalSearch(event.target.value);
-  });
-
-  portalSearchElements.input.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      movePortalSearchSelection(1);
-      return;
+    function closePortalSearchResults() {
+      if (portalSearchElements.results) portalSearchElements.results.classList.remove('visible');
+      portalSearchState.results = [];
+      portalSearchState.activeIndex = -1;
     }
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      movePortalSearchSelection(-1);
-      return;
-    }
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      var activeResult = portalSearchState.results[portalSearchState.activeIndex] || portalSearchState.results[0];
-      executePortalSearchSelection(activeResult);
-      return;
-    }
-    if (event.key === 'Escape') {
+
+    function executePortalSearchSelection(result) {
+      if (!result) return;
+
+      showTab(result.paneId);
+      if (result.paneId === 'playbooks') resetPlaybookFilter();
+
+      if (result.kind === 'customer') {
+        var select = document.getElementById('customer-select');
+        if (select) {
+          select.value = String(result.customerIndex);
+          updateKnowMe(knowMeCustomers[result.customerIndex]);
+          result.targetElement = document.querySelector('.knowme-toolbar') || document.getElementById('knowme');
+        }
+      }
+
+      if (result.href) {
+        closePortalSearchResults();
+        window.location.assign(result.href);
+        return;
+      }
+
       closePortalSearchResults();
-      return;
+      var target = resolveSearchTargetElement(result);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        flashSearchHit(target);
+      }
     }
-  });
 
-  portalSearchElements.button.addEventListener('click', function() {
-    if (!portalSearchState.results.length) {
-      updatePortalSearch(portalSearchElements.input.value);
+    function updatePortalSearch(query) {
+      var normalizedQuery = normalizeSearchText(query);
+      if (!normalizedQuery) {
+        closePortalSearchResults();
+        return;
+      }
+
+      var exactTokens = tokenizeSearchQuery(query);
+      var expandedTokens = expandSearchTokens(exactTokens);
+      var results = portalSearchIndex
+        .map(function (entry) {
+          return { entry: entry, score: scoreSearchEntry(entry, normalizedQuery, exactTokens, expandedTokens) };
+        })
+        .filter(function (item) { return item.score > 0; })
+        .sort(function (left, right) { return right.score - left.score; })
+        .slice(0, 8)
+        .map(function (item) { return item.entry; });
+
+      portalSearchState.results = results;
+      portalSearchState.activeIndex = results.length ? 0 : -1;
+      renderPortalSearchResults(results);
     }
-    executePortalSearchSelection(portalSearchState.results[portalSearchState.activeIndex] || portalSearchState.results[0]);
-  });
 
-  portalSearchElements.resultsList.addEventListener('click', function(event) {
-    var target = event.target.closest('[data-search-index]');
-    if (!target) return;
-    var index = Number(target.getAttribute('data-search-index'));
-    executePortalSearchSelection(portalSearchState.results[index]);
-  });
-
-  document.addEventListener('click', function(event) {
-    var searchBox = event.target.closest('.search-box');
-    if (!searchBox) closePortalSearchResults();
-  });
-}
-
-var knowMeCustomers = [];
-var supportInsightsByTenant = {};
-var onboardingProgramSignals = [
-  {
-    title: 'ADO 27405 | Pre-Onboarding',
-    detail: 'Assigned to Shalini Hada and still New. This suggests the onboarding backlog still contains pre-onboarding items that have not yet moved into active execution.',
-    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/27405'
-  },
-  {
-    title: 'ADO 25743 | Pre-Onboarding',
-    detail: 'Assigned to Shalini Hada and still New. This reinforces her point that onboarding templates and readiness checks are still evolving rather than fully standardized.',
-    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/25743'
-  },
-  {
-    title: 'ADO 25697 | Pre-Onboarding',
-    detail: 'Assigned to Shalini Hada and still New. Another open pre-onboarding item points to program-level readiness work still in flight.',
-    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/25697'
-  },
-  {
-    title: 'ADO 13197 | Pre-onboarding discovery',
-    detail: 'Assigned to Shalini Hada and still New. This item is explicitly about identifying the program executive sponsor and engaging regional M1s for successful pre-onboarding discovery.',
-    url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/13197'
-  }
-];
-
-function formatKnowMeDate(value) {
-  if (!value) return 'Not available';
-  var date = new Date(value);
-  if (isNaN(date.getTime())) return 'Not available';
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-}
-
-function formatKnowMeText(value, fallback) {
-  if (!value) return fallback || 'Not available';
-  return String(value).trim() || (fallback || 'Not available');
-}
-
-function setKnowMeText(id, value, fallback) {
-  var element = document.getElementById(id);
-  if (element) element.textContent = formatKnowMeText(value, fallback);
-}
-
-function setKnowMeList(id, items, emptyTitle, emptyText) {
-  var element = document.getElementById(id);
-  if (!element) return;
-  element.innerHTML = '';
-  if (!items || !items.length) {
-    var emptyItem = document.createElement('div');
-    emptyItem.className = 'insight-item';
-    emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No items available') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
-    element.appendChild(emptyItem);
-    return;
-  }
-
-  items.forEach(function(item) {
-    var wrapper = document.createElement('div');
-    wrapper.className = 'insight-item';
-    wrapper.innerHTML = '<strong>' + formatKnowMeText(item.title, 'Untitled') + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
-    element.appendChild(wrapper);
-  });
-}
-
-function setKnowMeTimeline(id, items, emptyTitle, emptyText) {
-  var element = document.getElementById(id);
-  if (!element) return;
-  element.innerHTML = '';
-  if (!items || !items.length) {
-    var emptyItem = document.createElement('div');
-    emptyItem.className = 'timeline-item';
-    emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No timeline items') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
-    element.appendChild(emptyItem);
-    return;
-  }
-
-  items.forEach(function(item) {
-    var wrapper = document.createElement('div');
-    wrapper.className = 'timeline-item';
-    wrapper.innerHTML = '<strong>' + formatKnowMeText(item.title, 'Untitled') + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
-    element.appendChild(wrapper);
-  });
-}
-
-function setKnowMeBars(id, items) {
-  var element = document.getElementById(id);
-  if (!element) return;
-  element.innerHTML = '';
-  if (!items || !items.length) {
-    var row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = '<label>No workload mix</label><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span>0%</span>';
-    element.appendChild(row);
-    return;
-  }
-
-  var maxValue = items.reduce(function(currentMax, item) {
-    return Math.max(currentMax, Number(item.value) || 0);
-  }, 0) || 1;
-
-  items.forEach(function(item) {
-    var rawValue = Number(item.value) || 0;
-    var width = rawValue > 0 ? Math.max(8, Math.min(100, Math.round((rawValue / maxValue) * 100))) : 0;
-    var label = item.valueLabel || String(rawValue);
-    var row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = '<label>' + formatKnowMeText(item.label, 'Unknown') + '</label><div class="bar-track"><div class="bar-fill" style="width:' + width + '%"></div></div><span>' + formatKnowMeText(label, '0') + '</span>';
-    element.appendChild(row);
-  });
-}
-
-function setKnowMeLink(id, url, label, fallback) {
-  var element = document.getElementById(id);
-  if (!element) return;
-
-  if (url) {
-    element.href = url;
-    element.textContent = formatKnowMeText(label, 'Open link');
-    element.style.pointerEvents = 'auto';
-    element.setAttribute('aria-disabled', 'false');
-    return;
-  }
-
-  element.href = '#';
-  element.textContent = fallback || 'Link unavailable';
-  element.style.pointerEvents = 'none';
-  element.setAttribute('aria-disabled', 'true');
-}
-
-function setKnowMeLinkedList(id, items, emptyTitle, emptyText) {
-  var element = document.getElementById(id);
-  if (!element) return;
-  element.innerHTML = '';
-  if (!items || !items.length) {
-    var emptyItem = document.createElement('div');
-    emptyItem.className = 'insight-item';
-    emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No items available') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
-    element.appendChild(emptyItem);
-    return;
-  }
-
-  items.forEach(function(item) {
-    var wrapper = document.createElement('div');
-    wrapper.className = 'insight-item';
-    var title = formatKnowMeText(item.title, 'Untitled');
-    if (item.url) {
-      title = '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + title + '</a>';
+    function movePortalSearchSelection(direction) {
+      if (!portalSearchState.results.length) return;
+      var nextIndex = portalSearchState.activeIndex + direction;
+      if (nextIndex < 0) nextIndex = portalSearchState.results.length - 1;
+      if (nextIndex >= portalSearchState.results.length) nextIndex = 0;
+      portalSearchState.activeIndex = nextIndex;
+      renderPortalSearchResults(portalSearchState.results);
     }
-    wrapper.innerHTML = '<strong>' + title + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
-    element.appendChild(wrapper);
-  });
-}
 
-function deriveOnboardingStatus(customer) {
-  if (!customer) {
-    return {
-      title: 'No onboarding status available',
-      detail: 'Select a customer to evaluate onboarding status.'
-    };
-  }
+    function bindPortalSearch() {
+      portalSearchElements.input = document.getElementById('portal-search-input');
+      portalSearchElements.button = document.getElementById('portal-search-button');
+      portalSearchElements.results = document.getElementById('portal-search-results');
+      portalSearchElements.resultsList = document.getElementById('portal-search-results-list');
 
-  var stage = String(customer.participantStage || '').trim();
-  var status = String(customer.participantStatus || '').trim();
-  var onboardDate = customer.onboardDate ? new Date(customer.onboardDate) : null;
-  var hasValidOnboardDate = onboardDate && !isNaN(onboardDate.getTime());
-  var daysSinceOnboard = hasValidOnboardDate ? Math.floor((Date.now() - onboardDate.getTime()) / 86400000) : null;
+      if (!portalSearchElements.input || !portalSearchElements.button || !portalSearchElements.resultsList) return;
 
-  if (!hasValidOnboardDate && /new|nomination|pre/i.test(status)) {
-    return {
-      title: 'Likely pre-onboarding or nomination stage',
-      detail: 'This customer has onboarding-style status markers but no reliable onboard date yet. Treat the account as pre-onboarding until scope, ownership, and service start are confirmed.'
-    };
-  }
+      buildPortalSearchIndex();
 
-  if (hasValidOnboardDate && daysSinceOnboard <= 90) {
-    return {
-      title: 'Recently onboarded',
-      detail: 'The service start date is within the last 90 days, so this customer should still be treated as onboarding-sensitive even if support is already active.'
-    };
-  }
+      portalSearchElements.input.addEventListener('input', function (event) {
+        updatePortalSearch(event.target.value);
+      });
 
-  if (/active/i.test(stage) && /new/i.test(status) && hasValidOnboardDate) {
-    return {
-      title: 'Onboarded, but still carrying a new-participant signal',
-      detail: 'The customer is active and has an onboard date, but the participant status still reads New. Treat this as post-onboarding stabilization rather than a fully mature steady-state signal.'
-    };
-  }
+      portalSearchElements.input.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          movePortalSearchSelection(1);
+          return;
+        }
+        if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          movePortalSearchSelection(-1);
+          return;
+        }
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          var activeResult = portalSearchState.results[portalSearchState.activeIndex] || portalSearchState.results[0];
+          executePortalSearchSelection(activeResult);
+          return;
+        }
+        if (event.key === 'Escape') {
+          closePortalSearchResults();
+          return;
+        }
+      });
 
-  if (/active/i.test(stage)) {
-    return {
-      title: 'In active run-state',
-      detail: 'The customer appears to be beyond pre-onboarding. Use onboarding context as delivery history, not as the primary operating status.'
-    };
-  }
+      portalSearchElements.button.addEventListener('click', function () {
+        if (!portalSearchState.results.length) {
+          updatePortalSearch(portalSearchElements.input.value);
+        }
+        executePortalSearchSelection(portalSearchState.results[portalSearchState.activeIndex] || portalSearchState.results[0]);
+      });
 
-  return {
-    title: 'Onboarding status needs confirmation',
-    detail: 'The available CRM fields do not cleanly distinguish pre-onboarding from run-state. Validate participant stage, participant status, and onboard date before using this as a meeting signal.'
-  };
-}
+      portalSearchElements.resultsList.addEventListener('click', function (event) {
+        var target = event.target.closest('[data-search-index]');
+        if (!target) return;
+        var index = Number(target.getAttribute('data-search-index'));
+        executePortalSearchSelection(portalSearchState.results[index]);
+      });
 
-function buildRecoveryPlan(customer) {
-  if (!customer) return 'Not available';
+      document.addEventListener('click', function (event) {
+        var searchBox = event.target.closest('.search-box');
+        if (!searchBox) closePortalSearchResults();
+      });
+    }
 
-  var parts = [];
-  if (customer.customerImprovementPlan) parts.push(String(customer.customerImprovementPlan).trim());
-  if (customer.ownerMotion) parts.push('Owner motion: ' + String(customer.ownerMotion).trim());
+    var knowMeCustomers = [];
+    var supportInsightsByTenant = {};
+    var onboardingProgramSignals = [
+      {
+        title: 'ADO 27405 | Pre-Onboarding',
+        detail: 'Assigned to Shalini Hada and still New. This suggests the onboarding backlog still contains pre-onboarding items that have not yet moved into active execution.',
+        url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/27405'
+      },
+      {
+        title: 'ADO 25743 | Pre-Onboarding',
+        detail: 'Assigned to Shalini Hada and still New. This reinforces her point that onboarding templates and readiness checks are still evolving rather than fully standardized.',
+        url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/25743'
+      },
+      {
+        title: 'ADO 25697 | Pre-Onboarding',
+        detail: 'Assigned to Shalini Hada and still New. Another open pre-onboarding item points to program-level readiness work still in flight.',
+        url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/25697'
+      },
+      {
+        title: 'ADO 13197 | Pre-onboarding discovery',
+        detail: 'Assigned to Shalini Hada and still New. This item is explicitly about identifying the program executive sponsor and engaging regional M1s for successful pre-onboarding discovery.',
+        url: 'https://dev.azure.com/MSEC-CxE/_workitems/edit/13197'
+      }
+    ];
 
-  return parts.length ? parts.join('\n\n') : 'Not available';
-}
+    function formatKnowMeDate(value) {
+      if (!value) return 'Not available';
+      var date = new Date(value);
+      if (isNaN(date.getTime())) return 'Not available';
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
 
-function setKnowMeRiskCards(id, items) {
-  var element = document.getElementById(id);
-  if (!element) return;
-  element.innerHTML = '';
-  if (!items || !items.length) {
-    var empty = document.createElement('div');
-    empty.className = 'risk-card';
-    empty.innerHTML = '<h4>No top risks available</h4><p>No risk data available for this customer.</p>';
-    element.appendChild(empty);
-    return;
-  }
+    function formatKnowMeText(value, fallback) {
+      if (!value) return fallback || 'Not available';
+      return String(value).trim() || (fallback || 'Not available');
+    }
 
-  items.forEach(function(item) {
-    var card = document.createElement('div');
-    card.className = 'risk-card';
-    var dueLabel = item.dueDate ? 'Due date' : 'Review date';
-    card.innerHTML = '' +
-      '<h4>' + formatKnowMeText(item.title, 'Untitled risk') + '</h4>' +
-      '<div class="risk-meta">' +
-        '<span class="risk-pill">' + formatKnowMeText(item.state, 'Open') + '</span>' +
-        '<span class="risk-pill">Owner: ' + formatKnowMeText(item.owner, 'Unassigned') + '</span>' +
-      '</div>' +
-      '<p>' + formatKnowMeText(item.whyItMatters, 'No details available') + '</p>' +
-      '<div class="risk-actions">' +
-        '<div class="risk-action"><strong>Next action</strong><span>' + formatKnowMeText(item.nextAction, 'Not available') + '</span></div>' +
-        '<div class="risk-action"><strong>' + dueLabel + '</strong><span>' + formatKnowMeText(item.dueDate || item.reviewDate, 'Not available') + '</span></div>' +
-      '</div>';
-    element.appendChild(card);
-  });
-}
+    function setKnowMeText(id, value, fallback) {
+      var element = document.getElementById(id);
+      if (element) element.textContent = formatKnowMeText(value, fallback);
+    }
 
-function parseMetricNumber(value) {
-  var numeric = Number(String(value || '').replace(/[^0-9.]/g, ''));
-  return isNaN(numeric) ? 0 : numeric;
-}
+    function setKnowMeList(id, items, emptyTitle, emptyText) {
+      var element = document.getElementById(id);
+      if (!element) return;
+      element.innerHTML = '';
+      if (!items || !items.length) {
+        var emptyItem = document.createElement('div');
+        emptyItem.className = 'insight-item';
+        emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No items available') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
+        element.appendChild(emptyItem);
+        return;
+      }
 
-function findSupportInsights(customer) {
-  if (!customer) return null;
-  if (customer.tenantId && supportInsightsByTenant[customer.tenantId]) return supportInsightsByTenant[customer.tenantId];
+      items.forEach(function (item) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'insight-item';
+        wrapper.innerHTML = '<strong>' + formatKnowMeText(item.title, 'Untitled') + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
+        element.appendChild(wrapper);
+      });
+    }
 
-  var scoped = String(customer.scopedTenants || '').split(',').map(function(item) { return item.trim(); }).filter(Boolean);
-  for (var index = 0; index < scoped.length; index++) {
-    if (supportInsightsByTenant[scoped[index]]) return supportInsightsByTenant[scoped[index]];
-  }
+    function setKnowMeTimeline(id, items, emptyTitle, emptyText) {
+      var element = document.getElementById(id);
+      if (!element) return;
+      element.innerHTML = '';
+      if (!items || !items.length) {
+        var emptyItem = document.createElement('div');
+        emptyItem.className = 'timeline-item';
+        emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No timeline items') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
+        element.appendChild(emptyItem);
+        return;
+      }
 
-  return null;
-}
+      items.forEach(function (item) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'timeline-item';
+        wrapper.innerHTML = '<strong>' + formatKnowMeText(item.title, 'Untitled') + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
+        element.appendChild(wrapper);
+      });
+    }
 
-function setRiskGauge(score) {
-  var gauge = document.getElementById('km-risk-gauge');
-  var value = document.getElementById('km-risk-score');
-  var normalized = Math.max(0, Math.min(100, Number(score) || 0));
-  if (gauge) gauge.style.setProperty('--gauge', String(normalized));
-  if (value) value.textContent = String(normalized);
-}
+    function setKnowMeBars(id, items) {
+      var element = document.getElementById(id);
+      if (!element) return;
+      element.innerHTML = '';
+      if (!items || !items.length) {
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = '<label>No workload mix</label><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span>0%</span>';
+        element.appendChild(row);
+        return;
+      }
 
-function updateKnowMe(customer) {
-  var supportInsights = findSupportInsights(customer);
-  if (!customer) {
-    setKnowMeText('km-customer-name', '', 'Select a customer to view details');
-    setKnowMeText('km-customer-story', '', 'No customer narrative available');
-    setKnowMeText('km-tenant', '', 'Not available');
-    setKnowMeText('km-service-signed', '', 'Not available');
-    setKnowMeText('km-next-review', '', 'Not available');
-    setKnowMeText('km-status-label', '', 'Not available');
-    setKnowMeText('km-top-concern', '', 'Not available');
-    setKnowMeText('km-dan-guidance', '', 'No portal guidance available');
-    setRiskGauge(0);
-    setKnowMeText('km-open-cases', '', 'Not available');
-    setKnowMeText('km-open-cases-note', '', 'Not available');
-    setKnowMeText('km-sev-ab', '', 'Not available');
-    setKnowMeText('km-sev-ab-note', '', 'Not available');
-    setKnowMeText('km-ir-rate', '', 'Not available');
-    setKnowMeText('km-ir-rate-note', '', 'Not available');
-    setKnowMeText('km-mcs-linked', '', 'Not available');
-    setKnowMeText('km-mcs-linked-note', '', 'Not available');
-    setKnowMeText('km-top-product', '', 'Not available');
-    setKnowMeText('km-top-product-note', '', 'Not available');
-    setKnowMeText('km-crm-momentum', '', 'Not available');
-    setKnowMeText('km-crm-momentum-note', '', 'Not available');
-    setKnowMeText('km-onboarding-title', '', 'No onboarding status available');
-    setKnowMeText('km-onboarding-detail', '', 'Select a customer to evaluate onboarding status.');
-    setKnowMeText('km-improvement-plan', '', 'Not available');
-    setKnowMeText('km-dcr-summary', '', 'Not available');
-    setKnowMeText('km-tech', '', 'Not available');
-    setKnowMeText('km-dates', '', 'Not available');
-    setKnowMeText('km-team', '', 'Not available');
-    setKnowMeText('km-overview', '', 'No customer overview available');
-    setKnowMeText('km-key-things', '', 'No key notes available');
-    setKnowMeText('km-programs', '', 'Not available');
-    setKnowMeText('km-semantic-summary', '', 'No semantic model insights available');
-    setKnowMeText('km-semantic-trend-summary', '', 'No semantic model trend available');
-    setKnowMeText('km-semantic-age-summary', '', 'No semantic age mix available');
-    setKnowMeText('km-semantic-status-summary', '', 'No semantic status mix available');
-    setKnowMeText('km-semantic-product-summary', '', 'No semantic product mix available');
-    setKnowMeLink('km-semantic-source', '', '', 'Semantic model unavailable');
-    setKnowMeLink('km-semantic-report', '', '', 'Report unavailable');
-    setKnowMeRiskCards('km-top-risks', []);
-    setKnowMeList('km-escalation-health-list', [], 'No escalation signals', 'No escalation-health signals available');
-    setKnowMeList('km-product-gaps', [], 'No product gaps', 'No product-gap signals available');
-    setKnowMeList('km-crm-signals', [], 'No CRM signals', 'No CRM signals available');
-    setKnowMeLinkedList('km-onboarding-ado-list', [], 'No ADO onboarding signals', 'No onboarding items to display.');
-    setKnowMeList('km-semantic-status-list', [], 'No status bottlenecks', 'No semantic model status signals available');
-    setKnowMeTimeline('km-semantic-trend-list', [], 'No trend highlights', 'No semantic model trend highlights available');
-    setKnowMeBars('km-product-bars', []);
-    setKnowMeBars('km-semantic-age-bars', []);
-    setKnowMeBars('km-semantic-product-bars', []);
-    setKnowMeText('km-open-cases-mini', '', '0');
-    setKnowMeText('km-sev-mini', '', '0');
-    setKnowMeText('km-icm-mini', '', '0');
-    document.getElementById('km-stack-open').style.width = '0%';
-    document.getElementById('km-stack-sev').style.width = '0%';
-    document.getElementById('km-stack-icm').style.width = '0%';
-    return;
-  }
+      var maxValue = items.reduce(function (currentMax, item) {
+        return Math.max(currentMax, Number(item.value) || 0);
+      }, 0) || 1;
 
-  setKnowMeText('km-customer-name', customer.customerName, 'Not available');
-  setKnowMeText('km-customer-story', supportInsights && supportInsights.servicePostureSummary ? supportInsights.servicePostureSummary : customer.customerStory, customer.customerOverview || 'No customer narrative available');
-  var semanticInsights = supportInsights && supportInsights.semanticModelInsights ? supportInsights.semanticModelInsights : null;
-  setKnowMeText('km-tenant', customer.tenantId, 'Not available');
-  setKnowMeText('km-service-signed', formatKnowMeDate(customer.onboardDate), 'Not available');
-  setKnowMeText('km-next-review', customer.nextReviewDate, 'Not scheduled');
-  setKnowMeText('km-status-label', supportInsights ? supportInsights.statusLabel : customer.statusLabel, 'Not available');
-  setKnowMeText('km-top-concern', supportInsights ? supportInsights.topConcern : customer.topImpactedProduct, 'Not available');
-  setKnowMeText('km-dan-guidance', customer.danGuidance || customer.portalNote, 'No portal guidance available');
-  setRiskGauge((supportInsights && supportInsights.riskScore) || customer.riskScore || 64);
-  setKnowMeText('km-open-cases', supportInsights ? supportInsights.openMcsCases : customer.openCases, 'Not available');
-  setKnowMeText('km-open-cases-note', supportInsights ? supportInsights.openMcsCasesNote : customer.openCasesNote, 'Not available');
-  setKnowMeText('km-sev-ab', supportInsights ? supportInsights.openSevAB : customer.sevABExposure, 'Not available');
-  setKnowMeText('km-sev-ab-note', supportInsights ? supportInsights.openSevABNote : customer.sevABExposureNote, 'Not available');
-  setKnowMeText('km-ir-rate', supportInsights ? supportInsights.irMetRate : customer.irMetRate, 'Not available');
-  setKnowMeText('km-ir-rate-note', supportInsights ? supportInsights.irMetRateNote : customer.irMetRateNote, 'Not available');
-  setKnowMeText('km-mcs-linked', supportInsights ? supportInsights.icmLinked : customer.mcsLinkedCases, 'Not available');
-  setKnowMeText('km-mcs-linked-note', supportInsights ? supportInsights.icmLinkedNote : customer.mcsLinkedCasesNote, 'Not available');
-  setKnowMeText('km-top-product', supportInsights ? supportInsights.topOpenProductGroup : customer.topImpactedProduct, 'Not available');
-  setKnowMeText('km-top-product-note', supportInsights ? supportInsights.topOpenProductNote : customer.topImpactedProductNote, 'Not available');
-  setKnowMeText('km-crm-momentum', supportInsights ? supportInsights.customerTrustRisk : customer.crmMomentum, 'Not available');
-  setKnowMeText('km-crm-momentum-note', supportInsights ? supportInsights.customerTrustRiskNote : customer.crmMomentumNote, 'Not available');
-  var onboardingStatus = deriveOnboardingStatus(customer);
-  setKnowMeText('km-onboarding-title', onboardingStatus.title, 'No onboarding status available');
-  setKnowMeText('km-onboarding-detail', onboardingStatus.detail, 'No onboarding detail available');
-  setKnowMeText('km-improvement-plan', buildRecoveryPlan(customer), 'Not available');
-  setKnowMeText('km-dcr-summary', customer.dcrSummary, 'Not available');
-  setKnowMeText('km-tech', customer.technologyVertical, 'Not available');
-  setKnowMeText('km-dates', 'Onboard: ' + formatKnowMeDate(customer.onboardDate) + ' | Contract end: ' + formatKnowMeDate(customer.contractExpiryDate), 'Not available');
-  setKnowMeText('km-team', [customer.ownerName, customer.assignedPm, customer.assignedEngineer1, customer.assignedEngineer2].filter(Boolean).join(' | '), 'Not available');
-  setKnowMeText('km-overview', customer.customerOverview, 'No customer overview available');
-  setKnowMeText('km-key-things', customer.keyThingsToKnow, 'No key notes available');
-  setKnowMeText('km-programs', customer.otherPrograms, 'None listed');
-  setKnowMeText('km-semantic-summary', semanticInsights ? semanticInsights.summary : '', 'No semantic model insights available');
-  setKnowMeText('km-semantic-trend-summary', semanticInsights ? semanticInsights.activeCasesTrendSummary : '', 'No semantic model trend available');
-  setKnowMeText('km-semantic-age-summary', semanticInsights ? semanticInsights.ageMixSummary : '', 'No semantic age mix available');
-  setKnowMeText('km-semantic-status-summary', semanticInsights ? semanticInsights.statusMixSummary : '', 'No semantic status mix available');
-  setKnowMeText('km-semantic-product-summary', semanticInsights ? semanticInsights.productMixSummary : '', 'No semantic product mix available');
-  setKnowMeLink('km-semantic-source', semanticInsights ? semanticInsights.sourceUrl : '', semanticInsights ? semanticInsights.sourceLabel : '', 'Semantic model unavailable');
-  setKnowMeLink('km-semantic-report', semanticInsights ? semanticInsights.reportUrl : '', semanticInsights ? semanticInsights.reportLabel : '', 'Report unavailable');
-  setKnowMeRiskCards('km-top-risks', customer.topRisks);
-  setKnowMeList('km-escalation-health-list', supportInsights && supportInsights.escalationHealth ? supportInsights.escalationHealth : [], 'No escalation signals', 'No escalation-health signals available');
-  setKnowMeList('km-product-gaps', customer.productGaps, 'No product gaps', 'No product-gap signals available');
-  setKnowMeList('km-crm-signals', customer.crmSignals, 'No CRM signals', 'No CRM signals available');
-  setKnowMeLinkedList('km-onboarding-ado-list', onboardingProgramSignals, 'No ADO onboarding signals', 'No onboarding items to display.');
-  setKnowMeList('km-semantic-status-list', semanticInsights ? semanticInsights.statusMix : [], 'No status bottlenecks', 'No semantic model status signals available');
-  setKnowMeTimeline('km-semantic-trend-list', semanticInsights ? semanticInsights.trendHighlights : [], 'No trend highlights', 'No semantic model trend highlights available');
-  setKnowMeBars('km-product-bars', supportInsights && supportInsights.productMix ? supportInsights.productMix : []);
-  setKnowMeBars('km-semantic-age-bars', semanticInsights ? semanticInsights.ageBuckets : []);
-  setKnowMeBars('km-semantic-product-bars', semanticInsights ? semanticInsights.productMix : []);
+      items.forEach(function (item) {
+        var rawValue = Number(item.value) || 0;
+        var width = rawValue > 0 ? Math.max(8, Math.min(100, Math.round((rawValue / maxValue) * 100))) : 0;
+        var label = item.valueLabel || String(rawValue);
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = '<label>' + formatKnowMeText(item.label, 'Unknown') + '</label><div class="bar-track"><div class="bar-fill" style="width:' + width + '%"></div></div><span>' + formatKnowMeText(label, '0') + '</span>';
+        element.appendChild(row);
+      });
+    }
 
-  var openCount = parseMetricNumber(supportInsights ? supportInsights.openMcsCases : customer.openCases);
-  var sevCount = parseMetricNumber(supportInsights ? supportInsights.openSevAB : (customer.sevABCount || customer.sevABExposure));
-  var icmCount = parseMetricNumber(supportInsights ? supportInsights.icmLinked : (customer.mcsLinkedCount || customer.mcsLinkedCases));
-  var total = Math.max(openCount, sevCount + icmCount, 1);
-  var openPct = Math.max(12, Math.min(68, Math.round((openCount / total) * 100)));
-  var sevPct = Math.max(10, Math.min(52, Math.round((sevCount / Math.max(openCount, 1)) * 100)));
-  var icmPct = Math.max(8, Math.min(40, Math.round((icmCount / Math.max(openCount, 1)) * 100)));
-  document.getElementById('km-stack-open').style.width = openPct + '%';
-  document.getElementById('km-stack-sev').style.width = sevPct + '%';
-  document.getElementById('km-stack-icm').style.width = icmPct + '%';
-  setKnowMeText('km-open-cases-mini', openCount || customer.openCases, '0');
-  setKnowMeText('km-sev-mini', sevCount || customer.sevABExposure, '0');
-  setKnowMeText('km-icm-mini', icmCount || customer.mcsLinkedCases, '0');
+    function setKnowMeLink(id, url, label, fallback) {
+      var element = document.getElementById(id);
+      if (!element) return;
 
-  var crmRecord = document.getElementById('km-crm-record');
-  if (crmRecord) {
-    crmRecord.href = customer.crmUrl || '#';
-    crmRecord.setAttribute('aria-disabled', customer.crmUrl ? 'false' : 'true');
-  }
-}
+      if (url) {
+        element.href = url;
+        element.textContent = formatKnowMeText(label, 'Open link');
+        element.style.pointerEvents = 'auto';
+        element.setAttribute('aria-disabled', 'false');
+        return;
+      }
 
-function populateKnowMe(customers) {
-  knowMeCustomers = customers || [];
-  buildPortalSearchIndex();
-  var select = document.getElementById('customer-select');
-  if (!select) return;
+      element.href = '#';
+      element.textContent = fallback || 'Link unavailable';
+      element.style.pointerEvents = 'none';
+      element.setAttribute('aria-disabled', 'true');
+    }
 
-  select.innerHTML = '';
-  if (!knowMeCustomers.length) {
-    var emptyOption = document.createElement('option');
-    emptyOption.textContent = 'No MCS customers available';
-    select.appendChild(emptyOption);
-    updateKnowMe(null);
-    return;
-  }
+    function setKnowMeLinkedList(id, items, emptyTitle, emptyText) {
+      var element = document.getElementById(id);
+      if (!element) return;
+      element.innerHTML = '';
+      if (!items || !items.length) {
+        var emptyItem = document.createElement('div');
+        emptyItem.className = 'insight-item';
+        emptyItem.innerHTML = '<strong>' + formatKnowMeText(emptyTitle, 'No items available') + '</strong><span>' + formatKnowMeText(emptyText, 'No details available') + '</span>';
+        element.appendChild(emptyItem);
+        return;
+      }
 
-  knowMeCustomers.forEach(function(customer, index) {
-    var option = document.createElement('option');
-    option.value = String(index);
-    option.textContent = customer.customerName;
-    select.appendChild(option);
-  });
+      items.forEach(function (item) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'insight-item';
+        var title = formatKnowMeText(item.title, 'Untitled');
+        if (item.url) {
+          title = '<a href="' + item.url + '" rel="noopener noreferrer">' + title + '</a>';
+        }
+        wrapper.innerHTML = '<strong>' + title + '</strong><span>' + formatKnowMeText(item.detail, 'No details available') + '</span>';
+        element.appendChild(wrapper);
+      });
+    }
 
-  select.addEventListener('change', function() {
-    updateKnowMe(knowMeCustomers[Number(select.value)]);
-  });
+    function deriveOnboardingStatus(customer) {
+      if (!customer) {
+        return {
+          title: 'No onboarding status available',
+          detail: 'Select a customer to evaluate onboarding status.'
+        };
+      }
 
-  var defaultIndex = knowMeCustomers.findIndex(function(customer) {
-    return /Ernst & Young|EY GLOBAL SERVICES LIMITED|\bEY\b/i.test(customer.customerName || '');
-  });
-  if (defaultIndex < 0) defaultIndex = 0;
+      var stage = String(customer.participantStage || '').trim();
+      var status = String(customer.participantStatus || '').trim();
+      var onboardDate = customer.onboardDate ? new Date(customer.onboardDate) : null;
+      var hasValidOnboardDate = onboardDate && !isNaN(onboardDate.getTime());
+      var daysSinceOnboard = hasValidOnboardDate ? Math.floor((Date.now() - onboardDate.getTime()) / 86400000) : null;
 
-  select.value = String(defaultIndex);
-  updateKnowMe(knowMeCustomers[defaultIndex]);
-}
+      if (!hasValidOnboardDate && /new|nomination|pre/i.test(status)) {
+        return {
+          title: 'Likely pre-onboarding or nomination stage',
+          detail: 'This customer has onboarding-style status markers but no reliable onboard date yet. Treat the account as pre-onboarding until scope, ownership, and service start are confirmed.'
+        };
+      }
 
-bindPortalSearch();
+      if (hasValidOnboardDate && daysSinceOnboard <= 90) {
+        return {
+          title: 'Recently onboarded',
+          detail: 'The service start date is within the last 90 days, so this customer should still be treated as onboarding-sensitive even if support is already active.'
+        };
+      }
 
-Promise.all([
-  fetch('data/mcs-customers.json').then(function(response) {
-    if (!response.ok) return [];
-    return response.json();
-  }).catch(function() { return []; }),
-  fetch('data/support-insights.json').then(function(response) {
-    if (!response.ok) return [];
-    return response.json();
-  }).catch(function() { return []; }),
-  fetch('data/playbook-search-index.json').then(function(response) {
-    if (!response.ok) return [];
-    return response.json();
-  }).catch(function() { return []; })
-])
-  .then(function(results) {
-    var customers = results[0] || [];
-    var supportInsights = results[1] || [];
-    supplementalSearchEntries = Array.isArray(results[2]) ? results[2] : [];
-    supportInsightsByTenant = {};
-    supportInsights.forEach(function(item) {
-      if (item && item.tenantId) supportInsightsByTenant[item.tenantId] = item;
-    });
-    populateKnowMe(customers);
-  })
-  .catch(function() {
-    supplementalSearchEntries = [];
-    populateKnowMe([]);
-  });
-</script>
+      if (/active/i.test(stage) && /new/i.test(status) && hasValidOnboardDate) {
+        return {
+          title: 'Onboarded, but still carrying a new-participant signal',
+          detail: 'The customer is active and has an onboard date, but the participant status still reads New. Treat this as post-onboarding stabilization rather than a fully mature steady-state signal.'
+        };
+      }
+
+      if (/active/i.test(stage)) {
+        return {
+          title: 'In active run-state',
+          detail: 'The customer appears to be beyond pre-onboarding. Use onboarding context as delivery history, not as the primary operating status.'
+        };
+      }
+
+      return {
+        title: 'Onboarding status needs confirmation',
+        detail: 'The available CRM fields do not cleanly distinguish pre-onboarding from run-state. Validate participant stage, participant status, and onboard date before using this as a meeting signal.'
+      };
+    }
+
+    function buildRecoveryPlan(customer) {
+      if (!customer) return 'Not available';
+
+      var parts = [];
+      if (customer.customerImprovementPlan) parts.push(String(customer.customerImprovementPlan).trim());
+      if (customer.ownerMotion) parts.push('Owner motion: ' + String(customer.ownerMotion).trim());
+
+      return parts.length ? parts.join('\n\n') : 'Not available';
+    }
+
+    function setKnowMeRiskCards(id, items) {
+      var element = document.getElementById(id);
+      if (!element) return;
+      element.innerHTML = '';
+      if (!items || !items.length) {
+        var empty = document.createElement('div');
+        empty.className = 'risk-card';
+        empty.innerHTML = '<h4>No top risks available</h4><p>No risk data available for this customer.</p>';
+        element.appendChild(empty);
+        return;
+      }
+
+      items.forEach(function (item) {
+        var card = document.createElement('div');
+        card.className = 'risk-card';
+        var dueLabel = item.dueDate ? 'Due date' : 'Review date';
+        card.innerHTML = '' +
+          '<h4>' + formatKnowMeText(item.title, 'Untitled risk') + '</h4>' +
+          '<div class="risk-meta">' +
+          '<span class="risk-pill">' + formatKnowMeText(item.state, 'Open') + '</span>' +
+          '<span class="risk-pill">Owner: ' + formatKnowMeText(item.owner, 'Unassigned') + '</span>' +
+          '</div>' +
+          '<p>' + formatKnowMeText(item.whyItMatters, 'No details available') + '</p>' +
+          '<div class="risk-actions">' +
+          '<div class="risk-action"><strong>Next action</strong><span>' + formatKnowMeText(item.nextAction, 'Not available') + '</span></div>' +
+          '<div class="risk-action"><strong>' + dueLabel + '</strong><span>' + formatKnowMeText(item.dueDate || item.reviewDate, 'Not available') + '</span></div>' +
+          '</div>';
+        element.appendChild(card);
+      });
+    }
+
+    function parseMetricNumber(value) {
+      var numeric = Number(String(value || '').replace(/[^0-9.]/g, ''));
+      return isNaN(numeric) ? 0 : numeric;
+    }
+
+    function findSupportInsights(customer) {
+      if (!customer) return null;
+      if (customer.tenantId && supportInsightsByTenant[customer.tenantId]) return supportInsightsByTenant[customer.tenantId];
+
+      var scoped = String(customer.scopedTenants || '').split(',').map(function (item) { return item.trim(); }).filter(Boolean);
+      for (var index = 0; index < scoped.length; index++) {
+        if (supportInsightsByTenant[scoped[index]]) return supportInsightsByTenant[scoped[index]];
+      }
+
+      return null;
+    }
+
+    function setRiskGauge(score) {
+      var gauge = document.getElementById('km-risk-gauge');
+      var value = document.getElementById('km-risk-score');
+      var normalized = Math.max(0, Math.min(100, Number(score) || 0));
+      if (gauge) gauge.style.setProperty('--gauge', String(normalized));
+      if (value) value.textContent = String(normalized);
+    }
+
+    function updateKnowMe(customer) {
+      var supportInsights = findSupportInsights(customer);
+      if (!customer) {
+        setKnowMeText('km-customer-name', '', 'Select a customer to view details');
+        setKnowMeText('km-customer-story', '', 'No customer narrative available');
+        setKnowMeText('km-tenant', '', 'Not available');
+        setKnowMeText('km-service-signed', '', 'Not available');
+        setKnowMeText('km-next-review', '', 'Not available');
+        setKnowMeText('km-status-label', '', 'Not available');
+        setKnowMeText('km-top-concern', '', 'Not available');
+        setKnowMeText('km-dan-guidance', '', 'No portal guidance available');
+        setRiskGauge(0);
+        setKnowMeText('km-open-cases', '', 'Not available');
+        setKnowMeText('km-open-cases-note', '', 'Not available');
+        setKnowMeText('km-sev-ab', '', 'Not available');
+        setKnowMeText('km-sev-ab-note', '', 'Not available');
+        setKnowMeText('km-ir-rate', '', 'Not available');
+        setKnowMeText('km-ir-rate-note', '', 'Not available');
+        setKnowMeText('km-mcs-linked', '', 'Not available');
+        setKnowMeText('km-mcs-linked-note', '', 'Not available');
+        setKnowMeText('km-top-product', '', 'Not available');
+        setKnowMeText('km-top-product-note', '', 'Not available');
+        setKnowMeText('km-crm-momentum', '', 'Not available');
+        setKnowMeText('km-crm-momentum-note', '', 'Not available');
+        setKnowMeText('km-onboarding-title', '', 'No onboarding status available');
+        setKnowMeText('km-onboarding-detail', '', 'Select a customer to evaluate onboarding status.');
+        setKnowMeText('km-improvement-plan', '', 'Not available');
+        setKnowMeText('km-dcr-summary', '', 'Not available');
+        setKnowMeText('km-tech', '', 'Not available');
+        setKnowMeText('km-dates', '', 'Not available');
+        setKnowMeText('km-team', '', 'Not available');
+        setKnowMeText('km-overview', '', 'No customer overview available');
+        setKnowMeText('km-key-things', '', 'No key notes available');
+        setKnowMeText('km-programs', '', 'Not available');
+        setKnowMeText('km-semantic-summary', '', 'No semantic model insights available');
+        setKnowMeText('km-semantic-trend-summary', '', 'No semantic model trend available');
+        setKnowMeText('km-semantic-age-summary', '', 'No semantic age mix available');
+        setKnowMeText('km-semantic-status-summary', '', 'No semantic status mix available');
+        setKnowMeText('km-semantic-product-summary', '', 'No semantic product mix available');
+        setKnowMeLink('km-semantic-source', '', '', 'Semantic model unavailable');
+        setKnowMeLink('km-semantic-report', '', '', 'Report unavailable');
+        setKnowMeRiskCards('km-top-risks', []);
+        setKnowMeList('km-escalation-health-list', [], 'No escalation signals', 'No escalation-health signals available');
+        setKnowMeList('km-product-gaps', [], 'No product gaps', 'No product-gap signals available');
+        setKnowMeList('km-crm-signals', [], 'No CRM signals', 'No CRM signals available');
+        setKnowMeLinkedList('km-onboarding-ado-list', [], 'No ADO onboarding signals', 'No onboarding items to display.');
+        setKnowMeList('km-semantic-status-list', [], 'No status bottlenecks', 'No semantic model status signals available');
+        setKnowMeTimeline('km-semantic-trend-list', [], 'No trend highlights', 'No semantic model trend highlights available');
+        setKnowMeBars('km-product-bars', []);
+        setKnowMeBars('km-semantic-age-bars', []);
+        setKnowMeBars('km-semantic-product-bars', []);
+        setKnowMeText('km-open-cases-mini', '', '0');
+        setKnowMeText('km-sev-mini', '', '0');
+        setKnowMeText('km-icm-mini', '', '0');
+        document.getElementById('km-stack-open').style.width = '0%';
+        document.getElementById('km-stack-sev').style.width = '0%';
+        document.getElementById('km-stack-icm').style.width = '0%';
+        return;
+      }
+
+      setKnowMeText('km-customer-name', customer.customerName, 'Not available');
+      setKnowMeText('km-customer-story', supportInsights && supportInsights.servicePostureSummary ? supportInsights.servicePostureSummary : customer.customerStory, customer.customerOverview || 'No customer narrative available');
+      var semanticInsights = supportInsights && supportInsights.semanticModelInsights ? supportInsights.semanticModelInsights : null;
+      setKnowMeText('km-tenant', customer.tenantId, 'Not available');
+      setKnowMeText('km-service-signed', formatKnowMeDate(customer.onboardDate), 'Not available');
+      setKnowMeText('km-next-review', customer.nextReviewDate, 'Not scheduled');
+      setKnowMeText('km-status-label', supportInsights ? supportInsights.statusLabel : customer.statusLabel, 'Not available');
+      setKnowMeText('km-top-concern', supportInsights ? supportInsights.topConcern : customer.topImpactedProduct, 'Not available');
+      setKnowMeText('km-dan-guidance', customer.danGuidance || customer.portalNote, 'No portal guidance available');
+      setRiskGauge((supportInsights && supportInsights.riskScore) || customer.riskScore || 64);
+      setKnowMeText('km-open-cases', supportInsights ? supportInsights.openMcsCases : customer.openCases, 'Not available');
+      setKnowMeText('km-open-cases-note', supportInsights ? supportInsights.openMcsCasesNote : customer.openCasesNote, 'Not available');
+      setKnowMeText('km-sev-ab', supportInsights ? supportInsights.openSevAB : customer.sevABExposure, 'Not available');
+      setKnowMeText('km-sev-ab-note', supportInsights ? supportInsights.openSevABNote : customer.sevABExposureNote, 'Not available');
+      setKnowMeText('km-ir-rate', supportInsights ? supportInsights.irMetRate : customer.irMetRate, 'Not available');
+      setKnowMeText('km-ir-rate-note', supportInsights ? supportInsights.irMetRateNote : customer.irMetRateNote, 'Not available');
+      setKnowMeText('km-mcs-linked', supportInsights ? supportInsights.icmLinked : customer.mcsLinkedCases, 'Not available');
+      setKnowMeText('km-mcs-linked-note', supportInsights ? supportInsights.icmLinkedNote : customer.mcsLinkedCasesNote, 'Not available');
+      setKnowMeText('km-top-product', supportInsights ? supportInsights.topOpenProductGroup : customer.topImpactedProduct, 'Not available');
+      setKnowMeText('km-top-product-note', supportInsights ? supportInsights.topOpenProductNote : customer.topImpactedProductNote, 'Not available');
+      setKnowMeText('km-crm-momentum', supportInsights ? supportInsights.customerTrustRisk : customer.crmMomentum, 'Not available');
+      setKnowMeText('km-crm-momentum-note', supportInsights ? supportInsights.customerTrustRiskNote : customer.crmMomentumNote, 'Not available');
+      var onboardingStatus = deriveOnboardingStatus(customer);
+      setKnowMeText('km-onboarding-title', onboardingStatus.title, 'No onboarding status available');
+      setKnowMeText('km-onboarding-detail', onboardingStatus.detail, 'No onboarding detail available');
+      setKnowMeText('km-improvement-plan', buildRecoveryPlan(customer), 'Not available');
+      setKnowMeText('km-dcr-summary', customer.dcrSummary, 'Not available');
+      setKnowMeText('km-tech', customer.technologyVertical, 'Not available');
+      setKnowMeText('km-dates', 'Onboard: ' + formatKnowMeDate(customer.onboardDate) + ' | Contract end: ' + formatKnowMeDate(customer.contractExpiryDate), 'Not available');
+      setKnowMeText('km-team', [customer.ownerName, customer.assignedPm, customer.assignedEngineer1, customer.assignedEngineer2].filter(Boolean).join(' | '), 'Not available');
+      setKnowMeText('km-overview', customer.customerOverview, 'No customer overview available');
+      setKnowMeText('km-key-things', customer.keyThingsToKnow, 'No key notes available');
+      setKnowMeText('km-programs', customer.otherPrograms, 'None listed');
+      setKnowMeText('km-semantic-summary', semanticInsights ? semanticInsights.summary : '', 'No semantic model insights available');
+      setKnowMeText('km-semantic-trend-summary', semanticInsights ? semanticInsights.activeCasesTrendSummary : '', 'No semantic model trend available');
+      setKnowMeText('km-semantic-age-summary', semanticInsights ? semanticInsights.ageMixSummary : '', 'No semantic age mix available');
+      setKnowMeText('km-semantic-status-summary', semanticInsights ? semanticInsights.statusMixSummary : '', 'No semantic status mix available');
+      setKnowMeText('km-semantic-product-summary', semanticInsights ? semanticInsights.productMixSummary : '', 'No semantic product mix available');
+      setKnowMeLink('km-semantic-source', semanticInsights ? semanticInsights.sourceUrl : '', semanticInsights ? semanticInsights.sourceLabel : '', 'Semantic model unavailable');
+      setKnowMeLink('km-semantic-report', semanticInsights ? semanticInsights.reportUrl : '', semanticInsights ? semanticInsights.reportLabel : '', 'Report unavailable');
+      setKnowMeRiskCards('km-top-risks', customer.topRisks);
+      setKnowMeList('km-escalation-health-list', supportInsights && supportInsights.escalationHealth ? supportInsights.escalationHealth : [], 'No escalation signals', 'No escalation-health signals available');
+      setKnowMeList('km-product-gaps', customer.productGaps, 'No product gaps', 'No product-gap signals available');
+      setKnowMeList('km-crm-signals', customer.crmSignals, 'No CRM signals', 'No CRM signals available');
+      setKnowMeLinkedList('km-onboarding-ado-list', onboardingProgramSignals, 'No ADO onboarding signals', 'No onboarding items to display.');
+      setKnowMeList('km-semantic-status-list', semanticInsights ? semanticInsights.statusMix : [], 'No status bottlenecks', 'No semantic model status signals available');
+      setKnowMeTimeline('km-semantic-trend-list', semanticInsights ? semanticInsights.trendHighlights : [], 'No trend highlights', 'No semantic model trend highlights available');
+      setKnowMeBars('km-product-bars', supportInsights && supportInsights.productMix ? supportInsights.productMix : []);
+      setKnowMeBars('km-semantic-age-bars', semanticInsights ? semanticInsights.ageBuckets : []);
+      setKnowMeBars('km-semantic-product-bars', semanticInsights ? semanticInsights.productMix : []);
+
+      var openCount = parseMetricNumber(supportInsights ? supportInsights.openMcsCases : customer.openCases);
+      var sevCount = parseMetricNumber(supportInsights ? supportInsights.openSevAB : (customer.sevABCount || customer.sevABExposure));
+      var icmCount = parseMetricNumber(supportInsights ? supportInsights.icmLinked : (customer.mcsLinkedCount || customer.mcsLinkedCases));
+      var total = Math.max(openCount, sevCount + icmCount, 1);
+      var openPct = Math.max(12, Math.min(68, Math.round((openCount / total) * 100)));
+      var sevPct = Math.max(10, Math.min(52, Math.round((sevCount / Math.max(openCount, 1)) * 100)));
+      var icmPct = Math.max(8, Math.min(40, Math.round((icmCount / Math.max(openCount, 1)) * 100)));
+      document.getElementById('km-stack-open').style.width = openPct + '%';
+      document.getElementById('km-stack-sev').style.width = sevPct + '%';
+      document.getElementById('km-stack-icm').style.width = icmPct + '%';
+      setKnowMeText('km-open-cases-mini', openCount || customer.openCases, '0');
+      setKnowMeText('km-sev-mini', sevCount || customer.sevABExposure, '0');
+      setKnowMeText('km-icm-mini', icmCount || customer.mcsLinkedCases, '0');
+
+      var crmRecord = document.getElementById('km-crm-record');
+      if (crmRecord) {
+        crmRecord.href = customer.crmUrl || '#';
+        crmRecord.setAttribute('aria-disabled', customer.crmUrl ? 'false' : 'true');
+      }
+    }
+
+    function populateKnowMe(customers) {
+      knowMeCustomers = customers || [];
+      buildPortalSearchIndex();
+      var select = document.getElementById('customer-select');
+      if (!select) return;
+
+      select.innerHTML = '';
+      if (!knowMeCustomers.length) {
+        var emptyOption = document.createElement('option');
+        emptyOption.textContent = 'No MCS customers available';
+        select.appendChild(emptyOption);
+        updateKnowMe(null);
+        return;
+      }
+
+      knowMeCustomers.forEach(function (customer, index) {
+        var option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = customer.customerName;
+        select.appendChild(option);
+      });
+
+      select.addEventListener('change', function () {
+        updateKnowMe(knowMeCustomers[Number(select.value)]);
+      });
+
+      var defaultIndex = knowMeCustomers.findIndex(function (customer) {
+        return /Ernst & Young|EY GLOBAL SERVICES LIMITED|\bEY\b/i.test(customer.customerName || '');
+      });
+      if (defaultIndex < 0) defaultIndex = 0;
+
+      select.value = String(defaultIndex);
+      updateKnowMe(knowMeCustomers[defaultIndex]);
+    }
+
+    bindPortalSearch();
+
+    Promise.all([
+      fetch('data/mcs-customers.json').then(function (response) {
+        if (!response.ok) return [];
+        return response.json();
+      }).catch(function () { return []; }),
+      fetch('data/support-insights.json').then(function (response) {
+        if (!response.ok) return [];
+        return response.json();
+      }).catch(function () { return []; }),
+      fetch('data/playbook-search-index.json').then(function (response) {
+        if (!response.ok) return [];
+        return response.json();
+      }).catch(function () { return []; })
+    ])
+      .then(function (results) {
+        var customers = results[0] || [];
+        var supportInsights = results[1] || [];
+        supplementalSearchEntries = Array.isArray(results[2]) ? results[2] : [];
+        supportInsightsByTenant = {};
+        supportInsights.forEach(function (item) {
+          if (item && item.tenantId) supportInsightsByTenant[item.tenantId] = item;
+        });
+        populateKnowMe(customers);
+      })
+      .catch(function () {
+        supplementalSearchEntries = [];
+        populateKnowMe([]);
+      });
+  </script>
 </body>
+
 </html>
 <!-- v1.7 -->
