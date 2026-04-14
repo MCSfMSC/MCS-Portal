@@ -2586,26 +2586,92 @@
               d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z" />
           </svg>
         </div>
-        <h2>MCS AI Prompts</h2>
-        <p>Prompt templates for CLE scenarios: case or CRI timeline, case risk, and CRI risk assessment</p>
-        <div class="agent-chat">
-          <input type="text" placeholder="Search prompt templates for a CLE scenario..." />
+        <h2>MCS AI Assistant</h2>
+        <p>Embedded Copilot Studio chat for MCS scenario lookup, guided next steps, and playbook discovery without
+          leaving the portal.</p>
+        <div class="agent-status-row">
+          <span class="agent-status-pill is-neutral" id="copilot-status-pill">Awaiting setup</span>
+          <div class="agent-status-detail" id="copilot-status-detail">This agent can connect either with a Copilot
+            Studio Web channel Direct Line secret or with a separate browser Entra app registration for authenticated
+            Direct Connect.</div>
         </div>
-        <div class="agent-prompts">
-          <div class="prompt">Summarize case timeline for [case #]</div>
-          <div class="prompt">Analyze case risk for [case #]</div>
-          <div class="prompt">Assess CRI risk for [customer]</div>
+        <div class="agent-actions">
+          <button class="agent-btn primary" id="copilot-connect-button" type="button">Connect agent</button>
+          <button class="agent-btn secondary" id="copilot-reset-button" type="button" disabled>Start new chat</button>
         </div>
       </div>
 
+      <div class="portal-note agent-setup-note" id="copilot-setup-note" hidden>
+        <h3 id="copilot-setup-title">Complete the agent connection setup</h3>
+        <p id="copilot-setup-detail">Use a Direct Line secret for this static portal, or provide browser auth values
+          for the authenticated Direct Connect flow.</p>
+        <div class="agent-config-grid">
+          <label class="agent-config-field">
+            <span>Direct Line Secret</span>
+            <input id="copilot-direct-line-secret-input" type="password"
+              placeholder="Paste Web channel secret for this browser only" autocomplete="off" />
+          </label>
+          <label class="agent-config-field">
+            <span>Browser App Client ID</span>
+            <input id="copilot-app-client-id-input" type="text"
+              placeholder="Browser app registration client ID (not Agent app ID)" />
+          </label>
+          <label class="agent-config-field">
+            <span>Tenant ID</span>
+            <input id="copilot-tenant-id-input" type="text" placeholder="Microsoft Entra directory (tenant) ID" />
+          </label>
+        </div>
+        <div class="agent-config-actions">
+          <button class="agent-btn secondary" id="copilot-save-config-button" type="button">Save connection config</button>
+          <button class="agent-btn secondary" id="copilot-clear-config-button" type="button">Clear saved config</button>
+        </div>
+        <p class="agent-setup-hint">For this static portal, the simplest path is Copilot Studio &gt; Channels &gt; Web
+          channel security &gt; Secret 1 or Secret 2. Save the secret only in this browser; do not commit it to the
+          repo. If you prefer authenticated Direct Connect instead, use a separate Microsoft Entra SPA or public client
+          app registration rather than the Copilot Studio Agent app ID.</p>
+      </div>
+
+      <div class="agent-shell">
+        <div class="agent-shell-head">
+          <div>
+            <h3>Knowledge Discovery Assistant</h3>
+            <p>Embedded Web Chat experience backed by either your Copilot Studio Direct Line web channel or your
+              authenticated Direct Connect endpoint.</p>
+          </div>
+          <div class="agent-shell-meta" id="copilot-session-meta">Not connected</div>
+        </div>
+
+        <div class="agent-prompts">
+          <button class="prompt" type="button"
+            data-agent-prompt="I am scheduled for vacation, so how do I change my oncall schedule?">Vacation and on-call
+            change</button>
+          <button class="prompt" type="button"
+            data-agent-prompt="My customer has a potential security breach, what are my next steps?">Security breach
+            next steps</button>
+          <button class="prompt" type="button"
+            data-agent-prompt="Summarize the most relevant MCS playbooks I should review for this customer scenario.">Summarize
+            relevant playbooks</button>
+        </div>
+
+        <div class="agent-error" id="copilot-error" hidden></div>
+
+        <div class="agent-empty-state" id="copilot-empty-state">
+          <h4>Connect the agent to start a live chat</h4>
+          <p id="copilot-empty-detail">The portal can exchange a saved Direct Line secret for a chat token, or use a
+            browser app registration for Microsoft sign-in, and then render the Copilot Studio conversation inline.</p>
+        </div>
+
+        <div class="agent-webchat" id="copilot-webchat" aria-label="Embedded Copilot Studio chat"></div>
+      </div>
+
       <div class="pane-header" style="margin-top:32px;">
-        <h2>Prompt Templates</h2>
-        <p>Pre-built prompts for common CLE scenarios</p>
+        <h2>Supporting AI References</h2>
+        <p>Existing prompt artifacts and examples that complement the embedded agent</p>
       </div>
       <div class="res-grid">
         <a class="res-card"
           href="https://microsoft.sharepoint-df.com/teams/CxESecurityCare/_layouts/15/Doc.aspx?sourcedoc=%7B56B9E5EB-25AF-497F-B8D9-F1B5E6329C72%7D&file=OES%20Newsletter%20-%202026-02%20Prep.docx&action=default&mobileredirect=true&DefaultItemOpen=1"
-          target="_blank" rel="noopener noreferrer">
+          rel="noopener noreferrer">
           <div class="rc-info">
             <div class="rc-title">CRI Risk Score Agent (M365 Copilot)</div>
             <div class="rc-desc">CRI risk assessment via M365 Copilot — severity, idle time, ownership churn</div>
@@ -2613,7 +2679,7 @@
         </a>
         <a class="res-card"
           href="https://microsoftapc-my.sharepoint.com/personal/weiyihu_microsoft_com/Documents/Recordings/You're%20Invited!%20FY26%20CSS%20GCR%20Talent%20Development%20Program%20%20How%20Security%20CxE%20PM%20team%20uses%20AI%20to%20accelerate%20escalation-20260303_110221-Meeting%20Recording.mp4?web=1"
-          target="_blank" rel="noopener noreferrer">
+          rel="noopener noreferrer">
           <div class="rc-info">
             <div class="rc-title">Zebra AI Case Review</div>
             <div class="rc-desc">Case timeline, delay analysis, risk identification experiments</div>
@@ -3484,6 +3550,10 @@
         populateKnowMe([]);
       });
   </script>
+  <script src="https://unpkg.com/botframework-webchat@4.18.0/dist/webchat.js"></script>
+  <script src="https://unpkg.com/@azure/msal-browser@4.13.1/lib/msal-browser.js"></script>
+  <script src="scripts/copilot-studio-agent-config.js?v=5"></script>
+  <script type="module" src="scripts/copilot-studio-agent.js?v=5"></script>
 </body>
 
 </html>
